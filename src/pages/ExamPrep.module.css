@@ -1,0 +1,248 @@
+.page {
+  padding: 72px 0 96px;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--space-12);
+  align-items: start;
+  margin-bottom: var(--space-12);
+}
+
+.pageH1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: var(--space-4);
+  line-height: 1.1;
+}
+
+.pageSubtitle {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+.headerCard {
+  background: var(--card);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: sticky;
+  top: 80px;
+}
+
+.headerCardPrice {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--gold);
+  text-shadow: var(--gold-glow);
+  line-height: 1;
+}
+
+.headerCardNote {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--font-mono);
+}
+
+.headerCardFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+
+.headerCardFeature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 12px;
+  color: var(--text2);
+}
+
+/* Preview */
+.previewSection {
+  margin-bottom: var(--space-12);
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.previewH2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.015em;
+}
+
+.sampleQuestions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.sampleQ {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.sampleQText {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: var(--space-4);
+  line-height: 1.55;
+}
+
+.sampleQOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.sampleQOption {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text2);
+  transition: var(--transition-fast);
+}
+
+.sampleQCorrect {
+  background: var(--green-bg);
+  border-color: var(--green-border);
+  color: var(--text);
+}
+
+.sampleQLetter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.sampleQBadge {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--green);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.sampleQExplanation {
+  font-size: 12px;
+  color: var(--text3);
+  font-style: italic;
+  line-height: 1.6;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+
+.previewCta {
+  text-align: center;
+  padding: var(--space-8);
+  background: var(--bg2);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.previewCtaText {
+  font-size: 15px;
+  color: var(--text2);
+  margin-bottom: var(--space-5);
+}
+
+/* Domains */
+.domains {
+  margin-top: var(--space-12);
+}
+
+.domainsH2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.015em;
+  margin-bottom: var(--space-6);
+}
+
+.domainsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.domainItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.domainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.domainName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.domainQ {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+
+.domainBar {
+  height: 6px;
+  background: var(--bg3);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.domainBarFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: width 0.6s var(--ease-primary);
+}
+
+@media (max-width: 768px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .headerCard {
+    position: static;
+  }
+}
