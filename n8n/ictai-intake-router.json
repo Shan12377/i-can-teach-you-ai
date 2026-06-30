@@ -65,7 +65,7 @@
     {
       "parameters": {
         "operation": "append",
-        "documentId": { "__rl": true, "value": "REPLACE_WITH_SPREADSHEET_ID", "mode": "id" },
+        "documentId": { "__rl": true, "value": "164CWzJXJORYcVoOxk6WXOMzS40JcaPnMuIABECUHQM4", "mode": "id" },
         "sheetName": { "__rl": true, "value": "Waitlist", "mode": "name" },
         "columns": {
           "mappingMode": "defineBelow",
@@ -99,7 +99,7 @@
     {
       "parameters": {
         "operation": "append",
-        "documentId": { "__rl": true, "value": "REPLACE_WITH_SPREADSHEET_ID", "mode": "id" },
+        "documentId": { "__rl": true, "value": "164CWzJXJORYcVoOxk6WXOMzS40JcaPnMuIABECUHQM4", "mode": "id" },
         "sheetName": { "__rl": true, "value": "Waitlist", "mode": "name" },
         "columns": {
           "mappingMode": "defineBelow",
