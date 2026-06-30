@@ -1,0 +1,173 @@
+{
+  "name": "ICTAI Intake Router",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ictai-intake",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 400],
+      "webhookId": "ictai-intake"
+    },
+    {
+      "parameters": {
+        "mode": "rules",
+        "rules": {
+          "rules": [
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "typeValidation": "strict" },
+                "conditions": [
+                  {
+                    "id": "r1",
+                    "leftValue": "={{ $json.body.submissionType }}",
+                    "rightValue": "waitlist_email",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Step 1 - Email"
+            },
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "typeValidation": "strict" },
+                "conditions": [
+                  {
+                    "id": "r2",
+                    "leftValue": "={{ $json.body.submissionType }}",
+                    "rightValue": "waitlist_questions",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Step 2 - Full"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-switch",
+      "name": "Route by Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [420, 400]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "value": "REPLACE_WITH_SPREADSHEET_ID", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Waitlist", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.body.timestamp }}",
+            "Email": "={{ $json.body.email }}",
+            "Step": "=Email captured (Step 1)",
+            "Source": "={{ $json.body.source }}"
+          },
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "node-sheets-1",
+      "name": "Log Email (Step 1)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [640, 260]
+    },
+    {
+      "parameters": {
+        "options": { "responseCode": 200 }
+      },
+      "id": "node-respond-1",
+      "name": "Respond OK (Step 1)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [860, 260]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "value": "REPLACE_WITH_SPREADSHEET_ID", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Waitlist", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.body.timestamp }}",
+            "Email": "={{ $json.body.email }}",
+            "Step": "=Full signup (Step 2)",
+            "Interests": "={{ ($json.body.interests || []).join(', ') }}",
+            "Background": "={{ $json.body.background }}",
+            "Challenge": "={{ $json.body.challenge }}",
+            "Source": "={{ $json.body.source }}"
+          },
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "node-sheets-2",
+      "name": "Log Full Signup (Step 2)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [640, 540]
+    },
+    {
+      "parameters": {
+        "sendTo": "higginsshallanda@gmail.com",
+        "subject": "New ICTAI Waitlist Signup",
+        "emailType": "text",
+        "message": "={{ 'New waitlist signup on I Can Teach You AI\\n\\nEmail: ' + $json.body.email + '\\nBackground: ' + ($json.body.background || 'Not provided') + '\\nChallenge: ' + ($json.body.challenge || 'Not provided') + '\\nInterests: ' + (($json.body.interests || []).join(', ') || 'None selected') + '\\nTimestamp: ' + $json.body.timestamp }}",
+        "options": {}
+      },
+      "id": "node-gmail",
+      "name": "Alert: New Signup",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [860, 540]
+    },
+    {
+      "parameters": {
+        "options": { "responseCode": 200 }
+      },
+      "id": "node-respond-2",
+      "name": "Respond OK (Step 2)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1080, 540]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Route by Type", "type": "main", "index": 0 }]]
+    },
+    "Route by Type": {
+      "main": [
+        [{ "node": "Log Email (Step 1)", "type": "main", "index": 0 }],
+        [{ "node": "Log Full Signup (Step 2)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Log Email (Step 1)": {
+      "main": [[{ "node": "Respond OK (Step 1)", "type": "main", "index": 0 }]]
+    },
+    "Log Full Signup (Step 2)": {
+      "main": [[{ "node": "Alert: New Signup", "type": "main", "index": 0 }]]
+    },
+    "Alert: New Signup": {
+      "main": [[{ "node": "Respond OK (Step 2)", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" }
+}
