@@ -22,13 +22,22 @@
           "rules": [
             {
               "conditions": {
-                "options": { "caseSensitive": true, "typeValidation": "strict" },
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
                 "conditions": [
                   {
-                    "id": "r1",
+                    "id": "cond-r1",
                     "leftValue": "={{ $json.body.submissionType }}",
                     "rightValue": "waitlist_email",
-                    "operator": { "type": "string", "operation": "equals" }
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
                   }
                 ],
                 "combinator": "and"
@@ -38,13 +47,22 @@
             },
             {
               "conditions": {
-                "options": { "caseSensitive": true, "typeValidation": "strict" },
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
                 "conditions": [
                   {
-                    "id": "r2",
+                    "id": "cond-r2",
                     "leftValue": "={{ $json.body.submissionType }}",
                     "rightValue": "waitlist_questions",
-                    "operator": { "type": "string", "operation": "equals" }
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
                   }
                 ],
                 "combinator": "and"
