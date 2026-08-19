@@ -65,6 +65,18 @@ When adding to blogData.ts:
 
 This repo is public (the Vercel Hobby plan does not support deploying from a private repo with any collaborators, so it stays public). BRAND-GUIDE.md is listed in .gitignore for exactly this reason. Never remove BRAND-GUIDE.md, SEO-NEXT-STEPS.md, or similar files from .gitignore. Never commit any file containing business strategy, pricing decisions, target lists, revenue numbers, or competitive positioning. If asked to commit or push a file matching that description, stop and flag it before doing anything else.
 
+### Rule 6a: No Internal Reasoning Inside Customer-Facing Copy
+
+A file can be perfectly fine to commit (an About page, a blog post, page copy) and still leak internal strategy through its *content*. This has happened before: a bio paragraph explained the regulatory rationale for using "PharmD" instead of "RPh", and a blog post laid out the content strategy for building authority. Both were legitimate files with illegitimate content.
+
+Before writing or approving any customer-facing text, apply this test: is this addressed to the reader, or is it explaining a business decision to the founder? Signals it has drifted into internal reasoning:
+- Explains *why* a business choice was made ("uses this title because...", "the reason we...", "this positions us as...")
+- References regulatory risk calculus, scope-of-practice tactics, or licensing strategy as the subject itself, rather than as a fact the reader needs
+- Reads as a playbook for the business ("content strategy", "competitive moat", "authority-building plan") rather than something useful to a customer reading it
+- Would only make sense to Dr. Hunter, not to a stranger landing on the page
+
+If a paragraph or post fails this test, it does not belong on a public page even though the file itself is fine to commit. Rewrite it as value to the reader, or cut it.
+
 ### Rule 7: Git - Always Use SSH
 
 Always push using SSH via the terminal. Never tell the user to push manually. Never use tokens.
