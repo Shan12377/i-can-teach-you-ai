@@ -63,7 +63,7 @@ When adding to blogData.ts:
 
 ### Rule 6: No Strategy Files in Public Repos
 
-Never commit files containing business strategy, pricing decisions, target lists, revenue numbers, or competitive positioning to a public repository. If the repo is public, flag this before committing. Files like BRAND-GUIDE.md and any SEO/marketing strategy docs should only exist in private repos.
+This repo is public (the Vercel Hobby plan does not support deploying from a private repo with any collaborators, so it stays public). BRAND-GUIDE.md is listed in .gitignore for exactly this reason. Never remove BRAND-GUIDE.md, SEO-NEXT-STEPS.md, or similar files from .gitignore. Never commit any file containing business strategy, pricing decisions, target lists, revenue numbers, or competitive positioning. If asked to commit or push a file matching that description, stop and flag it before doing anything else.
 
 ### Rule 7: Git - Always Use SSH
 
