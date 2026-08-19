@@ -194,6 +194,13 @@
   margin-top: 7px;
 }
 
+.ctaGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: auto;
+}
+
 .ctaButton {
   display: inline-flex;
   align-items: center;
@@ -206,14 +213,13 @@
   font-weight: 600;
   border-radius: var(--radius-md);
   text-decoration: none;
-  margin-top: auto;
   transition: background var(--transition-base), transform var(--transition-spring), box-shadow var(--transition-base);
 }
 
 .ctaButton:hover {
   background: var(--teal2);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(124, 111, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(11, 158, 142, 0.35);
 }
 
 /* FAQ */

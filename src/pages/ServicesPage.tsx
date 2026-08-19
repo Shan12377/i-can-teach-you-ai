@@ -19,7 +19,7 @@ const services = [
       'A take-home AI policy template for your organization',
     ],
     format: 'In-person or virtual. Half-day (3 hours) or full-day (6 hours). Custom curriculum available.',
-    cta: 'Book a Workshop',
+    ctas: [{ label: 'Book a Workshop', href: 'mailto:hello@icanteachyouai.com' }],
   },
   {
     id: 'sessions',
@@ -38,7 +38,8 @@ const services = [
       'Leave with a written action plan and resource list',
     ],
     format: 'Virtual via Doxy.me. 60 minutes. Follow-up email summary included.',
-    cta: 'Book a Session',
+    // Stripe test-mode link. Swap for the live payment link before launch.
+    ctas: [{ label: 'Book a Session ($197)', href: 'https://buy.stripe.com/test_8x200cdV3aLw5V08Pb6EU00' }],
   },
   {
     id: 'exam-prep',
@@ -57,7 +58,11 @@ const services = [
       'Build a spaced repetition routine using 90-minute focus blocks and retrieval practice',
     ],
     format: 'Virtual. 60-minute session or 90-minute deep dive. Group rates available for student organizations and study groups.',
-    cta: 'Book Exam Prep',
+    // Stripe test-mode links. Swap for the live payment links before launch.
+    ctas: [
+      { label: 'Book 60 min ($67)', href: 'https://buy.stripe.com/test_bJeeV63gp6vg838aXj6EU01' },
+      { label: 'Book 90 min Deep Dive ($97)', href: 'https://buy.stripe.com/test_8x228k5ox8Do97c7L76EU02' },
+    ],
   },
   {
     id: 'builds',
@@ -76,7 +81,7 @@ const services = [
       'Handoff call with walkthrough of every component',
     ],
     format: 'Project-based. Scoped per engagement. Quoted after a 30-minute discovery call.',
-    cta: 'Start a Project',
+    ctas: [{ label: 'Start a Project', href: 'mailto:hello@icanteachyouai.com' }],
   },
 ];
 
@@ -130,12 +135,18 @@ export default function ServicesPage() {
               <p className={styles.sectionText}>{service.format}</p>
             </div>
 
-            <a
-              href="mailto:hello@icanteachyouai.com"
-              className={styles.ctaButton}
-            >
-              {service.cta}
-            </a>
+            <div className={styles.ctaGroup}>
+              {service.ctas.map((cta) => (
+                <a
+                  key={cta.label}
+                  href={cta.href}
+                  className={styles.ctaButton}
+                  {...(cta.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {cta.label}
+                </a>
+              ))}
+            </div>
           </article>
         ))}
       </section>
