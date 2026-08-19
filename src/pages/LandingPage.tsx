@@ -31,7 +31,7 @@ const stack = [
   {
     tool: 'Make',
     role: 'Personal automations',
-    detail: 'Telegram bots, Notion integrations, morning briefings, and cycle-aware health tracking.',
+    detail: 'Telegram bots, Notion integrations, and morning briefings.',
     color: 'var(--gold)',
   },
 ];
