@@ -4,7 +4,7 @@ import { BLOG_POSTS } from './blogData';
 import styles from './Blog.module.css';
 import s from '../../styles/shared.module.css';
 
-const CATEGORIES = ['All', 'HIPAA', 'Vibe Coding', 'Claude Code', 'Exam Prep', 'Automation', 'Compliance', 'Business', 'Build Notes', 'Strategy'];
+const CATEGORIES = ['All', 'HIPAA', 'Vibe Coding', 'Claude Code', 'Exam Prep', 'Automation', 'Compliance', 'Business', 'Build Notes'];
 
 export default function BlogIndexPage() {
   const [activeCategory, setActiveCategory] = useState('All');

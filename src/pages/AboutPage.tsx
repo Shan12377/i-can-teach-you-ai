@@ -28,10 +28,10 @@ export default function AboutPage() {
               is the foundation of everything taught at I Can Teach You AI.
             </p>
             <p className={styles.bioPara}>
-              She uses the title PharmD, not RPh, intentionally. PharmD is an academic credential that signals
-              clinical depth and scientific rigor without triggering the scope-of-practice constraints of a
-              licensed pharmacist operating outside a pharmacy. That distinction matters when you are building
-              educational platforms, not dispensing medications.
+              Her clinical training shapes everything she builds. Understanding drug interactions, lab
+              interpretation, and patient safety protocols is what separates compliant AI systems from
+              the ones that get flagged. That perspective is baked into every course, every workshop,
+              and every workflow she teaches.
             </p>
             <p className={styles.bioPara}>
               The curriculum here is not theoretical. Every workflow, every compliance decision, and every
