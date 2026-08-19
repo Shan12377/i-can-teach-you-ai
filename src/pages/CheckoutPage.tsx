@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styles from './Checkout.module.css';
 
+const STRIPE_PAYMENT_LINKS: Record<string, string> = {
+  'cca-f-exam-prep': 'https://buy.stripe.com/3cI4gsbMV3j4fvAe9v6EU03',
+};
+
 const PRODUCTS: Record<string, { name: string; price: string; description: string; features: string[] }> = {
   'cca-f-exam-prep': {
     name: 'CCA-F Exam Prep',
@@ -37,21 +41,14 @@ export default function CheckoutPage() {
   const product = PRODUCTS[productId] || PRODUCTS['cca-f-exam-prep'];
   const [loading, setLoading] = useState(false);
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
+    const paymentLink = STRIPE_PAYMENT_LINKS[productId];
+    if (!paymentLink) {
+      alert('Stripe integration coming soon. See CLAUDE.md for connection instructions.');
+      return;
+    }
     setLoading(true);
-    // TODO: Replace with actual Stripe Checkout session creation
-    // 1. POST to /api/create-checkout-session with { productId }
-    // 2. Redirect to session.url
-    // Example:
-    // const res = await fetch('/api/create-checkout-session', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ productId }),
-    // });
-    // const { url } = await res.json();
-    // window.location.href = url;
-    alert('Stripe integration coming soon. See CLAUDE.md for connection instructions.');
-    setLoading(false);
+    window.location.href = paymentLink;
   };
 
   return (
