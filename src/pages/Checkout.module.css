@@ -33,7 +33,7 @@
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--teal);
   margin-bottom: var(--space-3);
 }
 
@@ -68,7 +68,7 @@
 }
 
 .checkmark {
-  color: var(--accent);
+  color: var(--teal);
   font-size: 12px;
   flex-shrink: 0;
   margin-top: 1px;
@@ -105,7 +105,7 @@
 }
 
 .summaryDisclaimer a {
-  color: var(--accent);
+  color: var(--teal);
   text-decoration: none;
 }
 
@@ -159,7 +159,7 @@
 }
 
 .stripeIcon {
-  color: var(--accent);
+  color: var(--teal);
   font-size: 10px;
   margin-top: 3px;
   flex-shrink: 0;
@@ -222,7 +222,7 @@
 }
 
 .legalLink:hover {
-  color: var(--accent);
+  color: var(--teal);
 }
 
 /* Success Page */
@@ -269,12 +269,12 @@
 }
 
 .successNoteLink {
-  color: var(--accent);
+  color: var(--teal);
   text-decoration: none;
 }
 
 .successNoteLink:hover {
-  color: var(--accent2);
+  color: var(--teal2);
 }
 
 @media (max-width: 768px) {

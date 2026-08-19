@@ -177,14 +177,15 @@ export default function LandingPage() {
             Five tools. Two production apps. Zero traditional development experience required.
             Each one chosen for a specific reason, and each one teachable.
           </p>
-          <div className={styles.stackGrid}>
-            {stack.map(t => (
-              <div key={t.tool} className={styles.stackCard}>
-                <div className={styles.stackCardHeader}>
+          <div className={styles.stackList}>
+            {stack.map((t, i) => (
+              <div key={t.tool} className={styles.stackRow}>
+                <span className={styles.stackIndex}>{String(i + 1).padStart(2, '0')}</span>
+                <div className={styles.stackToolCol}>
                   <span className={styles.stackIndicator} style={{ background: t.color }} />
                   <span className={styles.stackTool}>{t.tool}</span>
+                  <span className={styles.stackRole}>{t.role}</span>
                 </div>
-                <span className={styles.stackRole}>{t.role}</span>
                 <p className={styles.stackDetail}>{t.detail}</p>
               </div>
             ))}
@@ -200,9 +201,9 @@ export default function LandingPage() {
             The AI curriculum that actually applies to your work
           </h2>
           <div className={styles.featuresGrid}>
-            {features.map(f => (
+            {features.map((f, idx) => (
               <div key={f.kicker} className={styles.featureCard}>
-                <span className={s.pillAccent + ' ' + s.pill}>{f.kicker}</span>
+                <span className={(idx === 0 ? s.pillGold : s.pillAccent) + ' ' + s.pill}>{f.kicker}</span>
                 <h3 className={styles.featureTitle}>{f.title}</h3>
                 <p className={styles.featureBody}>{f.body}</p>
                 <span className={styles.featureTag}>{f.tag}</span>

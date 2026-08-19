@@ -7,11 +7,11 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  background: var(--accent);
-  color: #fff;
+  background: var(--gold);
+  color: var(--bg);
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 12px 28px;
   border-radius: var(--radius-md);
   border: none;
@@ -19,13 +19,13 @@
   transition: var(--transition-spring);
   letter-spacing: -0.01em;
   text-decoration: none;
+  box-shadow: var(--gold-glow);
 }
 
 .btnPrimary:hover {
-  background: var(--accent2);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(124, 111, 255, 0.3);
-  color: #fff;
+  box-shadow: var(--gold-glow-strong);
+  color: var(--bg);
 }
 
 .btnGold {
@@ -127,8 +127,8 @@
 }
 
 .input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-bg);
 }
 
 .textarea {
@@ -151,8 +151,8 @@
 }
 
 .textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-bg);
 }
 
 .select {
@@ -170,8 +170,8 @@
 }
 
 .select:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-bg);
 }
 
 .label {
@@ -229,9 +229,16 @@
 }
 
 .pillAccent {
+  background: var(--teal-bg);
+  color: var(--teal2);
+  border: 1px solid var(--teal-border);
+}
+
+.pillCode {
   background: var(--accent-bg);
   color: var(--accent2);
   border: 1px solid var(--accent-border);
+  font-family: var(--font-mono);
 }
 
 .pillGold {
@@ -270,7 +277,7 @@
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.12em;
-  color: var(--accent2);
+  color: var(--teal2);
   text-transform: uppercase;
   margin-bottom: var(--space-3);
   display: block;
@@ -289,12 +296,12 @@
 
 /* --- Alert boxes --- */
 .alertInfo {
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
+  background: var(--teal-bg);
+  border: 1px solid var(--teal-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
   font-size: 13px;
-  color: var(--accent2);
+  color: var(--teal2);
   line-height: 1.65;
 }
 

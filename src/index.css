@@ -23,7 +23,7 @@ body {
 }
 
 a {
-  color: var(--accent2);
+  color: var(--teal2);
   text-decoration: none;
   transition: var(--transition-fast);
 }
@@ -57,7 +57,7 @@ code {
 }
 
 ::selection {
-  background: var(--accent-bg);
+  background: var(--teal-bg);
   color: var(--text);
 }
 

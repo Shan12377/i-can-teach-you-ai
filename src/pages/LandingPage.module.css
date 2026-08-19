@@ -43,7 +43,8 @@
 }
 
 .heroAccent {
-  color: var(--accent2);
+  color: var(--gold);
+  text-shadow: var(--gold-glow);
 }
 
 .heroSub {
@@ -70,7 +71,7 @@
 
 .buildsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--space-4);
   margin-top: var(--space-8);
 }
@@ -84,11 +85,34 @@
   flex-direction: column;
   gap: var(--space-3);
   transition: var(--transition-fast);
+  grid-column: span 3;
+}
+
+.buildCard:nth-child(1) {
+  grid-column: span 4;
+  border-top: 2px solid var(--gold);
+  padding: var(--space-8);
+}
+
+.buildCard:nth-child(1) .buildName {
+  font-size: 20px;
+}
+
+.buildCard:nth-child(1) .buildDesc {
+  font-size: 14px;
+}
+
+.buildCard:nth-child(2) {
+  grid-column: span 2;
 }
 
 .buildCard:hover {
   border-color: var(--border2);
   background: var(--card2);
+}
+
+.buildCard:nth-child(1):hover {
+  border-top-color: var(--gold);
 }
 
 .buildCardTop {
@@ -152,7 +176,7 @@
 .buildLink {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--accent2);
+  color: var(--teal2);
   text-decoration: none;
   margin-top: auto;
 }
@@ -168,33 +192,46 @@
   background: var(--bg2);
 }
 
-.stackGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-4);
-  margin-top: var(--space-8);
-}
-
-.stackCard {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
+.stackList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: var(--space-8);
+  background: var(--bg);
+}
+
+.stackRow {
+  display: grid;
+  grid-template-columns: 40px 260px 1fr;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--border);
   transition: var(--transition-fast);
 }
 
-.stackCard:hover {
-  border-color: var(--border2);
+.stackRow:last-child {
+  border-bottom: none;
 }
 
-.stackCardHeader {
+.stackRow:hover {
+  background: var(--card);
+}
+
+.stackIndex {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent2);
+  letter-spacing: 0.04em;
+}
+
+.stackToolCol {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-1);
+  flex-wrap: wrap;
 }
 
 .stackIndicator {
@@ -223,7 +260,6 @@
   font-size: 13px;
   color: var(--text2);
   line-height: 1.65;
-  margin-top: var(--space-1);
 }
 
 /* --- Shared section headings --- */
@@ -254,7 +290,7 @@
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--border);
   border-radius: var(--radius-lg);
@@ -271,8 +307,20 @@
   transition: var(--transition-fast);
 }
 
+.featureCard:nth-child(1) {
+  grid-column: span 2;
+}
+
+.featureCard:nth-child(4) {
+  grid-column: span 2;
+}
+
 .featureCard:hover {
   background: var(--card);
+}
+
+.featureCard:nth-child(1) .featureTitle {
+  font-size: 20px;
 }
 
 .featureTitle {
@@ -317,7 +365,7 @@
 
 .blogGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4);
 }
 
@@ -331,6 +379,20 @@
   gap: var(--space-3);
   text-decoration: none;
   transition: var(--transition-fast);
+}
+
+.blogCard:first-child {
+  grid-column: span 2;
+  padding: var(--space-8);
+}
+
+.blogCard:first-child .blogCardTitle {
+  font-size: 22px;
+  max-width: 640px;
+}
+
+.blogCard:first-child .blogCardExcerpt {
+  max-width: 640px;
 }
 
 .blogCard:hover {
@@ -370,7 +432,7 @@
 
 .blogCardReadMore {
   font-size: 12px;
-  color: var(--accent2);
+  color: var(--teal2);
   font-family: var(--font-mono);
   margin-top: auto;
 }
@@ -433,5 +495,58 @@
   .heroIntro {
     flex-direction: column;
     gap: 2px;
+  }
+
+  .buildsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .buildCard,
+  .buildCard:nth-child(1),
+  .buildCard:nth-child(2) {
+    grid-column: span 1;
+  }
+
+  .buildCard:nth-child(1) {
+    padding: var(--space-6);
+  }
+
+  .buildCard:nth-child(1) .buildName {
+    font-size: 16px;
+  }
+
+  .buildCard:nth-child(1) .buildDesc {
+    font-size: 13px;
+  }
+
+  .stackRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .featureCard:nth-child(1),
+  .featureCard:nth-child(4) {
+    grid-column: span 1;
+  }
+
+  .featureCard:nth-child(1) .featureTitle {
+    font-size: 17px;
+  }
+
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .blogCard:first-child {
+    grid-column: span 1;
+    padding: var(--space-6);
+  }
+
+  .blogCard:first-child .blogCardTitle {
+    font-size: 16px;
   }
 }

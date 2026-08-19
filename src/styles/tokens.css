@@ -23,13 +23,15 @@
   --text2:       #8888a8;
   --text3:       #555570;
 
-  /* --- Primary Accent (Purple/Indigo — AI education) --- */
+  /* --- Code Accent (Purple/Indigo) ---
+     Reserved for code blocks, inline code, and technical/monospace labels only.
+     Not a general UI or link color — see BRAND-GUIDE.md §2. --- */
   --accent:          #7c6fff;
   --accent2:         #a594ff;
   --accent-bg:       rgba(124, 111, 255, 0.12);
   --accent-border:   rgba(124, 111, 255, 0.28);
 
-  /* --- Gold (connection to HHH / drshallandahunter.com) --- */
+  /* --- Gold: brand primary (connection to HHH / drshallandahunter.com) --- */
   --gold:            #c8a74b;
   --gold-rgb:        200, 167, 75;
   --gold-bg:         rgba(200, 167, 75, 0.12);
@@ -37,8 +39,9 @@
   --gold-glow:       0 0 12px rgba(200, 167, 75, 0.35);
   --gold-glow-strong: 0 0 24px rgba(200, 167, 75, 0.55);
 
-  /* --- Teal (connection to HHH) --- */
+  /* --- Teal: secondary/links (connection to HHH) --- */
   --teal:            #0B9E8E;
+  --teal2:           #14C4B0;
   --teal-dark:       #144445;
   --teal-bg:         rgba(11, 158, 142, 0.1);
   --teal-border:     rgba(11, 158, 142, 0.28);

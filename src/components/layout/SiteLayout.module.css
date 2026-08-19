@@ -68,8 +68,8 @@
 }
 
 .navLinkActive {
-  color: var(--accent2);
-  border-bottom-color: var(--accent);
+  color: var(--gold);
+  border-bottom-color: var(--gold);
 }
 
 .navRight {
@@ -80,19 +80,20 @@
 }
 
 .navCta {
-  background: var(--accent);
-  color: #fff;
+  background: var(--gold);
+  color: var(--bg);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 8px 20px;
   border-radius: var(--radius-md);
   text-decoration: none;
   transition: var(--transition-fast);
+  box-shadow: var(--gold-glow);
 }
 
 .navCta:hover {
-  background: var(--accent2);
-  color: #fff;
+  box-shadow: var(--gold-glow-strong);
+  color: var(--bg);
 }
 
 .mobileMenuBtn {
@@ -253,26 +254,27 @@
 }
 
 .mobileNavLinkActive {
-  color: var(--accent2);
+  color: var(--gold);
 }
 
 .mobileNavCta {
   margin-top: var(--space-3);
   display: block;
   text-align: center;
-  background: var(--accent);
-  color: #fff;
+  background: var(--gold);
+  color: var(--bg);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 12px 20px;
   border-radius: var(--radius-md);
   text-decoration: none;
   transition: var(--transition-fast);
+  box-shadow: var(--gold-glow);
 }
 
 .mobileNavCta:hover {
-  background: var(--accent2);
-  color: #fff;
+  box-shadow: var(--gold-glow-strong);
+  color: var(--bg);
 }
 
 /* Hamburger open state (X) */

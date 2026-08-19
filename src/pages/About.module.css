@@ -126,14 +126,14 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--teal);
   flex-shrink: 0;
   margin-top: 6px;
 }
 
 .sideCardLink {
   font-size: 13px;
-  color: var(--accent2);
+  color: var(--teal2);
   text-decoration: none;
   transition: var(--transition-fast);
 }
