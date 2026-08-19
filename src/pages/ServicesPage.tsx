@@ -38,8 +38,7 @@ const services = [
       'Leave with a written action plan and resource list',
     ],
     format: 'Virtual via Doxy.me. 60 minutes. Follow-up email summary included.',
-    // Stripe test-mode link. Swap for the live payment link before launch.
-    ctas: [{ label: 'Book a Session ($197)', href: 'https://buy.stripe.com/test_8x200cdV3aLw5V08Pb6EU00' }],
+    ctas: [{ label: 'Book a Session ($197)', href: 'https://buy.stripe.com/8x200cdV3aLw5V08Pb6EU00' }],
   },
   {
     id: 'exam-prep',
@@ -58,10 +57,9 @@ const services = [
       'Build a spaced repetition routine using 90-minute focus blocks and retrieval practice',
     ],
     format: 'Virtual. 60-minute session or 90-minute deep dive. Group rates available for student organizations and study groups.',
-    // Stripe test-mode links. Swap for the live payment links before launch.
     ctas: [
-      { label: 'Book 60 min ($67)', href: 'https://buy.stripe.com/test_bJeeV63gp6vg838aXj6EU01' },
-      { label: 'Book 90 min Deep Dive ($97)', href: 'https://buy.stripe.com/test_8x228k5ox8Do97c7L76EU02' },
+      { label: 'Book 60 min ($67)', href: 'https://buy.stripe.com/bJeeV63gp6vg838aXj6EU01' },
+      { label: 'Book 90 min Deep Dive ($97)', href: 'https://buy.stripe.com/8x228k5ox8Do97c7L76EU02' },
     ],
   },
   {
