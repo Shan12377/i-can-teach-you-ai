@@ -41,6 +41,25 @@ const services = [
     cta: 'Book a Session',
   },
   {
+    id: 'exam-prep',
+    icon: '📚',
+    kicker: 'For Students',
+    title: 'AI-Powered Exam Prep',
+    subtitle: 'For Health Science, Technical, and Professional Students',
+    description:
+      'A focused session that teaches students how to use AI tools, specifically NotebookLM, to study smarter for any exam. Built around the FAST Method (Filter, Apply, Synthesize, Test), a proven learning framework that turns scattered study materials into flashcards, quizzes, audio reviews, and visual summaries in a single sitting. Works for any high-stakes exam in any field.',
+    audience: 'Pharmacy (NAPLEX, UMPJE), nursing (NCLEX), medical, dental hygiene, respiratory therapy, radiology tech, medical assistant, health information technology, and any technical or professional program with board exams or certification tests',
+    outcomes: [
+      'The FAST Method: a four-step learning framework (Filter, Apply, Synthesize, Test) that compresses study time',
+      'Set up a NotebookLM notebook with curated, high-quality sources (not information hoarding)',
+      'Generate flashcards, practice quizzes, audio overviews, and infographics from your own study material',
+      'Use AI chat in Learning Guide mode to test understanding, not just recall',
+      'Build a spaced repetition routine using 90-minute focus blocks and retrieval practice',
+    ],
+    format: 'Virtual. 60-minute session or 90-minute deep dive. Group rates available for student organizations and study groups.',
+    cta: 'Book Exam Prep',
+  },
+  {
     id: 'builds',
     icon: '⚙',
     kicker: 'For Businesses',
