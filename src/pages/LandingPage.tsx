@@ -3,38 +3,95 @@ import styles from './LandingPage.module.css';
 import s from '../styles/shared.module.css';
 import { BLOG_POSTS } from './blog/blogData';
 
+const stack = [
+  {
+    tool: 'Claude Code',
+    role: 'Primary build tool',
+    detail: 'Built two full production apps without a dev team. CLAUDE.md is the secret weapon.',
+    color: 'var(--accent)',
+  },
+  {
+    tool: 'n8n (AWS)',
+    role: 'HIPAA-lane automation',
+    detail: 'Self-hosted on AWS with a signed BAA. Runs intake routing, email alerts, and webhook flows for HHH.',
+    color: 'var(--teal)',
+  },
+  {
+    tool: 'n8n (Oracle Cloud)',
+    role: 'Client and teaching automation',
+    detail: '12 months free on Oracle Cloud free tier. Used for non-clinical builds and teaching demos.',
+    color: 'var(--amber)',
+  },
+  {
+    tool: 'Google Apps Script',
+    role: 'Pharmacy Decoder backend',
+    detail: 'Powers OTP verification, student activation logging, and Google Sheets integration for the exam prep app.',
+    color: 'var(--green)',
+  },
+  {
+    tool: 'Make',
+    role: 'Personal automations',
+    detail: 'Telegram bots, Notion integrations, morning briefings, and cycle-aware health tracking.',
+    color: 'var(--gold)',
+  },
+];
+
+const builds = [
+  {
+    name: 'Hunter\'s Holistic Health',
+    url: 'https://www.huntersholistichealth.com',
+    desc: 'Functional medicine education platform with BP tracker, AI Meal Guard, daily logging, educator dashboard, and Stripe billing.',
+    stack: 'React, Supabase, n8n, Vercel, Chart.js',
+    status: 'Live',
+  },
+  {
+    name: 'Pharmacy Decoder',
+    url: 'https://pharmacydecoder.com',
+    desc: '340 UMPJE practice questions across all 4 NABP domains. School access system with OTP verification.',
+    stack: 'Vanilla JS, Google Apps Script, Airtable, Vercel',
+    status: 'Live',
+  },
+  {
+    name: 'DeIDGuard',
+    url: null,
+    desc: 'Chrome extension for HIPAA de-identification. Detects and masks PHI in browser-based workflows.',
+    stack: 'Chrome Extension API, JavaScript',
+    status: 'Built',
+  },
+  {
+    name: 'CCA-F Exam Prep',
+    url: '/exam-prep',
+    desc: '207 practice questions for the Claude Code Associate Foundations certification. Every answer sourced from official Anthropic docs.',
+    stack: 'React, TypeScript',
+    status: 'Live',
+  },
+];
+
 const features = [
   {
     kicker: 'HIPAA-Conscious Workflows',
     title: 'Build AI systems that survive a compliance review',
-    body: 'Most AI workflow tutorials skip the part where your setup violates federal law. Every workflow covered here is built with the two-layer architecture that keeps PHI out of the wrong places.',
+    body: 'Most AI workflow tutorials skip the compliance layer. Every workflow here uses the two-layer architecture that keeps PHI out of the wrong places.',
     tag: 'Healthcare Professionals',
   },
   {
     kicker: 'Vibe Coding',
-    title: 'Ship real apps without a traditional development background',
-    body: 'Claude Code, Cursor, and the right CLAUDE.md file can take you from idea to deployed app faster than hiring a developer. The catch is knowing what to tell it and what rules to set.',
+    title: 'Ship real apps without a traditional dev background',
+    body: 'Claude Code and a solid CLAUDE.md file can take you from idea to deployed app faster than hiring a developer. The catch is knowing what to tell it.',
     tag: 'Builders',
   },
   {
     kicker: 'Claude Code Certification',
     title: 'Pass the CCA-F exam on your first attempt',
-    body: '207 practice questions, every answer linked to the official Anthropic doc it came from. No guessing what is accurate. Built by someone who has used Claude Code in production.',
+    body: '207 practice questions, every answer linked to the official Anthropic doc it came from. Built by someone who uses Claude Code in production.',
     tag: 'Exam Prep',
   },
   {
     kicker: 'AI in Your Practice',
     title: 'Automate the admin without touching patient data',
-    body: 'Intake routing, appointment follow-ups, supplement protocol builders, and pre-session briefs. All of it running through n8n without a single piece of PHI leaving the covered lane.',
+    body: 'Intake routing, appointment follow-ups, supplement protocol builders. All running through n8n without a single piece of PHI leaving the covered lane.',
     tag: 'Automation',
   },
-];
-
-const stats = [
-  { n: '207', label: 'Practice Questions' },
-  { n: '13+', label: 'Blog Posts' },
-  { n: 'PharmD', label: 'Credential' },
-  { n: '0', label: 'PHI Violations' },
 ];
 
 export default function LandingPage() {
@@ -45,18 +102,21 @@ export default function LandingPage() {
       {/* Hero */}
       <section className={styles.hero}>
         <div className={s.wrapWide}>
-          <div className={styles.heroBadge}>
-            <span className={s.pulseDot} />
-            <span>Early access waitlist now open</span>
+          <div className={styles.heroIntro}>
+            <span className={styles.heroCred}>Dr. Shallanda Hunter, PharmD</span>
+            <span className={styles.heroDot}>&middot;</span>
+            <span className={styles.heroRole}>Functional Medicine Educator</span>
+            <span className={styles.heroDot}>&middot;</span>
+            <span className={styles.heroRole}>Builder</span>
           </div>
           <h1 className={styles.heroH1}>
-            AI education built for{' '}
-            <span className={styles.heroAccent}>healthcare professionals</span>{' '}
-            who want to build.
+            I build healthcare apps with AI.<br />
+            <span className={styles.heroAccent}>I can teach you how.</span>
           </h1>
           <p className={styles.heroSub}>
-            HIPAA-conscious workflows. Claude Code certification prep. Vibe coding for non-developers.
-            Taught by a PharmD who built a functional medicine platform with AI and zero traditional development.
+            Not generic AI tutorials. I built two production platforms, a Chrome extension,
+            and an exam prep product using Claude Code, n8n, and vibe coding.
+            No dev team. No CS degree. PharmD who builds.
           </p>
           <div className={styles.heroCtas}>
             <Link to="/waitlist" className={`${s.btnGold} ${s.btnLg}`}>
@@ -65,42 +125,80 @@ export default function LandingPage() {
             <Link to="/blog" className={`${s.btnOutline} ${s.btnLg}`}>
               Read the Blog
             </Link>
+            <Link to="/exam-prep" className={`${s.btnOutline} ${s.btnLg}`}>
+              CCA-F Exam Prep
+            </Link>
           </div>
-          <div className={styles.heroStats}>
-            {stats.map(stat => (
-              <div key={stat.label} className={styles.heroStat}>
-                <span className={styles.heroStatN}>{stat.n}</span>
-                <span className={styles.heroStatL}>{stat.label}</span>
+        </div>
+      </section>
+
+      {/* What I've Built */}
+      <section className={styles.builds}>
+        <div className={s.wrapWide}>
+          <span className={s.kickerGold}>Proof of Work</span>
+          <h2 className={styles.sectionH}>
+            These are live. Not concepts. Not mockups.
+          </h2>
+          <div className={styles.buildsGrid}>
+            {builds.map(b => (
+              <div key={b.name} className={styles.buildCard}>
+                <div className={styles.buildCardTop}>
+                  <h3 className={styles.buildName}>{b.name}</h3>
+                  <span className={`${styles.buildStatus} ${b.status === 'Live' ? styles.buildStatusLive : ''}`}>
+                    {b.status === 'Live' && <span className={styles.buildDot} />}
+                    {b.status}
+                  </span>
+                </div>
+                <p className={styles.buildDesc}>{b.desc}</p>
+                <span className={styles.buildStack}>{b.stack}</span>
+                {b.url && (
+                  b.url.startsWith('/') ? (
+                    <Link to={b.url} className={styles.buildLink}>View &rarr;</Link>
+                  ) : (
+                    <a href={b.url} target="_blank" rel="noopener noreferrer" className={styles.buildLink}>
+                      Visit &rarr;
+                    </a>
+                  )
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Social proof bar */}
-      <div className={styles.proofBar}>
+      {/* My Stack */}
+      <section className={styles.stackSection}>
         <div className={s.wrapWide}>
-          <p className={styles.proofText}>
-            Built by{' '}
-            <a href="https://www.drshallandahunter.com" target="_blank" rel="noopener noreferrer" className={styles.proofLink}>
-              Dr. Shallanda Hunter, PharmD
-            </a>
-            {' '}&middot; Functional Medicine Educator &middot; AI Implementation Guide &middot; Product Builder
+          <span className={s.kicker}>My Stack</span>
+          <h2 className={styles.sectionH}>
+            The tools behind every build
+          </h2>
+          <p className={styles.sectionP}>
+            Five tools. Two production apps. Zero traditional development experience required.
+            Each one chosen for a specific reason, and each one teachable.
           </p>
+          <div className={styles.stackGrid}>
+            {stack.map(t => (
+              <div key={t.tool} className={styles.stackCard}>
+                <div className={styles.stackCardHeader}>
+                  <span className={styles.stackIndicator} style={{ background: t.color }} />
+                  <span className={styles.stackTool}>{t.tool}</span>
+                </div>
+                <span className={styles.stackRole}>{t.role}</span>
+                <p className={styles.stackDetail}>{t.detail}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Features */}
+      {/* What You'll Learn */}
       <section className={styles.features}>
         <div className={s.wrapWide}>
           <span className={s.kicker}>What You Will Learn</span>
           <h2 className={styles.sectionH}>
             The AI curriculum that actually applies to your work
           </h2>
-          <p className={styles.sectionP}>
-            Not generic AI tutorials. Not another ChatGPT prompt list. This is built around the real workflows,
-            compliance requirements, and tools that matter in healthcare.
-          </p>
           <div className={styles.featuresGrid}>
             {features.map(f => (
               <div key={f.kicker} className={styles.featureCard}>
@@ -110,60 +208,6 @@ export default function LandingPage() {
                 <span className={styles.featureTag}>{f.tag}</span>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Proof of work */}
-      <section className={styles.proof}>
-        <div className={s.wrapWide}>
-          <div className={styles.proofGrid}>
-            <div className={styles.proofContent}>
-              <span className={s.kickerGold}>Proof of Work</span>
-              <h2 className={styles.sectionH}>
-                Built a full HIPAA-conscious health platform. With AI. Without a developer.
-              </h2>
-              <p className={styles.sectionP}>
-                Hunters Holistic Health is a live, deployed functional medicine education platform built entirely
-                using Claude Code and vibe coding techniques. It includes a blood pressure tracker, AI meal analysis,
-                daily logging, and a secure educator dashboard.
-              </p>
-              <p className={styles.sectionP}>
-                The same n8n automation workflows covered in this curriculum are running in production right now.
-                The architecture, the compliance decisions, and the build process are all documented and teachable.
-              </p>
-              <a
-                href="https://www.huntersholistichealth.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${s.btnOutline}`}
-              >
-                See the live platform
-              </a>
-            </div>
-            <div className={styles.proofCard}>
-              <div className={styles.proofCardHeader}>
-                <span className={s.pill + ' ' + s.pillGreen}>Live in Production</span>
-                <span className={styles.proofCardDomain}>huntersholistichealth.com</span>
-              </div>
-              <div className={styles.proofCardItems}>
-                {[
-                  'PWA built with Vite + React + TypeScript',
-                  'Supabase for non-PHI data storage',
-                  'n8n automation for intake routing',
-                  'Google Workspace clinical lane for PHI',
-                  'AI Meal Guard via OpenAI proxy',
-                  'Blood pressure trend tracker with Chart.js',
-                  'Educator dashboard with client roster',
-                  'Full Terms of Service and Privacy Policy',
-                ].map(item => (
-                  <div key={item} className={styles.proofCardItem}>
-                    <span className={styles.proofCardCheck}>&#10003;</span>
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -205,7 +249,7 @@ export default function LandingPage() {
           </h2>
           <p className={styles.ctaP}>
             Join the waitlist for early access, launch pricing, and invitations to live sessions.
-            No spam. No pressure. Fully in your control.
+            No spam. No pressure.
           </p>
           <Link to="/waitlist" className={`${s.btnGold} ${s.btnLg}`}>
             Save My Spot

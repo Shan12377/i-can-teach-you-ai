@@ -10,6 +10,175 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: 'my-automation-stack-pharmd-builds-with-ai',
+    title: 'My Automation Stack: How a PharmD Runs 5 Businesses With 5 Tools',
+    excerpt: 'I run two production apps, a Chrome extension, an exam prep product, and a consulting service. Here is the exact automation stack behind all of it.',
+    category: 'My Stack',
+    date: 'Aug 18, 2026',
+    readTime: '8 min read',
+    content: `
+## Why This Post Exists
+
+Most "what tools I use" posts are affiliate marketing disguised as advice. This one is not. These are the five tools I actually use every day to run Hunter's Holistic Health, Pharmacy Decoder, I Can Teach You AI, and my consulting work. No affiliate links. Just what works and why.
+
+## The Stack
+
+**1. Claude Code (Primary Build Tool)**
+
+Claude Code is the reason these businesses exist in their current form. I am a PharmD, not a software engineer. Claude Code let me build a full React + Supabase health education platform (huntersholistichealth.com), a pharmacy exam prep app with 340 questions and OTP verification (pharmacydecoder.com), and this site.
+
+The key is the CLAUDE.md file. Every project gets one. It contains the design system, the compliance rules, the file structure, and explicit instructions about what Claude should never do without asking. When Claude Code reads a thorough CLAUDE.md, it behaves like a senior developer who has been briefed. Without one, it guesses.
+
+I use Claude Code for initial builds, major refactors, and anything that touches multiple files at once.
+
+**2. n8n on AWS (HIPAA-Lane Automation)**
+
+n8n is a self-hosted workflow automation tool. I run it on AWS specifically because AWS offers a Business Associate Agreement (BAA). That BAA is what makes this instance safe for automations that handle data adjacent to my health education practice.
+
+This instance runs the intake routing system for Hunter's Holistic Health: four submission types (waitlist, support, feature requests, clinical inquiries) each routed to their own Google Sheets tab with email alerts. It also handles appointment follow-up automations and the daily business briefing workflow that pulls from five Gmail accounts and three database tables.
+
+The reason I self-host on AWS instead of using n8n Cloud or Zapier: when you self-host, your webhook data never passes through a third-party server. For healthcare-adjacent work, that matters.
+
+**3. n8n on Oracle Cloud (Teaching and Client Builds)**
+
+Oracle Cloud offers a free tier that includes a VM with enough resources to run n8n for 12 months at zero cost. I use this second n8n instance for everything that does not need the BAA: teaching demos, client workflow builds, and personal automations that have nothing to do with health data.
+
+This separation is deliberate. The AWS instance is the clinical-adjacent lane. The Oracle instance is the general-purpose lane. They never share data. This is the two-layer architecture applied to my own infrastructure.
+
+For anyone starting out with n8n, Oracle Cloud free tier is the best way to learn without paying for hosting.
+
+**4. Google Apps Script (Pharmacy Decoder Backend)**
+
+Pharmacy Decoder is a single-file web app that serves 340 UMPJE practice questions. It does not need a full backend. Google Apps Script handles everything server-side: OTP email verification for school access codes, activation logging to Google Sheets, and review collection.
+
+The pattern is simple. The front end calls Apps Script via JSONP (dynamic script injection, not fetch, because of cross-origin restrictions). Apps Script handles the logic and writes to a linked Google Spreadsheet. Zero hosting cost. Zero maintenance. It has been running without issues since launch.
+
+For simple apps that need server-side logic without a full backend, Apps Script is the laziest correct solution.
+
+**5. Make (Personal Automations)**
+
+Make (formerly Integromat) handles my personal workflow automations: Telegram bots that send morning briefings, Notion integrations for cycle tracking and daily logs, and various notification flows that do not need the security posture of the AWS n8n instance.
+
+Make is easier to set up than n8n for simple two-step automations. The visual builder is more polished, and the pre-built integrations with Telegram and Notion work without configuration. The tradeoff is that your data flows through Make's servers, which is fine for personal use but not for anything health-related.
+
+## Why These Five and Not Others
+
+Every tool in this stack was chosen because it solves a specific problem better than the alternatives, not because it is popular or trendy.
+
+Claude Code over Cursor: because I need agentic autonomy, not an editor with autocomplete. I am not a developer looking for speed; I am a domain expert who needs the AI to handle implementation.
+
+n8n over Zapier: because self-hosting gives me data control and Zapier gets expensive at scale.
+
+Google Apps Script over a Vercel serverless function: because Pharmacy Decoder does not need a build step, a deployment pipeline, or TypeScript. Apps Script is the right level of complexity for what it does.
+
+Make over building everything in n8n: because some automations are simple enough that self-hosting is overkill.
+
+## The Takeaway
+
+Five tools. Two production apps. One Chrome extension. One exam prep product. One consulting service. No dev team. No CS degree. PharmD who builds.
+    `,
+  },
+  {
+    slug: 'n8n-aws-baa-healthcare-automation',
+    title: 'Running n8n on AWS With a BAA: Why It Matters for Healthcare',
+    excerpt: 'If you are automating workflows for a health practice, where your automation runs matters as much as what it does. Here is why AWS plus a BAA is the right hosting decision.',
+    category: 'My Stack',
+    date: 'Aug 16, 2026',
+    readTime: '7 min read',
+    content: `
+## The Hosting Decision Most People Skip
+
+When healthcare professionals discover n8n, they usually go straight to n8n Cloud or spin up a Docker container on the cheapest VPS they can find. The workflow runs. Data flows. Nobody thinks about where that data is sitting.
+
+For general business automation, this is fine. For healthcare-adjacent automation, it is a compliance gap.
+
+## What a BAA Actually Does
+
+A Business Associate Agreement (BAA) is a legal contract between you and a service provider that handles data on your behalf. Under HIPAA, if a vendor processes, stores, or transmits protected health information (PHI), they must sign a BAA agreeing to specific security and privacy obligations.
+
+AWS offers a BAA that covers EC2, S3, RDS, and dozens of other services. When you run n8n on an AWS EC2 instance covered by a BAA, you have a legal framework governing how that infrastructure handles your data.
+
+Without a BAA, you are trusting the provider's general terms of service, which typically include broad rights to access, analyze, and sometimes use your data.
+
+## What My AWS n8n Instance Actually Runs
+
+The n8n instance on AWS handles everything connected to Hunter's Holistic Health:
+
+The intake router receives four types of form submissions (waitlist, support, feature requests, clinical inquiries). Each type is routed to its own Google Sheets tab. Email alerts go out with name, email, category, and timestamp only. No health details in the alerts.
+
+The clinical inquiry flow is the most sensitive. The form itself collects only general interest information with a visible disclaimer telling users not to include lab results or diagnoses. But because this flow is the gateway to the clinical lane, it runs on the BAA-covered infrastructure.
+
+The daily business briefing pulls data from five Gmail accounts, four Google Sheets tabs, and three Supabase tables. It summarizes everything via Claude Haiku, posts to Telegram, and creates calendar events for anything with a deadline.
+
+## The Two-Instance Pattern
+
+I run two separate n8n instances. The AWS instance handles healthcare-adjacent flows. A second instance on Oracle Cloud free tier handles everything else: teaching demos, client workflow builds, personal automations.
+
+This separation costs nothing extra (Oracle free tier is genuinely free for 12 months) and creates a clean boundary between data that needs the BAA umbrella and data that does not.
+
+## The Setup
+
+The AWS setup is straightforward. An EC2 t3.micro instance running Ubuntu with Docker. n8n runs as a Docker container with a mounted volume for persistent data. The instance sits behind an Application Load Balancer with an SSL certificate from AWS Certificate Manager.
+
+Total monthly cost: roughly $15 to $20 depending on traffic, well within the free tier for the first year.
+
+## The Takeaway
+
+If you are building automation for a health practice, the hosting decision is not just a technical choice. It is a compliance decision. Running n8n on AWS with a BAA does not make your workflows HIPAA-compliant by itself, but it puts the infrastructure layer on a proper legal foundation. That is the minimum starting point for healthcare-adjacent automation.
+    `,
+  },
+  {
+    slug: 'google-apps-script-pharmacy-decoder-backend',
+    title: 'Google Apps Script as a Backend: How Pharmacy Decoder Runs Without a Server',
+    excerpt: 'Pharmacy Decoder serves 340 exam questions with OTP verification and student tracking. The entire backend is Google Apps Script. Here is why that is the right choice.',
+    category: 'My Stack',
+    date: 'Aug 14, 2026',
+    readTime: '6 min read',
+    content: `
+## The Problem
+
+Pharmacy Decoder is a single-file web app. It serves 340 UMPJE practice questions to pharmacy students. Schools get access codes that unlock 14 days of free use. Students verify their school email via a one-time password sent to their inbox.
+
+That OTP flow needs server-side logic. You cannot send emails from the browser. You cannot verify codes securely in client-side JavaScript. The question was: what is the simplest possible backend that handles this without introducing a build system, a deployment pipeline, or a monthly hosting bill?
+
+## Why Google Apps Script
+
+Google Apps Script is JavaScript that runs on Google's infrastructure. It can send emails via Gmail, read and write to Google Sheets, and expose web endpoints via the doGet and doPost functions. It is free for the usage levels a small app needs.
+
+For Pharmacy Decoder, Apps Script handles three things:
+
+First, OTP generation and delivery. When a student enters their school email and access code, the app calls Apps Script. The script generates a 6-digit code, stores it with an expiration timestamp, and sends it to the student's inbox via Gmail.
+
+Second, OTP verification. The student enters the code. The app calls Apps Script again. The script checks the code against the stored value and expiration. If valid, it returns success.
+
+Third, activation logging. On successful verification, the script writes a row to a Google Sheets tab: full name, email, access code, graduation year, exam date, follow-up date, activation timestamp.
+
+## The JSONP Pattern
+
+Apps Script endpoints do not support CORS in the way a typical API does. The standard fetch API with no-cors mode cannot read the response body. The solution is JSONP: dynamic script tag injection.
+
+The app creates a script element, sets the src to the Apps Script URL with a callback parameter, and appends it to the document. Apps Script wraps the response in a function call that matches the callback name. When the script loads, the browser executes the callback with the response data.
+
+This pattern is old and unfashionable. It also works perfectly for this use case with zero configuration.
+
+## What This Costs
+
+Nothing. Google Apps Script has generous daily quotas for email sending (100 emails per day on a free account, 1500 on Google Workspace) and script execution time. Pharmacy Decoder does not come close to any of these limits.
+
+Compare this to a Vercel serverless function, which would work but introduces a build step, a deployment pipeline, environment variables, and a framework dependency. For what Pharmacy Decoder needs, that is unnecessary complexity.
+
+## When Apps Script Is the Wrong Choice
+
+Apps Script is wrong when you need real-time performance, complex routing, or heavy computation. It is wrong when you need WebSocket connections or streaming responses. It is wrong when your app grows to hundreds of concurrent users.
+
+For a pharmacy exam prep app that serves a few hundred students per school cohort with occasional OTP verification requests, it is the laziest correct solution. And in software, the laziest correct solution is usually the best one.
+
+## The Takeaway
+
+Not every app needs a full backend. Google Apps Script gives you server-side email sending, data storage via Sheets, and web endpoints for free. For small, focused apps where the backend logic is simple, it is a tool worth knowing.
+    `,
+  },
+  {
     slug: 'hipaa-conscious-ai-workflows-healthcare',
     title: 'HIPAA-Conscious AI Workflows: What Most Tutorials Get Wrong',
     excerpt: 'Most AI workflow tutorials skip the compliance layer entirely. Here is the two-layer architecture that keeps PHI out of the wrong places and your practice out of trouble.',
@@ -1860,577 +2029,4 @@ If the task involves a specific patient, it belongs in your secure, BAA-covered 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
-  {
-    slug: 'claude-code-absolute-beginners-guide',
-    title: 'Claude Code for Absolute Beginners: What It Is and How to Start Today',
-    excerpt: 'Claude Code is Anthropic’s most powerful tool for building software, but its interface can be intimidating. Here is the absolute beginner’s guide to getting started.',
-    category: 'Claude Code',
-    date: 'Jun 9, 2026',
-    readTime: '7 min read',
-    content: `
-## What is Claude Code?
-
-If you have used ChatGPT or the standard Claude.ai interface, you are used to a chatbot. You ask a question, it gives you text.
-
-Claude Code is different. It is an *agent*. It does not just give you text; it actively reads the files on your computer, writes new code, creates folders, and runs terminal commands. It is the difference between asking an architect for a blueprint (Claude.ai) and hiring a general contractor to build the house (Claude Code).
-
-## Why It Intimidates Beginners
-
-Claude Code runs in the command line (the terminal). For non-technical users, seeing a black screen with text is terrifying. It feels like you are hacking the mainframe.
-
-You aren't. The terminal is just a text-based way to talk to your computer, and Claude Code makes it incredibly simple.
-
-## How to Start (Step-by-Step)
-
-**Step 1: Install Node.js**
-Claude Code requires Node.js to run. Go to nodejs.org, download the installer, and click "Next" until it finishes.
-
-**Step 2: Open Your Terminal**
-On a Mac, open the app called "Terminal". On Windows, open "Command Prompt".
-
-**Step 3: Install Claude Code**
-Type this exact command and press Enter:
-\`npm install -g @anthropic-ai/claude-code\`
-
-**Step 4: Authenticate**
-Type \`claude\` and press Enter. It will open a browser window asking you to log in to your Anthropic account.
-
-**Step 5: Start Building**
-Create an empty folder on your desktop. Drag that folder onto your terminal window (this tells the terminal to look at that folder). Type \`claude\` again.
-
-Now, just type what you want: *"Create a new HTML file with a beautiful, dark-mode landing page for my wellness coaching business."*
-
-Claude Code will read the folder, create the file, write the HTML and CSS, and tell you when it is done.
-
-## The One Rule You Must Follow
-
-Always create a \`CLAUDE.md\` file in your folder before you start. Write your instructions, colors, and rules in that file. Claude Code automatically reads it every time it starts, ensuring it never forgets your brand guidelines or compliance rules.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'claude-code-vs-cursor-2026',
-    title: 'Claude Code vs Cursor: Which AI Coding Tool Should You Use in 2026?',
-    excerpt: 'The two heavyweights of AI coding have different philosophies. Cursor is an editor with AI; Claude Code is an AI that edits. Here is how to choose between them.',
-    category: 'Claude Code',
-    date: 'Jun 8, 2026',
-    readTime: '8 min read',
-    content: `
-## The Philosophy Difference
-
-To understand the difference between Cursor and Claude Code, you have to understand their underlying philosophies.
-
-**Cursor** is an IDE (Integrated Development Environment). It is a fork of VS Code. Its philosophy is: *You are the developer. You are driving the car. We are the advanced cruise control that keeps you in the lane and predicts your next turn.*
-
-**Claude Code** is an autonomous agent. Its philosophy is: *You are the product manager. You tell us the destination. We will drive the car, navigate the traffic, and tell you when we arrive.*
-
-## Where Cursor Wins
-
-1. **Micro-edits:** If you are looking at a file and need to change a button color or fix a specific typo, Cursor's inline chat (Cmd+K) and Tab autocomplete are unmatched.
-2. **Visual context:** Because it is an editor, you are always looking at your code. For people who know how to read code, this visual feedback loop is crucial.
-3. **Familiarity:** If you already use VS Code, switching to Cursor takes zero effort. All your extensions and themes work perfectly.
-
-## Where Claude Code Wins
-
-1. **Massive Refactors:** If you need to change the entire routing structure of a 50-file application, Claude Code handles it better. You give it the instruction, and it systematically works through the codebase, finding dependencies and updating them.
-2. **Following Strict Rules:** Claude Code's adherence to the \`CLAUDE.md\` file is legendary. If you put a strict compliance rule in that file (e.g., "Never use Tailwind"), Claude Code will enforce it across the entire project.
-3. **Agentic Autonomy:** Claude Code will run a build command, see an error, read the error, rewrite the code to fix it, and run the build command again—all without you pressing a button.
-
-## The Hybrid Approach (The Pro Move)
-
-The best developers in 2026 do not choose one. They use both.
-
-They use **Claude Code** (often via the Cowork interface) for the heavy lifting: scaffolding the initial project, writing the complex database schemas, and performing massive multi-file refactors.
-
-Then, they open that folder in **Cursor** to do the final polish, tweak the CSS, and handle the visual layout where seeing the code line-by-line is helpful.
-
-If you are a non-technical builder, lean heavily on Claude Code. It requires you to look at the code much less.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'build-health-app-without-coding-claude',
-    title: 'How I Used Claude Code to Build a HIPAA-Conscious Health App (Without a Developer)',
-    excerpt: 'I am a PharmD, not a software engineer. But using Claude Code, I built Hunters Holistic Health—a secure, two-layer educational health platform. Here is the exact process.',
-    category: 'Claude Code',
-    date: 'Jun 7, 2026',
-    readTime: '9 min read',
-    content: `
-## The Developer Bottleneck
-
-For years, healthcare professionals with great ideas for patient tools have faced a massive bottleneck: development costs. Building a secure, compliant web application costs tens of thousands of dollars. 
-
-I bypassed that bottleneck entirely to build the Hunters Holistic Health (HHH) platform. I am a PharmD, not a software engineer. I used Claude Code.
-
-## The Architecture of HHH
-
-HHH is not a simple WordPress site. It is a React-based Progressive Web App (PWA) with a Supabase backend, a dynamic patient dashboard, a blood pressure trend tracker, an AI Meal Guard, and a complex n8n intake routing system.
-
-More importantly, it is built on a strict two-layer architecture to manage HIPAA compliance:
-- **Lane 1 (The App):** Handles non-PHI educational tracking and operational intake.
-- **Lane 2 (Google Workspace):** A separate, manual lane for actual clinical records and PHI.
-
-## The Claude Code Process
-
-Here is exactly how I built it using Claude Code:
-
-**1. The Master Prompt (CLAUDE.md)**
-Before writing any code, I wrote a comprehensive \`CLAUDE.md\` file. I explicitly defined the two-layer architecture and added a "HIPAA Hard Stop" rule: *If any feature may create, transmit, or store individually identifiable health information, STOP and ask for confirmation.* This ensured the AI didn't accidentally build non-compliant database tables.
-
-**2. The Data Layer First**
-I instructed Claude Code to build the Supabase SQL schema first. We defined tables for daily logs and waitlist signups, strictly ensuring no fields asked for diagnoses or lab values.
-
-**3. The Vibe Coding Loop**
-I built the app one page at a time. I would type: *"Build the Blood Pressure Tracker page. Use Chart.js for the trend line. Remember the design tokens in tokens.css."* Claude Code would write the file, update the routing, and fix any TypeScript errors automatically.
-
-**4. The n8n Integration**
-Instead of writing complex backend routing, I had Claude Code build a webhook connection to n8n. Now, when someone fills out an intake form on the app, Claude's code sends it to my self-hosted n8n instance, which routes it to the correct Google Sheet without exposing data to third-party SaaS tools.
-
-## The Lesson for Healthcare Professionals
-
-You do not need to learn React. You need to learn system architecture and compliance constraints. If you can define *what* needs to be built and *what the rules are*, Claude Code can handle the *how*.
-
-The HHH platform is live proof that domain experts can now build their own tools.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'how-to-use-gemini-for-business-2026',
-    title: 'How to Use Google Gemini for Your Business in 2026: A Practical Guide',
-    excerpt: 'Gemini is deeply integrated into Google Workspace, but most businesses are only using 10% of its capability. Here is how to actually use Gemini to automate business operations.',
-    category: 'Gemini',
-    date: 'Jun 6, 2026',
-    readTime: '8 min read',
-    content: `
-## The Google Workspace Advantage
-
-If your business runs on Google Workspace (Gmail, Docs, Drive, Sheets), Google Gemini is your most powerful AI option. While ChatGPT and Claude require you to copy and paste data back and forth, Gemini lives inside the documents where your work already happens.
-
-However, most business owners use Gemini as a glorified search engine. Here is how to use it as an operational engine in 2026.
-
-## 1. The "Help Me Write" Command in Gmail
-
-This is the most obvious but underutilized feature. Do not just ask Gemini to "write an email." Give it context. 
-
-**Bad Prompt:** "Write an email to a client who hasn't paid."
-**Good Prompt:** "Draft a firm but polite follow-up email to a client regarding invoice #104. Reference our late fee policy. Keep it under 4 sentences."
-
-## 2. Synthesizing Meeting Notes in Google Docs
-
-If you record meetings via Google Meet, Gemini can automatically generate transcripts. But the real power is in Docs. 
-
-Open a new Doc, type \`@\`, and select Gemini. Prompt it: *"Summarize the transcript from yesterday's Q3 Planning meeting. Extract all action items and assign them to the names mentioned."*
-
-## 3. Data Extraction in Google Sheets
-
-Gemini in Sheets is transformative for small businesses. If you have a massive sheet of customer feedback or survey responses, you no longer need to read them all.
-
-Highlight the column of text responses, open the Gemini side panel, and prompt: *"Categorize these 500 feedback responses into three columns: Feature Request, Bug Report, or Pricing Complaint. Then summarize the top 3 most common Bug Reports."*
-
-## 4. The Drive-Wide Search
-
-Gemini can search across your entire Google Drive simultaneously. Instead of opening five different PDFs to find a specific policy, open Gemini and ask: *"Based on the Employee Handbook PDF and the Q1 Benefits Doc in my Drive, what is our exact policy on rolling over PTO into the next calendar year?"*
-
-Gemini will read the documents, synthesize the answer, and provide citations linking directly to the source files.
-
-## The Security Caveat
-
-If you are a healthcare professional or handle sensitive data, ensure you have the proper Google Workspace Enterprise tier and a signed BAA before allowing Gemini to scan drives containing PHI. Consumer-tier Gemini may use your data for training; Enterprise-tier Gemini does not.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'notebooklm-business-vs-studying',
-    title: 'NotebookLM for Business vs. Studying: Which Way Should You Use It?',
-    excerpt: 'Google’s NotebookLM was designed for students, but it has become a secret weapon for businesses. Here is the difference in how to use it for studying versus operational workflows.',
-    category: 'Gemini',
-    date: 'Jun 5, 2026',
-    readTime: '7 min read',
-    content: `
-## What is NotebookLM?
-
-NotebookLM is an AI research assistant created by Google. Unlike ChatGPT, which relies on its vast training data to answer questions, NotebookLM *only* knows what you upload to it. You upload up to 50 documents (PDFs, text files, YouTube links), and it becomes an absolute expert on those specific sources.
-
-It was originally marketed to students, but in 2026, businesses are using it just as heavily. The workflows, however, are entirely different.
-
-## NotebookLM for Studying (The Academic Workflow)
-
-For students, researchers, and professionals taking certification exams (like the CCA-F), NotebookLM is a study engine.
-
-**1. The Source Upload:** Upload all your syllabus PDFs, lecture transcripts, and slide decks into one Notebook.
-**2. The Audio Overview:** This is NotebookLM's killer feature. It generates a highly realistic, 10-minute podcast of two AI hosts discussing your uploaded material. Listening to this on a commute is the best way to passively absorb dense material.
-**3. The Quiz Generator:** Instead of just asking it to summarize, prompt NotebookLM: *"Act as a tough professor. Ask me 5 multiple-choice questions based on chapter 3 of the uploaded textbook. Do not give me the answers until I respond."*
-
-## NotebookLM for Business (The Operational Workflow)
-
-Businesses do not need study guides; they need instant access to trapped knowledge.
-
-**1. The HR/Onboarding Oracle:** Upload your employee handbook, benefits guides, and SOPs into a Notebook. When a new hire asks, "How do I submit an expense report?", you don't have to find the PDF. You ask NotebookLM, and it gives you the exact process with a citation to page 14 of the SOP document.
-**2. The Sales Call Analyzer:** Upload the transcripts of your 10 most successful sales calls and your 10 lost deals. Prompt it: *"Analyze these transcripts. What specific objections were raised in the lost deals that were successfully overcome in the won deals?"*
-**3. The Content Repurposer:** Upload your last 5 blog posts or newsletters. Prompt it: *"Based ONLY on the tone and facts in these documents, write a 5-post LinkedIn sequence highlighting our core methodology."*
-
-## The Limitation You Must Know
-
-NotebookLM is brilliant, but it is siloed. It does not integrate via API to other tools like n8n or Zapier (yet). It is a closed workspace. Use it for synthesis and research, but do not expect it to automate your outbound emails.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'gemini-healthcare-professionals-limits',
-    title: 'Gemini for Healthcare Professionals: What It Can and Cannot Do',
-    excerpt: 'Google Workspace is the backbone of many small health practices. But can you safely use Gemini AI within it? The answer depends entirely on your BAA and your use case.',
-    category: 'Gemini',
-    date: 'Jun 4, 2026',
-    readTime: '8 min read',
-    content: `
-## The Appeal of Gemini in Healthcare
-
-For small healthcare practices, functional medicine educators, and wellness coaches, Google Workspace is often the operational hub. You use Gmail for communication and Google Drive for secure file storage.
-
-When Google integrated Gemini directly into Workspace, the appeal was obvious: an AI assistant that can read your emails and summarize your patient notes. But in healthcare, convenience must always bow to compliance.
-
-## What Gemini CAN Do (Safely)
-
-If you are using Gemini on non-PHI data (Lane 1 operations), it is incredibly powerful.
-
-**1. Administrative Drafting:** You can use Gemini to draft standard operating procedures, employee onboarding documents, and marketing copy.
-**2. Educational Content:** You can prompt Gemini to help structure a 30-day wellness curriculum or outline a workshop presentation.
-**3. Non-Clinical Email Triage:** You can use Gemini to summarize vendor emails, software subscription notices, and general business correspondence.
-
-## What Gemini CANNOT Do (Without Strict Setup)
-
-You cannot use Gemini to summarize patient notes, analyze lab results, or draft clinical emails *unless* you have met very specific criteria.
-
-If you type a patient's name and their symptoms into a consumer-tier Gemini prompt, you have likely committed a HIPAA violation (if you are a covered entity) or breached standard data privacy expectations. Consumer-tier AI models may use your inputs as training data.
-
-## The Google Workspace BAA Exception
-
-There is a safe way to use Gemini for clinical data, but it requires the Enterprise tier of Google Workspace.
-
-1. You must have a paid Google Workspace Enterprise account.
-2. You must sign the Business Associate Agreement (BAA) in the Google Admin Console.
-3. You must ensure that the specific Gemini features you are using are covered under that BAA (Google frequently updates which specific AI sub-features are covered).
-
-When properly configured under a BAA, Google explicitly states that Gemini Enterprise does not use your organization's data to train its public models. In this locked-down environment, you *can* use Gemini to synthesize clinical notes stored in your secure Drive.
-
-## The Rule of Thumb
-
-If you are a solo practitioner and do not want the administrative burden of managing Enterprise-tier permissions, stick to the two-layer architecture. Use Gemini for your marketing, your admin, and your education. Keep it entirely away from your clinical records.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'chatgpt-vs-gemini-vs-perplexity-2026',
-    title: 'ChatGPT vs Gemini vs Perplexity in 2026: Which AI Tool Should You Actually Use?',
-    excerpt: 'The AI landscape has settled into three distinct heavyweights. Stop paying for all three. Here is the definitive guide to which tool fits your specific workflow.',
-    category: 'AI Tools',
-    date: 'Jun 3, 2026',
-    readTime: '9 min read',
-    content: `
-## The Big Three of 2026
-
-If you are a professional trying to integrate AI into your daily workflow, you are likely overwhelmed by the options. ChatGPT, Google Gemini, and Perplexity AI dominate the market, but they are no longer interchangeable. They have evolved into highly specialized tools.
-
-Here is how to choose.
-
-## ChatGPT (Best for Creation and Reasoning)
-
-ChatGPT (powered by OpenAI's latest models) remains the king of generative reasoning. 
-
-**Use it when:**
-- You need to write a blog post, draft a difficult email, or create a curriculum.
-- You need a sounding board to reason through a complex business strategy.
-- You are using the Advanced Voice Mode to practice a presentation or role-play a difficult conversation.
-
-**Do not use it when:**
-- You need highly accurate, up-to-the-second news or citations. While it can search the web, it is prone to hallucinating links.
-
-## Perplexity AI (Best for Research and Truth)
-
-Perplexity is not a chatbot; it is an answer engine. It searches the live internet, reads multiple sources, synthesizes the answer, and—crucially—provides footnote citations for every single claim it makes.
-
-**Use it when:**
-- You are researching a medical topic, a legal precedent, or a competitor.
-- You need to verify facts and want to click through to the original source.
-- You want to cut through SEO spam and get a direct answer.
-
-**Do not use it when:**
-- You want to write a creative essay or brainstorm abstract ideas. It is built for facts, not fiction.
-
-## Google Gemini (Best for Workspace Integration)
-
-Gemini's superpower is not its standalone chat interface; it is its integration into Google Docs, Sheets, Drive, and Gmail.
-
-**Use it when:**
-- Your entire business runs on Google Workspace.
-- You need to summarize a 50-page PDF that is already saved in your Google Drive.
-- You need to extract and categorize data from a massive Google Sheet.
-
-**Do not use it when:**
-- You are writing code (Claude Code and Cursor are vastly superior).
-
-## The Verdict
-
-If you are a **researcher, academic, or healthcare professional**, buy **Perplexity Pro**. The citations are non-negotiable for your work.
-If you are a **creator, marketer, or strategist**, buy **ChatGPT Plus**.
-If you are an **operations manager** living in spreadsheets, use **Gemini Advanced**.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'perplexity-ai-research-healthcare',
-    title: 'Perplexity AI for Research: Why Healthcare Professionals Are Switching',
-    excerpt: 'ChatGPT hallucinates medical citations. Google Search is buried in SEO spam. Here is why Perplexity AI has become the default research tool for healthcare professionals in 2026.',
-    category: 'AI Tools',
-    date: 'Jun 2, 2026',
-    readTime: '8 min read',
-    content: `
-## The Citation Problem
-
-For the first two years of the generative AI boom, healthcare professionals faced a massive problem: AI models lied confidently. If you asked ChatGPT for clinical studies on a specific supplement protocol, it would invent studies, invent authors, and generate fake PubMed URLs.
-
-This made traditional LLMs useless for serious clinical research or evidence-based writing. You always had to fall back to manual Google Scholar searches.
-
-In 2026, Perplexity AI solved this problem.
-
-## How Perplexity Actually Works
-
-Perplexity is an "answer engine." When you ask it a question, it does not just predict the next word based on its training data. Instead, it:
-1. Breaks your query down into multiple search terms.
-2. Scans the live internet for the most authoritative sources.
-3. Reads those sources in real-time.
-4. Synthesizes an answer.
-5. **Appends a footnote citation to every single sentence.**
-
-If Perplexity says, "Vitamin D supplementation has been shown to reduce the risk of acute respiratory tract infections," there will be a little \`[1]\` next to the sentence. Clicking that \`[1]\` takes you directly to the NIH or PubMed study it pulled that fact from.
-
-## The Pro Search Feature
-
-For deep research, Perplexity's "Pro Search" is unmatched. When you trigger Pro Search, the AI will ask *you* clarifying questions before it searches.
-
-If you ask, "What are the latest guidelines for continuous glucose monitoring?", Pro Search will pause and ask: "Are you looking for guidelines for Type 1 Diabetes, Type 2, or non-diabetic metabolic optimization?" It narrows the scope before it reads the literature.
-
-## Academic Focus Mode
-
-Perplexity includes a "Focus" feature that allows you to restrict its search universe. If you are writing a clinical protocol or a course for other practitioners, you can set the focus to "Academic." 
-
-In this mode, Perplexity will ignore blogs, news sites, and consumer health portals (like WebMD). It will only pull answers and citations from peer-reviewed journals, academic papers, and official clinical guidelines.
-
-## The Bottom Line
-
-If you are writing patient education materials, building a course, or researching a complex case, you cannot afford hallucinated citations. Perplexity AI is the only tool that treats truth and attribution as its primary features.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'best-ai-tools-small-business-owners-2026',
-    title: 'The Best AI Tools for Small Business Owners in 2026 (Ranked by Use Case)',
-    excerpt: 'Stop buying random AI subscriptions. Here is the definitive, lean AI software stack for small business owners, categorized by exactly what problem they solve.',
-    category: 'AI Tools',
-    date: 'Jun 1, 2026',
-    readTime: '9 min read',
-    content: `
-## The AI Subscription Fatigue
-
-Small business owners are currently suffering from AI subscription fatigue. Every software vendor has slapped an "AI" label on their product and raised the price by $10 a month. 
-
-You do not need 15 different AI tools. You need a lean stack of 3 to 4 tools that actually save you time or generate revenue. Here is the definitive 2026 stack, ranked by use case.
-
-## 1. For Content and Strategy: ChatGPT Plus
-**Cost:** $20/month
-**Why:** It remains the best all-around thinker. Use it to draft newsletters, brainstorm marketing campaigns, write difficult client emails, and act as a sounding board for business strategy. 
-**Pro Tip:** Use the "Custom Instructions" feature to feed it your brand voice and target audience so you don't have to explain your business every time you log in.
-
-## 2. For Research and Truth: Perplexity Pro
-**Cost:** $20/month
-**Why:** When you need facts, not creative writing. Use it to research competitors, understand new tax regulations, or find highly specific industry statistics. Because it cites its sources, you can trust the data it provides.
-
-## 3. For Operations and Spreadsheets: Google Gemini Advanced
-**Cost:** Included in Google One AI Premium ($20/month)
-**Why:** If you run your business on Google Workspace, this is mandatory. Use it to extract data from massive Google Sheets, summarize long PDFs in your Drive, and draft emails directly inside the Gmail compose window.
-
-## 4. For Workflow Automation: n8n (Self-Hosted)
-**Cost:** Free (if self-hosted) or $20/month (Cloud)
-**Why:** Zapier is too expensive at scale. n8n is a visual automation builder that connects your apps together. Use it to automatically route lead forms to Google Sheets, send onboarding emails, and trigger Slack alerts when a high-value client books a call.
-
-## 5. For Building Custom Apps: Claude Code
-**Cost:** Pay-per-use (API)
-**Why:** If you have outgrown off-the-shelf software and want to build a custom client portal, dashboard, or internal tool, you no longer need to hire a developer. Claude Code allows you to "vibe code" real applications using plain English.
-
-## The Rule for Small Businesses
-
-Do not buy an AI tool to "see what it can do." Identify a bottleneck in your business (e.g., "I spend 4 hours a week summarizing sales calls"), and buy the specific tool that solves that bottleneck.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'ai-workshops-schools-hospitals-guide',
-    title: 'How to Bring AI Workshops Into Your School or Hospital: A Practical Guide',
-    excerpt: 'Healthcare systems and educational institutions know they need AI literacy, but most generic training fails. Here is how to structure an AI workshop that actually changes organizational behavior.',
-    category: 'Workshops',
-    date: 'May 30, 2026',
-    readTime: '8 min read',
-    content: `
-## The Generic Training Problem
-
-Right now, schools and hospitals are panicking about AI. Their response is usually to hire a generic tech consultant to give a one-hour PowerPoint presentation on "The Future of ChatGPT." 
-
-The staff leaves the room entertained, but they return to their desks with no idea how to safely apply AI to their specific daily workflows. Generic training fails because AI is not a generic tool; its value is highly context-dependent.
-
-If you are an administrator looking to bring AI training to your organization, here is how to structure a workshop that actually works.
-
-## 1. Separate the Lanes Immediately
-
-In a healthcare or clinical education setting, the very first thing an AI workshop must teach is the Two-Layer Architecture. 
-
-Staff must understand the difference between **Lane 1** (administrative, educational, non-PHI) and **Lane 2** (clinical, PHI, secure). If you do not establish these boundaries in the first 15 minutes, staff will either be too terrified of compliance to use the tools at all, or they will accidentally paste patient data into a public LLM.
-
-## 2. Teach Prompt Engineering as Clinical Reasoning
-
-Do not teach "prompt hacks." Teach structured reasoning. 
-
-Healthcare professionals are already trained to use structured communication (like SBAR: Situation, Background, Assessment, Recommendation). Teach them to prompt AI the exact same way. Give the AI the Situation, provide the Background constraints, ask for an Assessment, and demand a Recommendation format. 
-
-When you map AI skills onto existing clinical frameworks, adoption skyrockets.
-
-## 3. Focus on "Trapped Knowledge"
-
-The highest-ROI use case for organizations is not writing emails; it is unlocking trapped knowledge. 
-
-A strong workshop should include a live demonstration of tools like NotebookLM or secure enterprise instances of Gemini. Show the staff how to upload a 200-page institutional policy manual and instantly query it for specific procedural answers. This demonstrates immediate, tangible value that saves hours of administrative searching.
-
-## 4. Address the Hallucination Risk Head-On
-
-Do not pretend AI is perfect. A credible workshop must dedicate significant time to the hallucination problem (AI confidently inventing facts). 
-
-Teach staff how to use citation-based engines like Perplexity for research, rather than generative engines like ChatGPT. Teach them the "Trust but Verify" workflow: use AI for synthesis, but demand primary source citations for any clinical or policy claim.
-
-## Hiring the Right Speaker
-
-When hiring someone to lead this workshop, look for a practitioner, not just a technologist. A developer can explain how a neural network functions. A PharmD or clinical educator can explain how to integrate that neural network into a busy practice while navigating HIPAA constraints.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'teaching-ai-literacy-healthcare-students',
-    title: 'Teaching AI Literacy to Healthcare Students: What Schools Are Getting Wrong',
-    excerpt: 'Nursing, pharmacy, and medical schools are treating AI as a cheating tool to be banned. They should be treating it as a clinical instrument that must be mastered safely.',
-    category: 'Workshops',
-    date: 'May 28, 2026',
-    readTime: '9 min read',
-    content: `
-## The Prohibition Reflex
-
-The default reaction of most higher education institutions to generative AI has been prohibition. Nursing schools, pharmacy programs, and medical colleges have deployed AI-detection software and updated honor codes to ban the use of tools like ChatGPT.
-
-This is a profound failure of educational responsibility. 
-
-The students currently sitting in these programs will graduate into a healthcare system where AI is deeply integrated into electronic health records, diagnostic imaging, and administrative workflows. Banning AI in the classroom is like banning calculators in a physics lab. It does not preserve academic integrity; it ensures professional incompetence.
-
-## AI is a Clinical Instrument
-
-We teach healthcare students how to use stethoscopes, how to read ECGs, and how to query clinical databases like UpToDate. We teach them the capabilities of these instruments, and more importantly, we teach them the limitations and failure modes.
-
-AI must be taught the same way. It is a clinical and administrative instrument.
-
-If a pharmacy student does not understand the difference between a generative model (which can hallucinate drug interactions) and a deterministic clinical database, they are dangerous. Schools must teach AI literacy, not AI avoidance.
-
-## What a Healthcare AI Curriculum Must Include
-
-A responsible AI literacy curriculum for healthcare students must cover four pillars:
-
-**1. The Architecture of Hallucination**
-Students must understand *why* LLMs hallucinate. They need to know that a generative AI is predicting the next most likely word, not querying a database of truth. This fundamental understanding is the only way to inoculate them against blindly trusting AI output.
-
-**2. Privacy and the PHI Boundary**
-Students must be taught the exact boundaries of HIPAA as it relates to cloud-based software. They need to know the difference between a consumer-tier AI (which may train on their inputs) and a BAA-covered enterprise environment.
-
-**3. Synthesis vs. Diagnosis**
-Students should be taught how to use AI safely for synthesis (e.g., "Summarize these three pages of dense pathophysiological text into bullet points") while strictly avoiding it for diagnosis (e.g., "Here are the patient's symptoms, what is the disease?").
-
-**4. The Citation Requirement**
-Students must be trained to use citation-backed AI tools (like Perplexity) and must be required to trace AI-generated claims back to primary, peer-reviewed literature.
-
-## The Role of the Educator
-
-The role of the clinical educator is no longer just to transfer knowledge. The internet already did that. The role of the educator is to teach discernment, critical thinking, and the safe application of powerful tools.
-
-Schools that embrace this will produce the healthcare leaders of the next decade. Schools that rely on AI detectors will produce graduates who are obsolete on day one.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  },
-  {
-    slug: 'chatgpt-healthcare-professionals-safe-use',
-    title: 'ChatGPT for Healthcare Professionals: What Is Actually Safe to Use It For',
-    excerpt: 'Can you use ChatGPT in your practice? Yes, but only if you understand the strict boundary between administrative leverage and clinical risk. Here is the definitive guide to safe use.',
-    category: 'Workshops',
-    date: 'May 25, 2026',
-    readTime: '8 min read',
-    content: `
-## The Confusion Around ChatGPT in Healthcare
-
-Ask five healthcare professionals if you can use ChatGPT in practice, and you will get five different answers. Some say it is a massive HIPAA violation. Others use it every day to write patient emails.
-
-The truth is nuanced. ChatGPT is neither inherently safe nor inherently dangerous; it is highly dependent on *what* you put into it and *which tier* of the software you are using.
-
-## The Tier Distinction
-
-First, you must understand the difference between the versions of ChatGPT.
-
-**Consumer ChatGPT (Free or Plus):** This is the version 99% of people use. By default, OpenAI may use the data you type into these versions to train their future models. **You cannot put any Protected Health Information (PHI) into this tier.** Doing so is a direct violation of privacy standards and HIPAA.
-
-**ChatGPT Enterprise / ChatGPT for Healthcare:** OpenAI offers enterprise tiers covered by a Business Associate Agreement (BAA). In these locked-down environments, data is not used for training, and the platform meets HIPAA security standards. 
-
-If you are a solo practitioner using the $20/month Plus version, you are in the consumer tier. Act accordingly.
-
-## Safe Use Cases (The Administrative Lane)
-
-If you are using consumer-tier ChatGPT, you can still gain massive leverage by keeping it strictly in the administrative lane.
-
-**1. Patient Education Materials**
-Prompt: *"Explain the mechanism of action of SSRIs at an 8th-grade reading level. Use an analogy about a recycling plant."*
-Why it's safe: There is no patient data here. You are using the AI to translate complex clinical concepts into accessible language.
-
-**2. Standard Operating Procedures (SOPs)**
-Prompt: *"Draft an SOP for how our front desk should handle a patient who arrives 15 minutes late to a 30-minute appointment."*
-Why it's safe: Purely operational.
-
-**3. Marketing and Outreach**
-Prompt: *"Write a 3-part email sequence for our clinic's new weight management program. Focus on the holistic approach."*
-Why it's safe: General business marketing.
-
-## Unsafe Use Cases (The Clinical Lane)
-
-Never use consumer-tier ChatGPT for the following:
-
-**1. Clinical Summaries**
-Unsafe: *"Summarize these notes for John Doe: [Patient Notes]."*
-Why: You just uploaded PHI to a consumer AI model.
-
-**2. Diagnostic Assistance**
-Unsafe: *"A 45-year-old female presents with..."*
-Why: Even if you anonymize the data (remove the name), providing a highly specific clinical history can sometimes be reverse-engineered, and relying on a general LLM for diagnostic reasoning carries immense liability risk.
-
-**3. Specific Treatment Protocols**
-Unsafe: *"Write a supplement protocol for my patient with Hashimoto's and these specific lab values: [Labs]."*
-Why: You are mixing anonymized clinical data with generative AI, which can hallucinate interactions or contraindications.
-
-## The Golden Rule
-
-If the task involves a specific patient, it belongs in your secure, BAA-covered environment (like an enterprise EHR or Google Workspace). If the task involves general education, business operations, or marketing, ChatGPT is your best tool.
-
-> **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
-    `,
-  }
 ];

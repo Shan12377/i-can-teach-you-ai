@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import styles from './SiteLayout.module.css';
+import { useSeo, ROUTE_META } from '../../lib/seo';
 
 export default function SiteLayout() {
   const location = useLocation();
+  useSeo(ROUTE_META[location.pathname] ?? null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
