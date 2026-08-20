@@ -20,124 +20,6 @@
     },
     {
       "parameters": {
-        "mode": "rules",
-        "rules": {
-          "rules": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "cond-r1",
-                    "leftValue": "={{ $json.body.submissionType }}",
-                    "rightValue": "waitlist_email",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Step 1 - Email"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "cond-r2",
-                    "leftValue": "={{ $json.body.submissionType }}",
-                    "rightValue": "waitlist_questions",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Step 2 - Full"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "cond-r3",
-                    "leftValue": "={{ $json.body.submissionType }}",
-                    "rightValue": "ictai_purchase",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Purchase"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "cond-r4",
-                    "leftValue": "={{ $json.body.submissionType }}",
-                    "rightValue": "ictai_resend_access",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Resend Access"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "node-switch",
-      "name": "Route by Type",
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3,
-      "position": [
-        420,
-        400
-      ]
-    },
-    {
-      "parameters": {
         "operation": "append",
         "documentId": {
           "__rl": true,
@@ -257,7 +139,8 @@
           "id": "5ry6Y3MK7PCHH35L",
           "name": "HHH Gmail account"
         }
-      }
+      },
+      "webhookId": "cad191a7-939d-471d-b903-a5f1936bb21f"
     },
     {
       "parameters": {
@@ -337,7 +220,8 @@
           "id": "5ry6Y3MK7PCHH35L",
           "name": "HHH Gmail account"
         }
-      }
+      },
+      "webhookId": "652e5ee5-8c6b-4205-9c8a-a97d60340ab3"
     },
     {
       "parameters": {
@@ -395,7 +279,8 @@
           "id": "5ry6Y3MK7PCHH35L",
           "name": "HHH Gmail account"
         }
-      }
+      },
+      "webhookId": "e858a2e8-0465-426b-ac4b-8bc6ce272789"
     },
     {
       "parameters": {
@@ -448,7 +333,8 @@
           "id": "5ry6Y3MK7PCHH35L",
           "name": "HHH Gmail account"
         }
-      }
+      },
+      "webhookId": "278115f0-9abd-42da-b701-d491b52ee223"
     },
     {
       "parameters": {
@@ -464,6 +350,134 @@
         860,
         860
       ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-Is Waitlist Email?",
+              "leftValue": "={{ $json.body.submissionType }}",
+              "rightValue": "waitlist_email",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-Is Waitlist Email?",
+      "name": "Is Waitlist Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        420,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-Is Waitlist Questions?",
+              "leftValue": "={{ $json.body.submissionType }}",
+              "rightValue": "waitlist_questions",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-Is Waitlist Questions?",
+      "name": "Is Waitlist Questions?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        420,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-Is Purchase?",
+              "leftValue": "={{ $json.body.submissionType }}",
+              "rightValue": "ictai_purchase",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-Is Purchase?",
+      "name": "Is Purchase?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        420,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-Is Resend Access?",
+              "leftValue": "={{ $json.body.submissionType }}",
+              "rightValue": "ictai_resend_access",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-Is Resend Access?",
+      "name": "Is Resend Access?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        420,
+        860
+      ]
     }
   ],
   "connections": {
@@ -471,39 +485,22 @@
       "main": [
         [
           {
-            "node": "Route by Type",
+            "node": "Is Waitlist Email?",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "Route by Type": {
-      "main": [
-        [
+          },
           {
-            "node": "Log Email (Step 1)",
+            "node": "Is Waitlist Questions?",
             "type": "main",
             "index": 0
-          }
-        ],
-        [
+          },
           {
-            "node": "Log Full Signup (Step 2)",
+            "node": "Is Purchase?",
             "type": "main",
             "index": 0
-          }
-        ],
-        [
+          },
           {
-            "node": "Log Purchase",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Email Buyer: Resend Access Link",
+            "node": "Is Resend Access?",
             "type": "main",
             "index": 0
           }
@@ -604,9 +601,56 @@
           }
         ]
       ]
+    },
+    "Is Waitlist Email?": {
+      "main": [
+        [
+          {
+            "node": "Log Email (Step 1)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Is Waitlist Questions?": {
+      "main": [
+        [
+          {
+            "node": "Log Full Signup (Step 2)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Is Purchase?": {
+      "main": [
+        [
+          {
+            "node": "Log Purchase",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Is Resend Access?": {
+      "main": [
+        [
+          {
+            "node": "Email Buyer: Resend Access Link",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
     }
   },
-  "active": false,
   "settings": {
     "executionOrder": "v1"
   }
