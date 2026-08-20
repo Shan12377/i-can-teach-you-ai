@@ -18,34 +18,40 @@ import './index.css';
 
 const ExamPage = lazy(() => import('./pages/ExamPage'));
 
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route element={<SiteLayout />}>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/exam-prep" element={<ExamPrepPage />} />
+        <Route
+          path="/exam"
+          element={(
+            <Suspense fallback={null}>
+              <ExamPage />
+            </Suspense>
+          )}
+        />
+        <Route path="/blog" element={<BlogIndexPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/waitlist" element={<WaitlistPage />} />
+        <Route path="/waitlist/questions" element={<WaitlistQuestionsPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+      </Route>
+    </Routes>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<SiteLayout />}>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/exam-prep" element={<ExamPrepPage />} />
-          <Route
-            path="/exam"
-            element={(
-              <Suspense fallback={null}>
-                <ExamPage />
-              </Suspense>
-            )}
-          />
-          <Route path="/blog" element={<BlogIndexPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
-          <Route path="/waitlist" element={<WaitlistPage />} />
-          <Route path="/waitlist/questions" element={<WaitlistQuestionsPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-        </Route>
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

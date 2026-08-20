@@ -87,6 +87,21 @@ export const ROUTE_META: Record<string, SeoInput> = {
     description:
       '207 practice questions for the Claude Code certification exam, written by a PharmD who builds production systems with Claude Code. Study smarter and pass the CCA-F.',
     path: '/exam-prep',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: 'CCA-F Exam Prep',
+      description:
+        '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, covering all six domains with official documentation citations.',
+      brand: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+      offers: {
+        '@type': 'Offer',
+        price: '37.00',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/exam-prep`,
+      },
+    },
   },
   '/blog': {
     title: 'Blog: HIPAA-Conscious AI and Vibe Coding | I Can Teach You AI',
@@ -105,6 +120,12 @@ export const ROUTE_META: Record<string, SeoInput> = {
     description:
       'Get early access to AI training built for healthcare professionals: HIPAA-conscious workflows, Claude Code prep, and vibe coding fundamentals.',
     path: '/waitlist',
+  },
+  '/exam': {
+    title: 'Exam Practice | I Can Teach You AI',
+    description: 'CCA-F exam practice, for verified purchasers.',
+    path: '/exam',
+    noindex: true,
   },
   '/waitlist/questions': {
     title: 'Waitlist Questions | I Can Teach You AI',

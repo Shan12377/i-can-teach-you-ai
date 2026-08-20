@@ -15,7 +15,7 @@ This platform is related to Hunter's Holistic Health but serves a different purp
 
 1. **HIPAA Hard Stop:** If any proposed feature, form field, or data flow may create, transmit, or store individually identifiable health information (IIHI), STOP immediately and consult Dr. Hunter before writing any code. Do not proceed on your own judgment.
 2. **Two-Layer Architecture:** The app and n8n are Lane 1 (non-PHI only). Any clinical or sensitive data must be handled in Lane 2 (Google Workspace clinical lane, manual review only). These two lanes must never merge in code.
-3. **Title Rule:** Always use "Functional Medicine Educator" or "PharmD". Never use "health coach" or "RPh".
+3. **Title Rule:** Always use "Functional Medicine Educator" or "PharmD". Never use "health coach" or "RPh". This rule exists to protect scope-of-practice on the Hunter's Holistic Health / functional medicine side. It does not extend to ICTAI's own structured data or copy where the context is explicitly non-clinical (e.g., a `jobTitle` describing Dr. Hunter as an AI educator) — "Pharmacist" is fine there since ICTAI is not a clinical practice.
 4. **Data Minimization:** Do not collect date of birth, physical address, or other unnecessary personal information in any form.
 5. **No Em Dashes:** Never use the em dash character (`—`) in any text, copy, comments, or documentation. Use periods, commas, or colons instead.
 6. **No AI Filler:** Do not use phrases like "delve into", "leverage", "unlock your potential", "elevate", or "seamless". Write clearly and technically.

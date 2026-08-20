@@ -3,37 +3,14 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { BLOG_POSTS } from './blogData';
 import styles from './Blog.module.css';
 import s from '../../styles/shared.module.css';
-import { useSeo, SITE_URL } from '../../lib/seo';
+import { useSeo } from '../../lib/seo';
+import { getBlogPostSeo } from './blogSeo';
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = BLOG_POSTS.find(p => p.slug === slug);
 
-  useSeo(
-    post
-      ? {
-          title: `${post.title} | I Can Teach You AI`,
-          description: post.excerpt,
-          path: `/blog/${post.slug}`,
-          type: 'article',
-          jsonLd: {
-            '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: post.title,
-            description: post.excerpt,
-            datePublished: new Date(post.date).toISOString().slice(0, 10),
-            url: `${SITE_URL}/blog/${post.slug}`,
-            author: {
-              '@type': 'Person',
-              name: 'Dr. Shallanda Hunter, PharmD',
-              jobTitle: 'Functional Medicine Educator',
-              url: SITE_URL,
-            },
-            publisher: { '@type': 'Organization', name: 'I Can Teach You AI', url: SITE_URL },
-          },
-        }
-      : null
-  );
+  useSeo(post ? getBlogPostSeo(post) : null);
 
   if (!post) return <Navigate to="/blog" replace />;
 
