@@ -12,7 +12,10 @@
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [200, 400],
+      "position": [
+        200,
+        400
+      ],
       "webhookId": "ictai-intake"
     },
     {
@@ -128,13 +131,24 @@
       "name": "Route by Type",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3,
-      "position": [420, 400]
+      "position": [
+        420,
+        400
+      ]
     },
     {
       "parameters": {
         "operation": "append",
-        "documentId": { "__rl": true, "value": "164CWzJXJORYcVoOxk6WXOMzS40JcaPnMuIABECUHQM4", "mode": "id" },
-        "sheetName": { "__rl": true, "value": "Waitlist", "mode": "name" },
+        "documentId": {
+          "__rl": true,
+          "value": "1FTM966CEeWuW_SRgcSQe6mGKdUVY9Tq_xHtNHTrC7U4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Waitlist",
+          "mode": "name"
+        },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
@@ -152,23 +166,45 @@
       "name": "Log Email (Step 1)",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
-      "position": [640, 260]
+      "position": [
+        640,
+        260
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uSXIKVQqBMMM9L5u",
+          "name": "HHH Google Sheets account"
+        }
+      }
     },
     {
       "parameters": {
-        "options": { "responseCode": 200 }
+        "options": {
+          "responseCode": 200
+        }
       },
       "id": "node-respond-1",
       "name": "Respond OK (Step 1)",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [860, 260]
+      "position": [
+        860,
+        260
+      ]
     },
     {
       "parameters": {
         "operation": "append",
-        "documentId": { "__rl": true, "value": "164CWzJXJORYcVoOxk6WXOMzS40JcaPnMuIABECUHQM4", "mode": "id" },
-        "sheetName": { "__rl": true, "value": "Waitlist", "mode": "name" },
+        "documentId": {
+          "__rl": true,
+          "value": "1FTM966CEeWuW_SRgcSQe6mGKdUVY9Tq_xHtNHTrC7U4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Waitlist",
+          "mode": "name"
+        },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
@@ -189,7 +225,16 @@
       "name": "Log Full Signup (Step 2)",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
-      "position": [640, 540]
+      "position": [
+        640,
+        540
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uSXIKVQqBMMM9L5u",
+          "name": "HHH Google Sheets account"
+        }
+      }
     },
     {
       "parameters": {
@@ -203,23 +248,45 @@
       "name": "Alert: New Signup",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2,
-      "position": [860, 540]
+      "position": [
+        860,
+        540
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5ry6Y3MK7PCHH35L",
+          "name": "HHH Gmail account"
+        }
+      }
     },
     {
       "parameters": {
-        "options": { "responseCode": 200 }
+        "options": {
+          "responseCode": 200
+        }
       },
       "id": "node-respond-2",
       "name": "Respond OK (Step 2)",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [1080, 540]
+      "position": [
+        1080,
+        540
+      ]
     },
     {
       "parameters": {
         "operation": "append",
-        "documentId": { "__rl": true, "value": "164CWzJXJORYcVoOxk6WXOMzS40JcaPnMuIABECUHQM4", "mode": "id" },
-        "sheetName": { "__rl": true, "value": "Purchases", "mode": "name" },
+        "documentId": {
+          "__rl": true,
+          "value": "1FTM966CEeWuW_SRgcSQe6mGKdUVY9Tq_xHtNHTrC7U4",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Purchases",
+          "mode": "name"
+        },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
@@ -238,7 +305,16 @@
       "name": "Log Purchase",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
-      "position": [640, 700]
+      "position": [
+        640,
+        700
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uSXIKVQqBMMM9L5u",
+          "name": "HHH Google Sheets account"
+        }
+      }
     },
     {
       "parameters": {
@@ -252,7 +328,16 @@
       "name": "Alert: New Purchase",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2,
-      "position": [860, 700]
+      "position": [
+        860,
+        700
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5ry6Y3MK7PCHH35L",
+          "name": "HHH Gmail account"
+        }
+      }
     },
     {
       "parameters": {
@@ -284,7 +369,10 @@
       "name": "Has Access Link?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
-      "position": [1080, 700]
+      "position": [
+        1080,
+        700
+      ]
     },
     {
       "parameters": {
@@ -298,27 +386,46 @@
       "name": "Email Buyer: Access Link",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2,
-      "position": [1300, 640]
+      "position": [
+        1300,
+        640
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5ry6Y3MK7PCHH35L",
+          "name": "HHH Gmail account"
+        }
+      }
     },
     {
       "parameters": {
-        "options": { "responseCode": 200 }
+        "options": {
+          "responseCode": 200
+        }
       },
       "id": "node-respond-3",
       "name": "Respond OK (Purchase, emailed)",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [1520, 640]
+      "position": [
+        1520,
+        640
+      ]
     },
     {
       "parameters": {
-        "options": { "responseCode": 200 }
+        "options": {
+          "responseCode": 200
+        }
       },
       "id": "node-respond-3b",
       "name": "Respond OK (Purchase, no email)",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [1300, 780]
+      "position": [
+        1300,
+        780
+      ]
     },
     {
       "parameters": {
@@ -332,59 +439,175 @@
       "name": "Email Buyer: Resend Access Link",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2,
-      "position": [640, 860]
+      "position": [
+        640,
+        860
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5ry6Y3MK7PCHH35L",
+          "name": "HHH Gmail account"
+        }
+      }
     },
     {
       "parameters": {
-        "options": { "responseCode": 200 }
+        "options": {
+          "responseCode": 200
+        }
       },
       "id": "node-respond-4",
       "name": "Respond OK (Resend)",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
-      "position": [860, 860]
+      "position": [
+        860,
+        860
+      ]
     }
   ],
   "connections": {
     "Webhook": {
-      "main": [[{ "node": "Route by Type", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Route by Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Route by Type": {
       "main": [
-        [{ "node": "Log Email (Step 1)", "type": "main", "index": 0 }],
-        [{ "node": "Log Full Signup (Step 2)", "type": "main", "index": 0 }],
-        [{ "node": "Log Purchase", "type": "main", "index": 0 }],
-        [{ "node": "Email Buyer: Resend Access Link", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Log Email (Step 1)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Full Signup (Step 2)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Purchase",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Buyer: Resend Access Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Log Email (Step 1)": {
-      "main": [[{ "node": "Respond OK (Step 1)", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Respond OK (Step 1)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Log Full Signup (Step 2)": {
-      "main": [[{ "node": "Alert: New Signup", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Alert: New Signup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Alert: New Signup": {
-      "main": [[{ "node": "Respond OK (Step 2)", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Respond OK (Step 2)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Log Purchase": {
-      "main": [[{ "node": "Alert: New Purchase", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Alert: New Purchase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Alert: New Purchase": {
-      "main": [[{ "node": "Has Access Link?", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Has Access Link?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Has Access Link?": {
       "main": [
-        [{ "node": "Email Buyer: Access Link", "type": "main", "index": 0 }],
-        [{ "node": "Respond OK (Purchase, no email)", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Email Buyer: Access Link",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond OK (Purchase, no email)",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Email Buyer: Access Link": {
-      "main": [[{ "node": "Respond OK (Purchase, emailed)", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Respond OK (Purchase, emailed)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Email Buyer: Resend Access Link": {
-      "main": [[{ "node": "Respond OK (Resend)", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Respond OK (Resend)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
-  "settings": { "executionOrder": "v1" }
+  "settings": {
+    "executionOrder": "v1"
+  }
 }
