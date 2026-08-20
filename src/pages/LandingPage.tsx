@@ -119,14 +119,14 @@ export default function LandingPage() {
             No dev team. No CS degree. PharmD who builds.
           </p>
           <div className={styles.heroCtas}>
-            <Link to="/waitlist" className={`${s.btnGold} ${s.btnLg}`}>
+            <Link to="/exam-prep" className={`${s.btnGold} ${s.btnLg}`}>
+              Get Exam Prep - $37
+            </Link>
+            <Link to="/services" className={`${s.btnOutline} ${s.btnLg}`}>
+              Book a Session
+            </Link>
+            <Link to="/waitlist" className={`${s.btnOutline} ${s.btnLg}`}>
               Join the Waitlist
-            </Link>
-            <Link to="/blog" className={`${s.btnOutline} ${s.btnLg}`}>
-              Read the Blog
-            </Link>
-            <Link to="/exam-prep" className={`${s.btnOutline} ${s.btnLg}`}>
-              CCA-F Exam Prep
             </Link>
           </div>
         </div>

@@ -70,6 +70,53 @@
   color: var(--text2);
 }
 
+/* Recover access */
+.recoverToggle {
+  background: none;
+  border: none;
+  color: var(--teal2);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  padding: 0;
+  margin-top: var(--space-3);
+  text-align: center;
+  width: 100%;
+}
+
+.recoverToggle:hover {
+  color: var(--text);
+}
+
+.recoverForm {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+
+.recoverLabel {
+  display: block;
+  font-size: 11px;
+  color: var(--text3);
+  margin-bottom: var(--space-2);
+}
+
+.recoverRow {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.recoverRow input {
+  flex: 1;
+  font-size: 13px;
+}
+
+.recoverError {
+  font-size: 12px;
+  color: var(--red);
+  margin-top: var(--space-2);
+}
+
 /* Preview */
 .previewSection {
   margin-bottom: var(--space-12);

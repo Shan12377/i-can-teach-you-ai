@@ -1,6 +1,60 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './ExamPrep.module.css';
 import s from '../styles/shared.module.css';
+import { recoverExamAccess } from '../lib/examAccess';
+
+function RecoverAccess() {
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
+  const [error, setError] = useState('');
+
+  if (!open) {
+    return (
+      <button type="button" className={styles.recoverToggle} onClick={() => setOpen(true)}>
+        Already purchased? Recover access
+      </button>
+    );
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    setError('');
+    const result = await recoverExamAccess(email);
+    if (result.ok) {
+      navigate('/exam');
+      return;
+    }
+    setStatus('error');
+    setError(result.error ?? 'Something went wrong');
+  };
+
+  return (
+    <form className={styles.recoverForm} onSubmit={handleSubmit}>
+      <label className={styles.recoverLabel} htmlFor="recover-email">
+        Enter the email you purchased with
+      </label>
+      <div className={styles.recoverRow}>
+        <input
+          id="recover-email"
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@example.com"
+          className={s.input}
+        />
+        <button type="submit" className={s.btnOutline} disabled={status === 'loading'}>
+          {status === 'loading' ? 'Checking...' : 'Recover'}
+        </button>
+      </div>
+      {status === 'error' && <p className={styles.recoverError}>{error}</p>}
+    </form>
+  );
+}
 
 export default function ExamPrepPage() {
   return (
@@ -37,6 +91,7 @@ export default function ExamPrepPage() {
                 </div>
               ))}
             </div>
+            <RecoverAccess />
           </div>
         </div>
 

@@ -29,3 +29,22 @@ export async function verifyExamPurchase(sessionId: string): Promise<string | nu
   const data = await res.json();
   return typeof data?.token === 'string' ? data.token : null;
 }
+
+export interface RecoverAccessResult {
+  ok: boolean;
+  error?: string;
+}
+
+export async function recoverExamAccess(email: string): Promise<RecoverAccessResult> {
+  const res = await fetch('/api/recover-access', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok || !data?.token || !data?.sessionId) {
+    return { ok: false, error: data?.error ?? 'Something went wrong' };
+  }
+  storeExamAccess(data.token, data.sessionId);
+  return { ok: true };
+}

@@ -9,10 +9,12 @@ export default function SiteLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
-    { to: '/blog', label: 'Blog' },
+    { to: '/exam-prep', label: 'Exam Prep' },
     { to: '/services', label: 'Services' },
+    { to: '/blog', label: 'Blog' },
     { to: '/products', label: 'Products' },
     { to: '/about', label: 'About' },
+    { to: '/waitlist', label: 'Waitlist' },
   ];
 
   const closeMobile = () => setMobileOpen(false);
@@ -36,8 +38,8 @@ export default function SiteLayout() {
             ))}
           </div>
           <div className={styles.navRight}>
-            <Link to="/waitlist" className={styles.navCta}>
-              Join Waitlist
+            <Link to="/exam-prep" className={styles.navCta}>
+              Exam Prep - $37
             </Link>
           </div>
           <button
@@ -62,8 +64,8 @@ export default function SiteLayout() {
               {link.label}
             </Link>
           ))}
-          <Link to="/waitlist" className={styles.mobileNavCta} onClick={closeMobile}>
-            Join Waitlist
+          <Link to="/exam-prep" className={styles.mobileNavCta} onClick={closeMobile}>
+            Exam Prep - $37
           </Link>
         </div>
       </nav>
