@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 import { CCA_F_PRICE_ID, issueTokenForSession } from './_lib/exam-purchase.js';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MAX_SESSIONS_SCANNED = 500;
+const MAX_SESSIONS_SCANNED = 200;
 
 export async function POST(req: Request): Promise<Response> {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
