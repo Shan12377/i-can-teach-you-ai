@@ -69,6 +69,56 @@
               },
               "renameOutput": true,
               "outputKey": "Step 2 - Full"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "cond-r3",
+                    "leftValue": "={{ $json.body.submissionType }}",
+                    "rightValue": "ictai_purchase",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Purchase"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "cond-r4",
+                    "leftValue": "={{ $json.body.submissionType }}",
+                    "rightValue": "ictai_resend_access",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Resend Access"
             }
           ]
         },
@@ -164,6 +214,135 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [1080, 540]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "value": "164CWzJXJORYcVoOxk6WXOMzS40JcaPnMuIABECUHQM4", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Purchases", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.body.timestamp }}",
+            "Email": "={{ $json.body.email }}",
+            "Product": "={{ $json.body.productName }}",
+            "Amount": "={{ $json.body.amount }}",
+            "Session ID": "={{ $json.body.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "node-sheets-3",
+      "name": "Log Purchase",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [640, 700]
+    },
+    {
+      "parameters": {
+        "sendTo": "higginsshallanda@gmail.com",
+        "subject": "={{ 'New purchase: ' + $json.body.productName }}",
+        "emailType": "text",
+        "message": "={{ 'New purchase on I Can Teach You AI\\n\\nProduct: ' + $json.body.productName + '\\nAmount: ' + $json.body.amount + '\\nBuyer: ' + $json.body.email + '\\nSession: ' + $json.body.sessionId + '\\nTimestamp: ' + $json.body.timestamp }}",
+        "options": {}
+      },
+      "id": "node-gmail-2",
+      "name": "Alert: New Purchase",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [860, 700]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-hasaccess",
+              "leftValue": "={{ $json.body.accessUrl }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "name": "filter.operator.notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-if-1",
+      "name": "Has Access Link?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1080, 700]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.body.email }}",
+        "subject": "Your CCA-F Exam Prep Access",
+        "emailType": "text",
+        "message": "={{ 'Thanks for your purchase.\\n\\nAccess your 207 CCA-F practice questions here:\\n' + $json.body.accessUrl + '\\n\\nQuestions? Reply to this email or contact hello@icanteachyouai.com' }}",
+        "options": {}
+      },
+      "id": "node-gmail-3",
+      "name": "Email Buyer: Access Link",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [1300, 640]
+    },
+    {
+      "parameters": {
+        "options": { "responseCode": 200 }
+      },
+      "id": "node-respond-3",
+      "name": "Respond OK (Purchase, emailed)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1520, 640]
+    },
+    {
+      "parameters": {
+        "options": { "responseCode": 200 }
+      },
+      "id": "node-respond-3b",
+      "name": "Respond OK (Purchase, no email)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1300, 780]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.body.email }}",
+        "subject": "Your CCA-F Exam Prep Access",
+        "emailType": "text",
+        "message": "={{ 'Here is your access link again:\\n' + $json.body.accessUrl + '\\n\\nQuestions? Reply to this email or contact hello@icanteachyouai.com' }}",
+        "options": {}
+      },
+      "id": "node-gmail-4",
+      "name": "Email Buyer: Resend Access Link",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [640, 860]
+    },
+    {
+      "parameters": {
+        "options": { "responseCode": 200 }
+      },
+      "id": "node-respond-4",
+      "name": "Respond OK (Resend)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [860, 860]
     }
   ],
   "connections": {
@@ -173,7 +352,9 @@
     "Route by Type": {
       "main": [
         [{ "node": "Log Email (Step 1)", "type": "main", "index": 0 }],
-        [{ "node": "Log Full Signup (Step 2)", "type": "main", "index": 0 }]
+        [{ "node": "Log Full Signup (Step 2)", "type": "main", "index": 0 }],
+        [{ "node": "Log Purchase", "type": "main", "index": 0 }],
+        [{ "node": "Email Buyer: Resend Access Link", "type": "main", "index": 0 }]
       ]
     },
     "Log Email (Step 1)": {
@@ -184,6 +365,24 @@
     },
     "Alert: New Signup": {
       "main": [[{ "node": "Respond OK (Step 2)", "type": "main", "index": 0 }]]
+    },
+    "Log Purchase": {
+      "main": [[{ "node": "Alert: New Purchase", "type": "main", "index": 0 }]]
+    },
+    "Alert: New Purchase": {
+      "main": [[{ "node": "Has Access Link?", "type": "main", "index": 0 }]]
+    },
+    "Has Access Link?": {
+      "main": [
+        [{ "node": "Email Buyer: Access Link", "type": "main", "index": 0 }],
+        [{ "node": "Respond OK (Purchase, no email)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Email Buyer: Access Link": {
+      "main": [[{ "node": "Respond OK (Purchase, emailed)", "type": "main", "index": 0 }]]
+    },
+    "Email Buyer: Resend Access Link": {
+      "main": [[{ "node": "Respond OK (Resend)", "type": "main", "index": 0 }]]
     }
   },
   "active": false,

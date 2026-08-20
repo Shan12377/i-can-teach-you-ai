@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './ExamPrep.module.css';
 import s from '../styles/shared.module.css';
 import { recoverExamAccess } from '../lib/examAccess';
 
 function RecoverAccess() {
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
-  const [error, setError] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'error' | 'sent'>('idle');
+  const [message, setMessage] = useState('');
 
   if (!open) {
     return (
@@ -22,15 +21,14 @@ function RecoverAccess() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
-    setError('');
     const result = await recoverExamAccess(email);
-    if (result.ok) {
-      navigate('/exam');
-      return;
-    }
-    setStatus('error');
-    setError(result.error ?? 'Something went wrong');
+    setStatus(result.ok ? 'sent' : 'error');
+    setMessage(result.message);
   };
+
+  if (status === 'sent') {
+    return <p className={styles.recoverForm}>{message}</p>;
+  }
 
   return (
     <form className={styles.recoverForm} onSubmit={handleSubmit}>
@@ -48,10 +46,10 @@ function RecoverAccess() {
           className={s.input}
         />
         <button type="submit" className={s.btnOutline} disabled={status === 'loading'}>
-          {status === 'loading' ? 'Checking...' : 'Recover'}
+          {status === 'loading' ? 'Sending...' : 'Recover'}
         </button>
       </div>
-      {status === 'error' && <p className={styles.recoverError}>{error}</p>}
+      {status === 'error' && <p className={styles.recoverError}>{message}</p>}
     </form>
   );
 }

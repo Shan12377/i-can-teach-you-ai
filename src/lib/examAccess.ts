@@ -32,9 +32,12 @@ export async function verifyExamPurchase(sessionId: string): Promise<string | nu
 
 export interface RecoverAccessResult {
   ok: boolean;
-  error?: string;
+  message: string;
 }
 
+// Never returns a token: the backend only ever emails the access link to the
+// purchasing address, so this just triggers that send (or silently no-ops if
+// the email doesn't match a purchase, without revealing which happened).
 export async function recoverExamAccess(email: string): Promise<RecoverAccessResult> {
   const res = await fetch('/api/recover-access', {
     method: 'POST',
@@ -42,9 +45,8 @@ export async function recoverExamAccess(email: string): Promise<RecoverAccessRes
     body: JSON.stringify({ email }),
   });
   const data = await res.json().catch(() => null);
-  if (!res.ok || !data?.token || !data?.sessionId) {
-    return { ok: false, error: data?.error ?? 'Something went wrong' };
+  if (!res.ok) {
+    return { ok: false, message: data?.error ?? 'Something went wrong' };
   }
-  storeExamAccess(data.token, data.sessionId);
-  return { ok: true };
+  return { ok: true, message: data.message };
 }
