@@ -20,6 +20,49 @@
     },
     {
       "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a0",
+              "name": "Timestamp",
+              "type": "string",
+              "value": "={{ $json.body.timestamp }}"
+            },
+            {
+              "id": "a1",
+              "name": "Email",
+              "type": "string",
+              "value": "={{ $json.body.email }}"
+            },
+            {
+              "id": "a2",
+              "name": "Step",
+              "type": "string",
+              "value": "=Email captured (Step 1)"
+            },
+            {
+              "id": "a3",
+              "name": "Source",
+              "type": "string",
+              "value": "={{ $json.body.source }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-set-shape-email-row",
+      "name": "Shape Email Row",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        540,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
         "operation": "append",
         "documentId": {
           "__rl": true,
@@ -32,19 +75,14 @@
           "mode": "name"
         },
         "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Timestamp": "={{ $json.body.timestamp }}",
-            "Email": "={{ $json.body.email }}",
-            "Step": "=Email captured (Step 1)",
-            "Source": "={{ $json.body.source }}"
-          },
+          "mappingMode": "autoMapInputData",
+          "value": {},
           "matchingColumns": [],
           "schema": []
         },
         "options": {}
       },
-      "id": "node-sheets-1",
+      "id": "node-sheets-log-email-(step-1)",
       "name": "Log Email (Step 1)",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
@@ -76,6 +114,67 @@
     },
     {
       "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a0",
+              "name": "Timestamp",
+              "type": "string",
+              "value": "={{ $json.body.timestamp }}"
+            },
+            {
+              "id": "a1",
+              "name": "Email",
+              "type": "string",
+              "value": "={{ $json.body.email }}"
+            },
+            {
+              "id": "a2",
+              "name": "Step",
+              "type": "string",
+              "value": "=Full signup (Step 2)"
+            },
+            {
+              "id": "a3",
+              "name": "Interests",
+              "type": "string",
+              "value": "={{ ($json.body.interests || []).join(', ') }}"
+            },
+            {
+              "id": "a4",
+              "name": "Bakground",
+              "type": "string",
+              "value": "={{ $json.body.background }}"
+            },
+            {
+              "id": "a5",
+              "name": "Challenge",
+              "type": "string",
+              "value": "={{ $json.body.challenge }}"
+            },
+            {
+              "id": "a6",
+              "name": "Source",
+              "type": "string",
+              "value": "={{ $json.body.source }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-set-shape-full-signup-row",
+      "name": "Shape Full Signup Row",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        540,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
         "operation": "append",
         "documentId": {
           "__rl": true,
@@ -88,22 +187,14 @@
           "mode": "name"
         },
         "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Timestamp": "={{ $json.body.timestamp }}",
-            "Email": "={{ $json.body.email }}",
-            "Step": "=Full signup (Step 2)",
-            "Interests": "={{ ($json.body.interests || []).join(', ') }}",
-            "Background": "={{ $json.body.background }}",
-            "Challenge": "={{ $json.body.challenge }}",
-            "Source": "={{ $json.body.source }}"
-          },
+          "mappingMode": "autoMapInputData",
+          "value": {},
           "matchingColumns": [],
           "schema": []
         },
         "options": {}
       },
-      "id": "node-sheets-2",
+      "id": "node-sheets-log-full-signup-(step-2)",
       "name": "Log Full Signup (Step 2)",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
@@ -159,6 +250,55 @@
     },
     {
       "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a0",
+              "name": "Timestamp",
+              "type": "string",
+              "value": "={{ $json.body.timestamp }}"
+            },
+            {
+              "id": "a1",
+              "name": "Email",
+              "type": "string",
+              "value": "={{ $json.body.email }}"
+            },
+            {
+              "id": "a2",
+              "name": "Product",
+              "type": "string",
+              "value": "={{ $json.body.productName }}"
+            },
+            {
+              "id": "a3",
+              "name": "Amount",
+              "type": "string",
+              "value": "={{ $json.body.amount }}"
+            },
+            {
+              "id": "a4",
+              "name": "Session ID",
+              "type": "string",
+              "value": "={{ $json.body.sessionId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-set-shape-purchase-row",
+      "name": "Shape Purchase Row",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        540,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "sheet",
         "operation": "append",
         "documentId": {
           "__rl": true,
@@ -171,20 +311,14 @@
           "mode": "name"
         },
         "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Timestamp": "={{ $json.body.timestamp }}",
-            "Email": "={{ $json.body.email }}",
-            "Product": "={{ $json.body.productName }}",
-            "Amount": "={{ $json.body.amount }}",
-            "Session ID": "={{ $json.body.sessionId }}"
-          },
+          "mappingMode": "autoMapInputData",
+          "value": {},
           "matchingColumns": [],
           "schema": []
         },
         "options": {}
       },
-      "id": "node-sheets-3",
+      "id": "node-sheets-log-purchase",
       "name": "Log Purchase",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
@@ -606,7 +740,7 @@
       "main": [
         [
           {
-            "node": "Log Email (Step 1)",
+            "node": "Shape Email Row",
             "type": "main",
             "index": 0
           }
@@ -618,7 +752,7 @@
       "main": [
         [
           {
-            "node": "Log Full Signup (Step 2)",
+            "node": "Shape Full Signup Row",
             "type": "main",
             "index": 0
           }
@@ -630,7 +764,7 @@
       "main": [
         [
           {
-            "node": "Log Purchase",
+            "node": "Shape Purchase Row",
             "type": "main",
             "index": 0
           }
@@ -648,6 +782,39 @@
           }
         ],
         []
+      ]
+    },
+    "Shape Email Row": {
+      "main": [
+        [
+          {
+            "node": "Log Email (Step 1)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shape Full Signup Row": {
+      "main": [
+        [
+          {
+            "node": "Log Full Signup (Step 2)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shape Purchase Row": {
+      "main": [
+        [
+          {
+            "node": "Log Purchase",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
