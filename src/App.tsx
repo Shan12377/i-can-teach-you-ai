@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SiteLayout from './components/layout/SiteLayout';
 import LandingPage from './pages/LandingPage';
@@ -15,6 +16,8 @@ import CheckoutSuccessPage from './pages/CheckoutSuccessPage';
 import ServicesPage from './pages/ServicesPage';
 import './index.css';
 
+const ExamPage = lazy(() => import('./pages/ExamPage'));
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -24,6 +27,14 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/exam-prep" element={<ExamPrepPage />} />
+          <Route
+            path="/exam"
+            element={(
+              <Suspense fallback={null}>
+                <ExamPage />
+              </Suspense>
+            )}
+          />
           <Route path="/blog" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/waitlist" element={<WaitlistPage />} />

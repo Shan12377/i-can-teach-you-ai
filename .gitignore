@@ -26,3 +26,6 @@ dist-ssr
 # Internal docs, not for the public repo
 BRAND-GUIDE.md
 SEO-NEXT-STEPS.md
+
+# Raw exam-prep source content, never public
+/content/
