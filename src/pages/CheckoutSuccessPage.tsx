@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styles from './Checkout.module.css';
 import s from '../styles/shared.module.css';
-
-const EXAM_ACCESS_TOKEN_KEY = 'examAccessToken';
+import { storeExamAccess, verifyExamPurchase } from '../lib/examAccess';
 
 export default function CheckoutSuccessPage() {
   const [searchParams] = useSearchParams();
@@ -14,15 +13,10 @@ export default function CheckoutSuccessPage() {
     if (!sessionId) return;
 
     let cancelled = false;
-    fetch('/api/verify-purchase', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId }),
-    })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (cancelled || !data?.token) return;
-        localStorage.setItem(EXAM_ACCESS_TOKEN_KEY, data.token);
+    verifyExamPurchase(sessionId)
+      .then((token) => {
+        if (cancelled || !token) return;
+        storeExamAccess(token, sessionId);
         setExamUnlocked(true);
       })
       .catch(() => {});

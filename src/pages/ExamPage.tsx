@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Exam.module.css';
 import s from '../styles/shared.module.css';
+import { clearExamAccess, getExamAccessToken, getExamSessionId, storeExamAccess, verifyExamPurchase } from '../lib/examAccess';
 
-const EXAM_ACCESS_TOKEN_KEY = 'examAccessToken';
 const SIMULATION_SIZE = 50;
 
 interface ExamQuestion {
@@ -52,34 +52,53 @@ export default function ExamPage() {
   const [mode, setMode] = useState<Mode>('menu');
 
   useEffect(() => {
-    const token = localStorage.getItem(EXAM_ACCESS_TOKEN_KEY);
+    const token = getExamAccessToken();
     if (!token) {
       navigate('/exam-prep', { replace: true });
       return;
     }
 
     let cancelled = false;
-    fetch('/api/exam-questions', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then(async (res) => {
-        if (cancelled) return;
-        if (res.status === 401) {
-          localStorage.removeItem(EXAM_ACCESS_TOKEN_KEY);
-          setLoadState('denied');
-          return;
-        }
-        if (!res.ok) {
-          setLoadState('error');
-          return;
-        }
-        const data: ExamQuestion[] = await res.json();
-        setQuestions(data);
-        setLoadState('ready');
-      })
-      .catch(() => {
-        if (!cancelled) setLoadState('error');
+
+    async function fetchQuestions(withToken: string): Promise<Response> {
+      return fetch('/api/exam-questions', {
+        headers: { Authorization: `Bearer ${withToken}` },
       });
+    }
+
+    async function load() {
+      let res = await fetchQuestions(token!);
+
+      // Token expired: silently re-verify against the stored Stripe session
+      // rather than immediately booting a legitimate returning customer.
+      if (res.status === 401) {
+        const sessionId = getExamSessionId();
+        const refreshedToken = sessionId ? await verifyExamPurchase(sessionId) : null;
+        if (refreshedToken) {
+          storeExamAccess(refreshedToken, sessionId!);
+          res = await fetchQuestions(refreshedToken);
+        }
+      }
+
+      if (cancelled) return;
+
+      if (res.status === 401) {
+        clearExamAccess();
+        setLoadState('denied');
+        return;
+      }
+      if (!res.ok) {
+        setLoadState('error');
+        return;
+      }
+      const data: ExamQuestion[] = await res.json();
+      setQuestions(data);
+      setLoadState('ready');
+    }
+
+    load().catch(() => {
+      if (!cancelled) setLoadState('error');
+    });
 
     return () => {
       cancelled = true;

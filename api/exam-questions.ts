@@ -5,11 +5,7 @@ import { verifyAccessToken } from './_lib/access-token.js';
 
 const encryptedDataPath = fileURLToPath(new URL('./_data/exam-questions.enc.json', import.meta.url));
 
-export default async function handler(req: Request): Promise<Response> {
-  if (req.method !== 'GET') {
-    return Response.json({ error: 'Method not allowed' }, { status: 405 });
-  }
-
+export async function GET(req: Request): Promise<Response> {
   const tokenSecret = process.env.EXAM_TOKEN_SECRET;
   const contentKey = process.env.EXAM_CONTENT_KEY;
   if (!tokenSecret || !contentKey) {

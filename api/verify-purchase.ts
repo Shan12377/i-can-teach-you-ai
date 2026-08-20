@@ -2,12 +2,9 @@ import Stripe from 'stripe';
 import { issueAccessToken } from './_lib/access-token.js';
 
 const CCA_F_PRICE_ID = 'price_1U6Isi2dkBth0O3OfzXETNAL';
+const MAX_TOKEN_ISSUANCES = 5;
 
-export default async function handler(req: Request): Promise<Response> {
-  if (req.method !== 'POST') {
-    return Response.json({ error: 'Method not allowed' }, { status: 405 });
-  }
-
+export async function POST(req: Request): Promise<Response> {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
   const tokenSecret = process.env.EXAM_TOKEN_SECRET;
   if (!stripeSecretKey || !tokenSecret) {
@@ -46,6 +43,22 @@ export default async function handler(req: Request): Promise<Response> {
   );
   if (!purchasedCorrectProduct) {
     return Response.json({ error: 'Session does not match this product' }, { status: 403 });
+  }
+
+  // Cap token re-issuance per purchase using the PaymentIntent's own metadata as a
+  // lightweight counter. Bounds how many devices a single leaked session_id/URL can
+  // unlock without needing a separate database.
+  const paymentIntentId =
+    typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id;
+  if (paymentIntentId) {
+    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+    const issuedCount = Number(paymentIntent.metadata.examTokenIssuances ?? '0');
+    if (issuedCount >= MAX_TOKEN_ISSUANCES) {
+      return Response.json({ error: 'Access limit reached for this purchase' }, { status: 429 });
+    }
+    await stripe.paymentIntents.update(paymentIntentId, {
+      metadata: { examTokenIssuances: String(issuedCount + 1) },
+    });
   }
 
   const token = issueAccessToken(sessionId, tokenSecret);

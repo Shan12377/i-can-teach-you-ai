@@ -1,6 +1,9 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
-const TOKEN_TTL_MS = 10 * 365 * 24 * 60 * 60 * 1000; // 10 years, matches "lifetime access"
+// Short-lived by design even though the product is "lifetime access": the client
+// silently re-verifies against the stored Stripe session_id when this expires
+// (see ExamPage.tsx), so a leaked/expired token alone stops working on its own.
+const TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 function sign(payload: string, secret: string): string {
   return createHmac('sha256', secret).update(payload).digest('base64url');
