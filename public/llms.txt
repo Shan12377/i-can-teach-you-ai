@@ -1,0 +1,30 @@
+# I Can Teach You AI
+
+> AI training for healthcare professionals, taught by Dr. Shallanda Hunter, PharmD. Focus areas: HIPAA-conscious AI workflows, Claude Code, n8n automation, and vibe coding for non-developers.
+
+Dr. Hunter is a licensed pharmacist who builds production software (Hunter's Holistic Health, a functional-medicine platform) with AI tools, and teaches the same workflows to other healthcare professionals. Content here is written by a practicing PharmD, not a general technical writer.
+
+## Products
+
+- [CCA-F Exam Prep](https://www.icanteachyouai.com/exam-prep): 207 practice questions for the Claude Code Associate Foundations certification exam, $37 one-time.
+- [Services](https://www.icanteachyouai.com/services): 1:1 sessions, AI workshops, and custom automation builds for healthcare practices and educators.
+
+## About
+
+- [About Dr. Shallanda Hunter](https://www.icanteachyouai.com/about): credentials and background.
+
+## Blog
+
+Technical guides on HIPAA-conscious AI workflows, Claude Code, n8n automation, and vibe coding for healthcare professionals. Full list: [sitemap.xml](https://www.icanteachyouai.com/sitemap.xml)
+
+Key topic clusters:
+- HIPAA and compliance for AI tools in healthcare
+- Claude Code fundamentals and certification prep
+- Vibe coding (building software without a traditional engineering background)
+- n8n automation and workflow building
+- Building healthcare software in public (real, shipped projects)
+
+## Policies
+
+- [Terms of Service](https://www.icanteachyouai.com/terms)
+- [Privacy Policy](https://www.icanteachyouai.com/privacy)
