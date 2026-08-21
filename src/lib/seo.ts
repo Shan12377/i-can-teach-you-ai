@@ -91,18 +91,43 @@ export const ROUTE_META: Record<string, SeoInput> = {
     path: '/exam-prep',
     jsonLd: {
       '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: 'CCA-F Exam Prep',
-      description:
-        '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, covering all six domains with official documentation citations.',
-      brand: { '@id': `${SITE_URL}/#org` },
-      offers: {
-        '@type': 'Offer',
-        price: '37.00',
-        priceCurrency: 'USD',
-        availability: 'https://schema.org/InStock',
-        url: `${SITE_URL}/exam-prep`,
-      },
+      '@graph': [
+        {
+          '@type': 'Product',
+          name: 'CCA-F Exam Prep',
+          description:
+            '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, covering all six domains with official documentation citations.',
+          brand: { '@id': `${SITE_URL}/#org` },
+          offers: {
+            '@type': 'Offer',
+            price: '37.00',
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+            url: `${SITE_URL}/exam-prep`,
+          },
+        },
+        {
+          '@type': 'Course',
+          name: 'CCA-F Exam Prep',
+          description:
+            '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, organized by domain with official documentation citations and explanations.',
+          url: `${SITE_URL}/exam-prep`,
+          provider: { '@id': `${SITE_URL}/#org` },
+          teaches: [
+            'Core Claude Code concepts',
+            'CLAUDE.md configuration and mastery',
+            'Agentic workflows',
+            'Safety and compliance in Claude Code',
+            'Tool use and integration',
+            'Advanced Claude Code patterns',
+          ],
+          hasCourseInstance: {
+            '@type': 'CourseInstance',
+            courseMode: 'online',
+            instructor: { '@id': `${SITE_URL}/#shallanda-hunter` },
+          },
+        },
+      ],
     },
   },
   '/blog': {
