@@ -32,9 +32,11 @@ export function applySeo(seo: SeoInput) {
   setMeta('property', 'og:url', url);
   setMeta('property', 'og:type', seo.type ?? 'website');
   setMeta('property', 'og:site_name', SITE_NAME);
-  setMeta('name', 'twitter:card', 'summary');
+  setMeta('property', 'og:image', `${SITE_URL}/og-image.png`);
+  setMeta('name', 'twitter:card', 'summary_large_image');
   setMeta('name', 'twitter:title', seo.title);
   setMeta('name', 'twitter:description', seo.description);
+  setMeta('name', 'twitter:image', `${SITE_URL}/og-image.png`);
 
   let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if (!canonical) {
