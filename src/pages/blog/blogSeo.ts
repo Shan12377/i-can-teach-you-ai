@@ -14,13 +14,8 @@ export function getBlogPostSeo(post: BlogPost): SeoInput {
       description: post.excerpt,
       datePublished: new Date(post.date).toISOString().slice(0, 10),
       url: `${SITE_URL}/blog/${post.slug}`,
-      author: {
-        '@type': 'Person',
-        name: 'Dr. Shallanda Hunter, PharmD',
-        jobTitle: 'Pharmacist and AI Educator',
-        url: SITE_URL,
-      },
-      publisher: { '@type': 'Organization', name: 'I Can Teach You AI', url: SITE_URL },
+      author: { '@id': `${SITE_URL}/#shallanda-hunter` },
+      publisher: { '@id': `${SITE_URL}/#org` },
     },
   };
 }

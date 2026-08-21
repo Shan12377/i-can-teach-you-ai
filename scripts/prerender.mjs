@@ -76,10 +76,13 @@ function buildHtml(path, appHtml) {
       `<meta property="og:type" content="${seo.type ?? 'website'}" />`
     );
     html = html.replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${url}" />`);
+    html = html.replace(
+      /<meta name="robots" content="[^"]*" \/>/,
+      `<meta name="robots" content="${seo.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'}" />`
+    );
 
-    if (seo.noindex) {
-      html = html.replace('</head>', '  <meta name="robots" content="noindex, nofollow" />\n  </head>');
-    }
+    const twitterTags = `  <meta name="twitter:title" content="${title}" />\n  <meta name="twitter:description" content="${description}" />\n`;
+    html = html.replace('</head>', `${twitterTags}  </head>`);
 
     if (seo.jsonLd) {
       const script = `  <script type="application/ld+json">${JSON.stringify(seo.jsonLd)}</script>\n`;

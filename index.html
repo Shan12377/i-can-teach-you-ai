@@ -21,38 +21,42 @@
     <meta property="og:image" content="https://www.icanteachyouai.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="I Can Teach You AI: AI training for healthcare professionals" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://www.icanteachyouai.com/og-image.png" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": "Organization",
+            "@type": "Person",
+            "@id": "https://www.icanteachyouai.com/#shallanda-hunter",
+            "name": "Dr. Shallanda Hunter",
+            "honorificSuffix": "PharmD",
+            "jobTitle": "Pharmacist and AI Educator",
+            "hasCredential": {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "name": "Doctor of Pharmacy (PharmD)"
+            },
+            "knowsAbout": [
+              "HIPAA-conscious AI workflows",
+              "Claude Code",
+              "AI automation for healthcare professionals"
+            ],
+            "sameAs": [
+              "https://www.drshallandahunter.com",
+              "https://www.huntersholistichealth.com"
+            ]
+          },
+          {
+            "@type": "EducationalOrganization",
             "@id": "https://www.icanteachyouai.com/#org",
             "name": "I Can Teach You AI",
             "url": "https://www.icanteachyouai.com",
             "email": "hello@icanteachyouai.com",
-            "founder": {
-              "@type": "Person",
-              "name": "Dr. Shallanda Hunter",
-              "honorificSuffix": "PharmD",
-              "jobTitle": "Pharmacist and AI Educator",
-              "hasCredential": {
-                "@type": "EducationalOccupationalCredential",
-                "credentialCategory": "degree",
-                "name": "Doctor of Pharmacy (PharmD)"
-              },
-              "knowsAbout": [
-                "HIPAA-conscious AI workflows",
-                "Claude Code",
-                "AI automation for healthcare professionals"
-              ],
-              "sameAs": [
-                "https://www.drshallandahunter.com",
-                "https://www.huntersholistichealth.com"
-              ]
-            }
+            "founder": { "@id": "https://www.icanteachyouai.com/#shallanda-hunter" }
           },
           {
             "@type": "WebSite",

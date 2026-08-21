@@ -95,7 +95,7 @@ export const ROUTE_META: Record<string, SeoInput> = {
       name: 'CCA-F Exam Prep',
       description:
         '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, covering all six domains with official documentation citations.',
-      brand: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+      brand: { '@id': `${SITE_URL}/#org` },
       offers: {
         '@type': 'Offer',
         price: '37.00',
@@ -116,6 +116,44 @@ export const ROUTE_META: Record<string, SeoInput> = {
     description:
       'Done-for-you AI workflow design, n8n automation, and compliant intake systems for healthcare practices and health educators. Built by a PharmD who ships production systems.',
     path: '/services',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Do I need technical experience?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'No. All workshops and sessions are designed for non-technical professionals. The goal is to teach you how to direct AI tools, not how to code them.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Are sessions HIPAA compliant?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'All 1-on-1 sessions are conducted via Doxy.me, a free HIPAA-compliant video platform. No PHI is collected or stored during sessions.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Can you customize a workshop for my specialty?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes. Workshops can be tailored for pharmacy, nursing, functional medicine, or general healthcare administration. Contact us to discuss your specific needs.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How long does a custom build take?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Most custom workflow builds are completed within 1 to 2 weeks after the discovery call and scope agreement. Larger app builds are quoted per project.',
+          },
+        },
+      ],
+    },
   },
   '/waitlist': {
     title: 'Join the Waitlist | I Can Teach You AI',
