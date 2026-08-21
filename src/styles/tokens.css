@@ -4,9 +4,45 @@
    Connected to: drshallandahunter.com (gold/teal)
    ============================================ */
 
-/* Font loading moved to index.html (preconnect + direct <link>) so the
-   browser can start fetching fonts as soon as HTML parsing begins, instead
-   of waiting for CSS parsing to reach a blocking @import here. */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/syne-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('/fonts/dm-sans-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/dm-sans-italic-300-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/dm-mono-400-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/dm-mono-500-latin.woff2') format('woff2');
+}
 
 :root {
   /* --- Backgrounds --- */
@@ -23,7 +59,7 @@
   /* --- Text --- */
   --text:        #eeeef8;
   --text2:       #8888a8;
-  --text3:       #7a7a96;
+  --text3:       #82829f;
 
   /* --- Code Accent (Purple/Indigo) ---
      Reserved for code blocks, inline code, and technical/monospace labels only.

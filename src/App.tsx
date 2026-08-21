@@ -1,57 +1,44 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SiteLayout from './components/layout/SiteLayout';
+import { lazy } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import WaitlistPage from './pages/intake/WaitlistPage';
-import WaitlistQuestionsPage from './pages/intake/WaitlistQuestionsPage';
-import AboutPage from './pages/AboutPage';
-import ProductsPage from './pages/ProductsPage';
-import ExamPrepPage from './pages/ExamPrepPage';
-import BlogIndexPage from './pages/blog/BlogIndexPage';
-import BlogPostPage from './pages/blog/BlogPostPage';
-import TermsPage from './pages/legal/TermsPage';
-import PrivacyPage from './pages/legal/PrivacyPage';
-import CheckoutPage from './pages/CheckoutPage';
-import CheckoutSuccessPage from './pages/CheckoutSuccessPage';
-import ServicesPage from './pages/ServicesPage';
+import RouteTree, { type RoutePages } from './RouteTree';
 import './index.css';
 
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+const ExamPrepPage = lazy(() => import('./pages/ExamPrepPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
+const BlogIndexPage = lazy(() => import('./pages/blog/BlogIndexPage'));
+const BlogPostPage = lazy(() => import('./pages/blog/BlogPostPage'));
+const WaitlistPage = lazy(() => import('./pages/intake/WaitlistPage'));
+const WaitlistQuestionsPage = lazy(() => import('./pages/intake/WaitlistQuestionsPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
+const CheckoutSuccessPage = lazy(() => import('./pages/CheckoutSuccessPage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const TermsPage = lazy(() => import('./pages/legal/TermsPage'));
+const PrivacyPage = lazy(() => import('./pages/legal/PrivacyPage'));
 
-export function AppRoutes() {
-  return (
-    <Routes>
-      <Route element={<SiteLayout />}>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/exam-prep" element={<ExamPrepPage />} />
-        <Route
-          path="/exam"
-          element={(
-            <Suspense fallback={null}>
-              <ExamPage />
-            </Suspense>
-          )}
-        />
-        <Route path="/blog" element={<BlogIndexPage />} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
-        <Route path="/waitlist" element={<WaitlistPage />} />
-        <Route path="/waitlist/questions" element={<WaitlistQuestionsPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-      </Route>
-    </Routes>
-  );
-}
+const clientPages: RoutePages = {
+  LandingPage,
+  AboutPage,
+  ProductsPage,
+  ExamPrepPage,
+  ExamPage,
+  BlogIndexPage,
+  BlogPostPage,
+  WaitlistPage,
+  WaitlistQuestionsPage,
+  CheckoutPage,
+  CheckoutSuccessPage,
+  ServicesPage,
+  TermsPage,
+  PrivacyPage,
+};
 
 export default function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <RouteTree pages={clientPages} />
     </BrowserRouter>
   );
 }

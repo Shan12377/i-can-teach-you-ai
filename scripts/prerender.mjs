@@ -33,7 +33,15 @@ const routes = [...staticRoutes, ...blogRoutes];
 
 const shellRoutes = ['/exam'];
 
-const template = readFileSync(join(distDir, 'index.html'), 'utf-8');
+const builtTemplate = readFileSync(join(distDir, 'index.html'), 'utf-8');
+const template = builtTemplate.replace(
+  /<link rel="stylesheet"[^>]*href="([^"]+)"[^>]*>/,
+  (tag, href) => {
+    if (!href.startsWith('/assets/index-')) return tag;
+    const css = readFileSync(join(distDir, href.slice(1)), 'utf-8');
+    return `<style>${css.replace(/<\/style/gi, '<\\/style')}</style>`;
+  }
+);
 
 function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
