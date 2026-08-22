@@ -108,6 +108,7 @@ export default function SiteLayout() {
                 <p className={styles.footerColTitle}>Legal</p>
                 <Link to="/terms" className={styles.footerLink}>Terms of Service</Link>
                 <Link to="/privacy" className={styles.footerLink}>Privacy Policy</Link>
+                <a href="/claude-md-excerpt.md" className={styles.footerLink}>Built with Claude Code</a>
               </div>
             </div>
           </div>

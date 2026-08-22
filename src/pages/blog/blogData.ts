@@ -1398,7 +1398,7 @@ To understand the difference between Cursor and Claude Code, you have to underst
 
 1. **Massive Refactors:** If you need to change the entire routing structure of a 50-file application, Claude Code handles it better. You give it the instruction, and it systematically works through the codebase, finding dependencies and updating them.
 2. **Following Strict Rules:** Claude Code's adherence to the \`CLAUDE.md\` file is legendary. If you put a strict compliance rule in that file (e.g., "Never use Tailwind"), Claude Code will enforce it across the entire project.
-3. **Agentic Autonomy:** Claude Code will run a build command, see an error, read the error, rewrite the code to fix it, and run the build command again—all without you pressing a button.
+3. **Agentic Autonomy:** Claude Code will run a build command, see an error, read the error, rewrite the code to fix it, and run the build command again, all without you pressing a button.
 
 ## The Hybrid Approach (The Pro Move)
 
@@ -1416,7 +1416,7 @@ If you are a non-technical builder, lean heavily on Claude Code. It requires you
   {
     slug: 'build-health-app-without-coding-claude',
     title: 'How I Used Claude Code to Build a HIPAA-Conscious Health App (Without a Developer)',
-    excerpt: 'I am a PharmD, not a software engineer. But using Claude Code, I built Hunters Holistic Health—a secure, two-layer educational health platform. Here is the exact process.',
+    excerpt: 'I am a PharmD, not a software engineer. But using Claude Code, I built Hunters Holistic Health: a secure, two-layer educational health platform. Here is the exact process.',
     category: 'Claude Code',
     date: 'Jun 7, 2026',
     readTime: '9 min read',
@@ -1616,7 +1616,7 @@ ChatGPT (powered by OpenAI's latest models) remains the king of generative reaso
 
 ## Perplexity AI (Best for Research and Truth)
 
-Perplexity is not a chatbot; it is an answer engine. It searches the live internet, reads multiple sources, synthesizes the answer, and—crucially—provides footnote citations for every single claim it makes.
+Perplexity is not a chatbot; it is an answer engine. It searches the live internet, reads multiple sources, synthesizes the answer, and, crucially, provides footnote citations for every single claim it makes.
 
 **Use it when:**
 - You are researching a medical topic, a legal precedent, or a competitor.
