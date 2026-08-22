@@ -16,7 +16,18 @@ export default function BlogPostPage() {
 
   const related = BLOG_POSTS.filter(p => p.slug !== slug && p.category === post.category).slice(0, 2);
 
-  // Convert markdown-ish content to HTML paragraphs
+  // Convert markdown-ish content to HTML paragraphs.
+  // Supports **bold** and [text](url) inline. Internal /… URLs use react-router; external open in a new tab.
+  const inline = (raw: string): string => {
+    return raw
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, text: string, href: string) => {
+        const isExternal = /^https?:\/\//.test(href);
+        const attrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+        return `<a href="${href}" class="${styles.inlineLink}"${attrs}>${text}</a>`;
+      });
+  };
+
   const renderContent = (content: string) => {
     const lines = content.trim().split('\n');
     const elements: React.ReactElement[] = [];
@@ -53,14 +64,13 @@ export default function BlogPostPage() {
         elements.push(
           <ul key={i} className={styles.postList}>
             {listItems.map((item, idx) => (
-              <li key={idx} dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+              <li key={idx} dangerouslySetInnerHTML={{ __html: inline(item) }} />
             ))}
           </ul>
         );
         continue;
       } else if (line.length > 0) {
-        const html = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        elements.push(<p key={i} className={styles.postP} dangerouslySetInnerHTML={{ __html: html }} />);
+        elements.push(<p key={i} className={styles.postP} dangerouslySetInnerHTML={{ __html: inline(line) }} />);
       }
 
       i++;

@@ -355,6 +355,18 @@
   margin-bottom: var(--space-5);
 }
 
+.inlineLink {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease;
+}
+
+.inlineLink:hover {
+  color: var(--text);
+}
+
 .postBold {
   font-weight: 600;
   color: var(--text);

@@ -76,7 +76,14 @@ Make over building everything in n8n: because some automations are simple enough
 ## The Takeaway
 
 Five tools. Two production apps. One Chrome extension. One exam prep product. One consulting service. No dev team. No CS degree. PharmD who builds.
-    `,
+
+## Related reading
+
+- Read [why running n8n on AWS under a signed BAA matters](/blog/n8n-aws-baa-healthcare-automation).
+- Read [using Google Apps Script as the entire backend for Pharmacy Decoder](/blog/google-apps-script-pharmacy-decoder-backend).
+- Read [the n8n intake router pattern for a health practice](/blog/n8n-intake-routing-health-practice).
+- Ready to work together? [a discovery call to build your own version of this stack](/services).
+`,
   },
   {
     slug: 'n8n-aws-baa-healthcare-automation',
@@ -104,7 +111,7 @@ Without a BAA, you are trusting the provider's general terms of service, which t
 
 The n8n instance on AWS handles everything connected to Hunter's Holistic Health:
 
-The intake router receives four types of form submissions (waitlist, support, feature requests, clinical inquiries). Each type is routed to its own Google Sheets tab. Email alerts go out with name, email, category, and timestamp only. No health details in the alerts.
+[The intake router](/blog/n8n-intake-routing-health-practice) receives four types of form submissions (waitlist, support, feature requests, clinical inquiries). Each type is routed to its own Google Sheets tab. Email alerts go out with name, email, category, and timestamp only. No health details in the alerts.
 
 The clinical inquiry flow is the most sensitive. The form itself collects only general interest information with a visible disclaimer telling users not to include lab results or diagnoses. But because this flow is the gateway to the clinical lane, it runs on the BAA-covered infrastructure.
 
@@ -125,7 +132,14 @@ Total monthly cost: roughly $15 to $20 depending on traffic, well within the fre
 ## The Takeaway
 
 If you are building automation for a health practice, the hosting decision is not just a technical choice. It is a compliance decision. Running n8n on AWS with a BAA does not make your workflows HIPAA-compliant by itself, but it puts the infrastructure layer on a proper legal foundation. That is the minimum starting point for healthcare-adjacent automation.
-    `,
+
+## Related reading
+
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Read [the n8n intake router pattern for a health practice](/blog/n8n-intake-routing-health-practice).
+- Read [how to set up Google Workspace as your HIPAA clinical lane](/blog/google-workspace-hipaa-clinical-lane-setup).
+- Ready to work together? [a scoped n8n build for your health practice](/services).
+`,
   },
   {
     slug: 'google-apps-script-pharmacy-decoder-backend',
@@ -176,7 +190,14 @@ For a pharmacy exam prep app that serves a few hundred students per school cohor
 ## The Takeaway
 
 Not every app needs a full backend. Google Apps Script gives you server-side email sending, data storage via Sheets, and web endpoints for free. For small, focused apps where the backend logic is simple, it is a tool worth knowing.
-    `,
+
+## Related reading
+
+- Read [the full five-tool automation stack behind this business](/blog/my-automation-stack-pharmd-builds-with-ai).
+- Read [the complete Stripe setup for a health education platform](/blog/stripe-setup-health-educator-platform).
+- Read [the n8n intake router pattern for a health practice](/blog/n8n-intake-routing-health-practice).
+- Ready to work together? [a lean-backend build for your own product](/services).
+`,
   },
   {
     slug: 'hipaa-conscious-ai-workflows-healthcare',
@@ -214,7 +235,7 @@ This is where your intake forms, n8n workflows, Google Sheets, and email notific
 
 **Lane 2: The Clinical Lane**
 
-This is where PHI lives. For most solo practitioners and small practices, this is Google Workspace with a signed Business Associate Agreement (BAA) from Google. After someone submits a clinical interest form in Lane 1, you review it manually and move the conversation into Lane 2 via secure Gmail and Google Drive.
+This is where PHI lives. For most solo practitioners and small practices, this is Google Workspace with a signed Business Associate Agreement (BAA) from Google. After someone submits a clinical interest form in Lane 1, you review it manually and move the conversation into Lane 2 via secure Gmail and Google Drive. The full configuration walkthrough is here: [how to set up Google Workspace as your HIPAA clinical lane](/blog/google-workspace-hipaa-clinical-lane-setup).
 
 The two lanes never merge in code. n8n never touches PHI. The app never stores PHI. The clinical lane is entirely manual and handled through your covered Google Workspace environment.
 
@@ -267,7 +288,7 @@ None of this is technically complex. It is administrative work that takes a few 
 
 ## Why This Matters More Than You Think
 
-The FTC has separate enforcement authority from HHS (which enforces HIPAA). Even if you are not a HIPAA covered entity, the FTC can take action against companies that fail to protect health information under Section 5 of the FTC Act. The FTC Health Breach Notification Rule also applies to vendors of personal health records and related entities.
+The [FTC has separate enforcement authority](/blog/ftc-compliance-health-content-creators) from HHS (which enforces HIPAA). Even if you are not a HIPAA covered entity, the FTC can take action against companies that fail to protect health information under Section 5 of the FTC Act. The FTC Health Breach Notification Rule also applies to vendors of personal health records and related entities.
 
 Building the two-layer architecture from the start protects you under both frameworks. It is not extra work. It is the right foundation.
 
@@ -275,10 +296,17 @@ Building the two-layer architecture from the start protects you under both frame
 
 The two-layer architecture is not complicated. It is a discipline. Keep PHI in the covered lane. Keep automation in the non-PHI lane. Never let them merge in code. Review any new feature against that rule before building it.
 
-Every workflow covered in this curriculum is built around this architecture. The intake system, the appointment follow-up automation, the supplement protocol builder, and the pre-session brief all run through Lane 1. The clinical lane is separate, manual, and Google Workspace-based.
+Every workflow covered in this curriculum is built around this architecture. [The intake system](/blog/n8n-intake-routing-health-practice), the appointment follow-up automation, [the supplement protocol builder](/blog/supplement-protocol-builder-n8n), and the pre-session brief all run through Lane 1. The clinical lane is separate, manual, and Google Workspace-based.
 
 That is how you build AI workflows that survive a compliance review.
-    `,
+
+## Related reading
+
+- Read [how to set up Google Workspace as your HIPAA clinical lane](/blog/google-workspace-hipaa-clinical-lane-setup).
+- Read [why running n8n on AWS under a signed BAA matters](/blog/n8n-aws-baa-healthcare-automation).
+- Read [what FTC compliance actually requires for health content creators](/blog/ftc-compliance-health-content-creators).
+- Ready to work together? [a done-for-you compliant AI workflow built for your practice](/services).
+`,
   },
   {
     slug: 'vibe-coding-healthcare-professionals',
@@ -357,7 +385,14 @@ None of these risks make vibe coding inappropriate for healthcare applications. 
 Vibe coding is a legitimate path to building useful tools for your practice. The barrier is not technical skill. It is the discipline to define what you want clearly, set the right constraints, and review what gets built before it goes live.
 
 The CLAUDE.md file is the difference between a productive session and a frustrating one. Write it before you start. Update it as the project evolves. Treat it as the most important document in your project.
-    `,
+
+## Related reading
+
+- Read [how to build your own patient-facing tools without a dev team](/blog/vibe-coding-healthcare-patient-tools).
+- Read [how a full HIPAA-conscious health app got built with Claude Code](/blog/build-health-app-without-coding-claude).
+- Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
+- Ready to work together? [a custom build session where the tool gets built with you](/services).
+`,
   },
   {
     slug: 'claude-code-exam-prep-cca-f-guide',
@@ -383,7 +418,7 @@ This domain covers the foundational principles of how Claude Code works. Key top
 
 The most common mistake in this domain is conflating how Claude Code works with how other AI tools work. Claude Code has specific behaviors around tool use, file operations, and task management that are distinct from a general-purpose chat interface.
 
-**Domain 2: CLAUDE.md Mastery (18%)**
+**Domain 2: [CLAUDE.md](/blog/claude-code-absolute-beginners-guide) Mastery (18%)**
 
 This is the domain where most candidates underestimate the depth of knowledge required. The exam tests not just what a CLAUDE.md file is, but how to structure one for maximum effectiveness, which sections reduce hallucination in long agentic tasks, and how Claude Code reads and prioritizes instructions from different sources.
 
@@ -444,7 +479,14 @@ The CCA-F certification signals to employers, clients, and collaborators that yo
 The exam is not difficult if you have read the documentation. The challenge is knowing which parts of the documentation are most heavily tested and how to apply the concepts to scenario-based questions.
 
 That is exactly what the practice questions are designed to address.
-    `,
+
+## Related reading
+
+- Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
+- Read [Claude Code vs Cursor in 2026](/blog/claude-code-vs-cursor-2026).
+- Read [the beginner vibe-coding tutorial: shipping a real app without writing code](/blog/vibe-coding-tutorial-beginners-2026).
+- Ready to work together? [the 207 practice questions with official-doc citations](/exam-prep).
+`,
   },
   {
     slug: 'n8n-intake-routing-health-practice',
@@ -536,7 +578,14 @@ The alternative is n8n Cloud, which is a managed version that starts at $20/mont
 The n8n intake router is the operational backbone of the non-PHI automation layer. It takes about four hours to build from scratch, including the Google Sheets setup and the app integration. Once it is running, it handles intake routing automatically with no manual intervention required.
 
 The architecture is portable. The same workflow structure, with minor modifications to the form fields and Sheet column names, can be deployed for any health educator, wellness practice, or small business. That portability is what makes it a sellable service.
-    `,
+
+## Related reading
+
+- Read [why running n8n on AWS under a signed BAA matters](/blog/n8n-aws-baa-healthcare-automation).
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Read [the full five-tool automation stack behind this business](/blog/my-automation-stack-pharmd-builds-with-ai).
+- Ready to work together? [a scoped intake-router build for your practice](/services).
+`,
   },
   {
     slug: 'ftc-compliance-health-content-creators',
@@ -624,7 +673,14 @@ This takes about two minutes per piece of content and eliminates the most common
 FTC compliance for health content creators is not complicated. It requires understanding the distinction between structure/function claims and disease claims, disclosing material connections clearly and conspicuously, and ensuring that testimonials are representative or properly qualified.
 
 The 2023 updates raised the bar. "Results not typical" is no longer enough. Build the compliance review into your workflow from the start.
-    `,
+
+## Related reading
+
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Read [building an AI meal analysis feature that stays inside educator scope](/blog/ai-meal-analysis-healthcare-compliance).
+- Read [what ChatGPT is actually safe to use for in clinical work](/blog/chatgpt-healthcare-professionals-safe-use).
+- Ready to work together? [a compliance review of your existing content and workflows](/services).
+`,
   },
   {
     slug: 'stripe-setup-health-educator-platform',
@@ -710,7 +766,14 @@ A compliant product description for a health education subscription: "Monthly ac
 Stripe setup for a health education platform takes about two hours from account creation to first live transaction. The most important decisions are the product structure, the webhook integration, and the compliance language in product descriptions.
 
 The Stripe Checkout hosted page handles PCI compliance automatically. The webhook integration with n8n handles post-purchase automation. The compliance language in product descriptions protects you from Stripe's terms of service restrictions and FTC scrutiny.
-    `,
+
+## Related reading
+
+- Read [using Google Apps Script as the entire backend for Pharmacy Decoder](/blog/google-apps-script-pharmacy-decoder-backend).
+- Read [the full five-tool automation stack behind this business](/blog/my-automation-stack-pharmd-builds-with-ai).
+- Read [the App Store approval path for a HIPAA-adjacent health app](/blog/apple-app-store-health-app-compliance).
+- Ready to work together? [a full payment and platform setup for your health business](/services).
+`,
   },
   {
     slug: 'blood-pressure-tracking-app-architecture',
@@ -787,7 +850,14 @@ The offline-first architecture is important for a daily logging feature. Clients
 The blood pressure tracker is a case study in building a clinically adjacent feature while staying firmly in educator territory. The data model enforces reasonable ranges. The chart uses educational reference points rather than diagnostic thresholds. The UI framing provides educational context rather than diagnostic labels. The shareable report includes a prominent disclaimer.
 
 Every decision in the architecture was made with the question: does this look like education or does this look like clinical practice? The answer should always be education.
-    `,
+
+## Related reading
+
+- Read [building a supplement protocol generator with n8n and OpenAI](/blog/supplement-protocol-builder-n8n).
+- Read [how a full HIPAA-conscious health app got built with Claude Code](/blog/build-health-app-without-coding-claude).
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Ready to work together? [a custom tracker or intake tool for your practice](/services).
+`,
   },
   {
     slug: 'google-workspace-hipaa-clinical-lane-setup',
@@ -848,7 +918,7 @@ Clients/
 
 Each client folder is created manually when a new client is onboarded. The folder is shared only with the specific client (if they need access) and any staff members who work with that client.
 
-The ID in the folder name is a simple sequential number (001, 002, etc.) that allows you to reference clients in non-PHI contexts (like n8n logs) without using their name.
+The ID in the folder name is a simple sequential number (001, 002, etc.) that allows you to reference clients in non-PHI contexts (like [n8n logs](/blog/n8n-aws-baa-healthcare-automation)) without using their name.
 
 ## The Five-Step Client Handoff Flow
 
@@ -890,7 +960,14 @@ This is not a substitute for legal counsel. A healthcare attorney can review you
 Google Workspace with a signed BAA is the most practical clinical lane option for solo practitioners and small practices. The setup takes about two hours. The ongoing maintenance is minimal. The cost is $6 per user per month.
 
 The key is doing the configuration correctly before using it for PHI. Accept the BAA, enable MFA, restrict sharing, and set up the client folder structure. Then use it consistently for all clinical communication and document storage.
-    `,
+
+## Related reading
+
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Read [why running n8n on AWS under a signed BAA matters](/blog/n8n-aws-baa-healthcare-automation).
+- Read [the App Store approval path for a HIPAA-adjacent health app](/blog/apple-app-store-health-app-compliance).
+- Ready to work together? [a full compliance-first workflow audit and build](/services).
+`,
   },
   {
     slug: 'ai-meal-analysis-healthcare-compliance',
@@ -966,7 +1043,14 @@ Image uploads require additional consideration: the images are not stored. They 
 An AI meal analysis feature can be built in a way that provides genuine educational value while staying firmly in educator territory. The key decisions are: backend proxy to control the system prompt, educational framing in the system prompt itself, UI language that reinforces the educational context, and no clinical scoring or cumulative tracking.
 
 The feature is one of the most engaging in the app. Clients use it regularly. The compliance architecture makes it sustainable.
-    `,
+
+## Related reading
+
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Read [building a supplement protocol generator with n8n and OpenAI](/blog/supplement-protocol-builder-n8n).
+- Read [what FTC compliance actually requires for health content creators](/blog/ftc-compliance-health-content-creators).
+- Ready to work together? [a custom AI feature built to stay inside educator scope](/services).
+`,
   },
   {
     slug: 'supplement-protocol-builder-n8n',
@@ -1071,7 +1155,14 @@ This is the correct architecture. The AI does the research acceleration. The Pha
 The supplement protocol builder is one of the highest-value workflows in the n8n roadmap. It saves 20 to 40 minutes per protocol review and surfaces medication interaction considerations that might otherwise be missed.
 
 The compliance architecture is straightforward: non-PHI inputs, educational output framing, educator review before client delivery, and clear affiliate disclosures. The PharmD credential is the differentiator that makes this workflow credible and safe.
-    `,
+
+## Related reading
+
+- Read [building an AI meal analysis feature that stays inside educator scope](/blog/ai-meal-analysis-healthcare-compliance).
+- Read [the n8n intake router pattern for a health practice](/blog/n8n-intake-routing-health-practice).
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Ready to work together? [a purpose-built protocol tool for your educator workflow](/services).
+`,
   },
   {
     slug: 'apple-app-store-health-app-compliance',
@@ -1161,7 +1252,14 @@ HealthKit integration is a Phase 2 feature, after the app has been approved and 
 Apple App Store compliance for health apps requires attention to four areas: educational intent in the app name and description, no diagnostic language in the UI, explicit consent before health data collection, and prominent disclaimers throughout the app.
 
 The PWA-first strategy allows you to launch and iterate without App Store review constraints. When you are ready for App Store submission, the compliance architecture built into the PWA translates directly to the native app.
-    `,
+
+## Related reading
+
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Read [how to set up Google Workspace as your HIPAA clinical lane](/blog/google-workspace-hipaa-clinical-lane-setup).
+- Read [how a full HIPAA-conscious health app got built with Claude Code](/blog/build-health-app-without-coding-claude).
+- Ready to work together? [a build engagement for a HIPAA-conscious health app](/services).
+`,
   },
   {
     slug: 'vibe-coding-tutorial-beginners-2026',
@@ -1208,6 +1306,14 @@ When something breaks (and it will), do not try to fix the code yourself. Copy t
 
 Vibe coding is not magic. It requires patience, clear communication, and the ability to break big problems into small steps. But it entirely removes syntax errors and missing semicolons from the equation, allowing anyone with a logical mind to build real software.
 
+
+## Related reading
+
+- Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
+- Read [the head-to-head on Cursor, Bolt, Replit, and Claude Code](/blog/best-vibe-coding-tools-2026-cursor-bolt-claude).
+- Read [how a full HIPAA-conscious health app got built with Claude Code](/blog/build-health-app-without-coding-claude).
+- Ready to work together? [the Claude Code Associate Foundations exam prep pack](/exam-prep).
+
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
@@ -1247,6 +1353,14 @@ The biggest risk of vibe coding in healthcare is accidentally building a HIPAA v
 ## Getting Started
 
 You do not need to learn Python or React. You need to learn how to write a \`CLAUDE.md\` file that clearly defines your app's purpose, the two-layer architecture rules, and your design preferences. From there, you act as the clinical director, and the AI acts as your engineering team.
+
+
+## Related reading
+
+- Read [a practical vibe-coding starting point for healthcare professionals](/blog/vibe-coding-healthcare-professionals).
+- Read [how a full HIPAA-conscious health app got built with Claude Code](/blog/build-health-app-without-coding-claude).
+- Read [the architecture decisions behind the blood pressure tracker](/blog/blood-pressure-tracking-app-architecture).
+- Ready to work together? [a patient tool built for your practice from scratch](/services).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1320,6 +1434,14 @@ If you have **zero coding experience**, start with **Bolt.new**.
 If you are building a **production app** and want an AI to do the heavy lifting, use **Claude Code**.
 If you are **already a developer** looking to code 10x faster, use **Cursor**.
 
+
+## Related reading
+
+- Read [Claude Code vs Cursor in 2026](/blog/claude-code-vs-cursor-2026).
+- Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
+- Read [the beginner vibe-coding tutorial: shipping a real app without writing code](/blog/vibe-coding-tutorial-beginners-2026).
+- Ready to work together? [the 207-question CCA-F exam prep for Claude Code](/exam-prep).
+
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
@@ -1369,6 +1491,14 @@ Claude Code will read the folder, create the file, write the HTML and CSS, and t
 
 Always create a \`CLAUDE.md\` file in your folder before you start. Write your instructions, colors, and rules in that file. Claude Code automatically reads it every time it starts, ensuring it never forgets your brand guidelines or compliance rules.
 
+
+## Related reading
+
+- Read [the complete CCA-F exam study guide](/blog/claude-code-exam-prep-cca-f-guide).
+- Read [Claude Code vs Cursor in 2026](/blog/claude-code-vs-cursor-2026).
+- Read [the beginner vibe-coding tutorial: shipping a real app without writing code](/blog/vibe-coding-tutorial-beginners-2026).
+- Ready to work together? [the CCA-F exam prep pack once you are past the basics](/exam-prep).
+
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
@@ -1409,6 +1539,14 @@ They use **Claude Code** (often via the Cowork interface) for the heavy lifting:
 Then, they open that folder in **Cursor** to do the final polish, tweak the CSS, and handle the visual layout where seeing the code line-by-line is helpful.
 
 If you are a non-technical builder, lean heavily on Claude Code. It requires you to look at the code much less.
+
+
+## Related reading
+
+- Read [the head-to-head on Cursor, Bolt, Replit, and Claude Code](/blog/best-vibe-coding-tools-2026-cursor-bolt-claude).
+- Read [the complete CCA-F exam study guide](/blog/claude-code-exam-prep-cca-f-guide).
+- Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
+- Ready to work together? [the Claude Code certification prep pack](/exam-prep).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1457,6 +1595,14 @@ You do not need to learn React. You need to learn system architecture and compli
 
 The HHH platform is live proof that domain experts can now build their own tools.
 
+
+## Related reading
+
+- Read [a practical vibe-coding starting point for healthcare professionals](/blog/vibe-coding-healthcare-professionals).
+- Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Ready to work together? [a built-for-you HIPAA-conscious app engagement](/services).
+
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
@@ -1503,6 +1649,13 @@ Gemini will read the documents, synthesize the answer, and provide citations lin
 
 If you are a healthcare professional or handle sensitive data, ensure you have the proper Google Workspace Enterprise tier and a signed BAA before allowing Gemini to scan drives containing PHI. Consumer-tier Gemini may use your data for training; Enterprise-tier Gemini does not.
 
+## Related reading
+
+- Read [what Gemini can and cannot do for a healthcare professional](/blog/gemini-healthcare-professionals-limits).
+- Read [the head-to-head between ChatGPT, Gemini, and Perplexity](/blog/chatgpt-vs-gemini-vs-perplexity-2026).
+- Read [NotebookLM for business vs. for studying: which mode fits your work](/blog/notebooklm-business-vs-studying).
+- Ready to work together? [a 1-on-1 session to set up your AI stack for real work](/services).
+
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
@@ -1539,6 +1692,14 @@ Businesses do not need study guides; they need instant access to trapped knowled
 ## The Limitation You Must Know
 
 NotebookLM is brilliant, but it is siloed. It does not integrate via API to other tools like n8n or Zapier (yet). It is a closed workspace. Use it for synthesis and research, but do not expect it to automate your outbound emails.
+
+
+## Related reading
+
+- Read [a practical guide to using Gemini in a business workflow](/blog/how-to-use-gemini-for-business-2026).
+- Read [why healthcare professionals are switching to Perplexity for research](/blog/perplexity-ai-research-healthcare).
+- Read [the ranked list of AI tools worth paying for as a small business owner](/blog/best-ai-tools-small-business-owners-2026).
+- Ready to work together? [a working session to build your own research workflow](/services).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1584,6 +1745,14 @@ When properly configured under a BAA, Google explicitly states that Gemini Enter
 ## The Rule of Thumb
 
 If you are a solo practitioner and do not want the administrative burden of managing Enterprise-tier permissions, stick to the two-layer architecture. Use Gemini for your marketing, your admin, and your education. Keep it entirely away from your clinical records.
+
+
+## Related reading
+
+- Read [what ChatGPT is actually safe to use for in clinical work](/blog/chatgpt-healthcare-professionals-safe-use).
+- Read [why healthcare professionals are switching to Perplexity for research](/blog/perplexity-ai-research-healthcare).
+- Read [the head-to-head between ChatGPT, Gemini, and Perplexity](/blog/chatgpt-vs-gemini-vs-perplexity-2026).
+- Ready to work together? [a 1-on-1 to build a compliant AI stack for your practice](/services).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1644,6 +1813,14 @@ If you are a **researcher, academic, or healthcare professional**, buy **Perplex
 If you are a **creator, marketer, or strategist**, buy **ChatGPT Plus**.
 If you are an **operations manager** living in spreadsheets, use **Gemini Advanced**.
 
+
+## Related reading
+
+- Read [what ChatGPT is actually safe to use for in clinical work](/blog/chatgpt-healthcare-professionals-safe-use).
+- Read [what Gemini can and cannot do for a healthcare professional](/blog/gemini-healthcare-professionals-limits).
+- Read [why healthcare professionals are switching to Perplexity for research](/blog/perplexity-ai-research-healthcare).
+- Ready to work together? [a working session to pick the right tool for your workflow](/services).
+
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
@@ -1690,6 +1867,14 @@ In this mode, Perplexity will ignore blogs, news sites, and consumer health port
 
 If you are writing patient education materials, building a course, or researching a complex case, you cannot afford hallucinated citations. Perplexity AI is the only tool that treats truth and attribution as its primary features.
 
+
+## Related reading
+
+- Read [what Gemini can and cannot do for a healthcare professional](/blog/gemini-healthcare-professionals-limits).
+- Read [what ChatGPT is actually safe to use for in clinical work](/blog/chatgpt-healthcare-professionals-safe-use).
+- Read [NotebookLM for business vs. for studying: which mode fits your work](/blog/notebooklm-business-vs-studying).
+- Ready to work together? [a research-workflow session for your clinical or educator work](/services).
+
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
@@ -1731,6 +1916,14 @@ You do not need 15 different AI tools. You need a lean stack of 3 to 4 tools tha
 ## The Rule for Small Businesses
 
 Do not buy an AI tool to "see what it can do." Identify a bottleneck in your business (e.g., "I spend 4 hours a week summarizing sales calls"), and buy the specific tool that solves that bottleneck.
+
+
+## Related reading
+
+- Read [a practical guide to using Gemini in a business workflow](/blog/how-to-use-gemini-for-business-2026).
+- Read [NotebookLM for business vs. for studying: which mode fits your work](/blog/notebooklm-business-vs-studying).
+- Read [the head-to-head between ChatGPT, Gemini, and Perplexity](/blog/chatgpt-vs-gemini-vs-perplexity-2026).
+- Ready to work together? [a 1-on-1 session to set up your AI stack end to end](/services).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1781,6 +1974,14 @@ Teach staff how to use citation-based engines like Perplexity for research, rath
 
 When hiring someone to lead this workshop, look for a practitioner, not just a technologist. A developer can explain how a neural network functions. A PharmD or clinical educator can explain how to integrate that neural network into a busy practice while navigating HIPAA constraints.
 
+
+## Related reading
+
+- Read [what schools are actually doing about AI literacy for healthcare students](/blog/teaching-ai-literacy-healthcare-students).
+- Read [what ChatGPT is actually safe to use for in clinical work](/blog/chatgpt-healthcare-professionals-safe-use).
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Ready to work together? [book a workshop for your school, hospital, or department](/services).
+
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
   },
@@ -1829,6 +2030,14 @@ Students must be trained to use citation-backed AI tools (like Perplexity) and m
 The role of the clinical educator is no longer just to transfer knowledge. The internet already did that. The role of the educator is to teach discernment, critical thinking, and the safe application of powerful tools.
 
 Schools that embrace this will produce the healthcare leaders of the next decade. Schools that rely on AI detectors will produce graduates who are obsolete on day one.
+
+
+## Related reading
+
+- Read [the playbook for bringing AI workshops into your school or hospital](/blog/ai-workshops-schools-hospitals-guide).
+- Read [what ChatGPT is actually safe to use for in clinical work](/blog/chatgpt-healthcare-professionals-safe-use).
+- Read [what Gemini can and cannot do for a healthcare professional](/blog/gemini-healthcare-professionals-limits).
+- Ready to work together? [a scoped curriculum built for your program](/services).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1892,6 +2101,14 @@ Why: You are mixing anonymized clinical data with generative AI, which can hallu
 ## The Golden Rule
 
 If the task involves a specific patient, it belongs in your secure, BAA-covered environment (like an enterprise EHR or Google Workspace). If the task involves general education, business operations, or marketing, ChatGPT is your best tool.
+
+
+## Related reading
+
+- Read [the two-layer architecture that keeps PHI out of your automation lane](/blog/hipaa-conscious-ai-workflows-healthcare).
+- Read [what Gemini can and cannot do for a healthcare professional](/blog/gemini-healthcare-professionals-limits).
+- Read [why healthcare professionals are switching to Perplexity for research](/blog/perplexity-ai-research-healthcare).
+- Ready to work together? [a 1-on-1 session to set up a safe AI stack in your practice](/services).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
