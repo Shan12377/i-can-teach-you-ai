@@ -19,15 +19,23 @@ export function clearExamAccess(): void {
   localStorage.removeItem(SESSION_ID_KEY);
 }
 
-export async function verifyExamPurchase(sessionId: string): Promise<string | null> {
+export interface VerifyPurchaseResult {
+  token: string | null;
+  error: string | null;
+}
+
+export async function verifyExamPurchase(sessionId: string): Promise<VerifyPurchaseResult> {
   const res = await fetch('/api/verify-purchase', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ sessionId }),
   });
-  if (!res.ok) return null;
-  const data = await res.json();
-  return typeof data?.token === 'string' ? data.token : null;
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    return { token: null, error: data?.error ?? 'Something went wrong verifying your purchase.' };
+  }
+  const token = typeof data?.token === 'string' ? data.token : null;
+  return { token, error: token ? null : 'Something went wrong verifying your purchase.' };
 }
 
 export interface RecoverAccessResult {

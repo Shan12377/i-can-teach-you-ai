@@ -5,7 +5,7 @@ import Stripe from 'stripe';
 import { verifyAccessToken } from './_lib/access-token.js';
 import { isSessionRefunded } from './_lib/exam-purchase.js';
 
-const encryptedDataPath = fileURLToPath(new URL('./_data/exam-questions.enc.json', import.meta.url));
+const encryptedDataPath = fileURLToPath(new URL('./_data/study-guide.enc.json', import.meta.url));
 
 export async function GET(req: Request): Promise<Response> {
   const tokenSecret = process.env.EXAM_TOKEN_SECRET;
@@ -36,13 +36,16 @@ export async function GET(req: Request): Promise<Response> {
 
     const decipher = createDecipheriv('aes-256-gcm', key, iv);
     decipher.setAuthTag(authTag);
-    const plaintext = Buffer.concat([decipher.update(ciphertext), decipher.final()]).toString('utf-8');
+    const plaintext = Buffer.concat([decipher.update(ciphertext), decipher.final()]);
 
     return new Response(plaintext, {
       status: 200,
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/pdf',
+        'content-disposition': 'attachment; filename="CCA-F-Study-Guide.pdf"',
+      },
     });
   } catch {
-    return Response.json({ error: 'Could not load exam content' }, { status: 500 });
+    return Response.json({ error: 'Could not load study guide' }, { status: 500 });
   }
 }

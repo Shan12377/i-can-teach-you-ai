@@ -70,6 +70,15 @@
   color: var(--text2);
 }
 
+.headerCardFeatureCheck {
+  color: var(--green);
+}
+
+.headerCardCta {
+  display: block;
+  text-align: center;
+}
+
 /* Recover access */
 .recoverToggle {
   background: none;
@@ -115,6 +124,99 @@
   font-size: 12px;
   color: var(--red);
   margin-top: var(--space-2);
+}
+
+/* Pain: what most prep resources get wrong */
+.painSection {
+  margin-bottom: var(--space-12);
+}
+
+.painH2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.015em;
+  margin-bottom: var(--space-3);
+}
+
+.painIntro {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: var(--space-6);
+}
+
+.painList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.painItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+
+.painItem:last-child {
+  border-bottom: none;
+}
+
+.painNum {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text3);
+  padding-top: 2px;
+}
+
+.painTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: var(--space-1);
+}
+
+.painDetail {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+.painDetail code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: var(--accent2);
+}
+
+.painBadge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--green);
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  border-radius: var(--radius-sm);
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.bonusNote {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text2);
 }
 
 /* Preview */

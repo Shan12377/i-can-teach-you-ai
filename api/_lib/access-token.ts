@@ -16,21 +16,32 @@ export function issueAccessToken(sessionId: string, secret: string): string {
   return `${encodedPayload}.${signature}`;
 }
 
-export function verifyAccessToken(token: string, secret: string): boolean {
+export interface AccessTokenPayload {
+  sessionId: string;
+}
+
+/**
+ * Verifies signature and expiry, returning the decoded payload (so callers
+ * can look up the underlying Stripe session for a live refund check) or null
+ * if the token is missing, tampered with, or expired.
+ */
+export function verifyAccessToken(token: string, secret: string): AccessTokenPayload | null {
   const [encodedPayload, signature] = token.split('.');
-  if (!encodedPayload || !signature) return false;
+  if (!encodedPayload || !signature) return null;
 
   const expectedSignature = sign(encodedPayload, secret);
   const provided = Buffer.from(signature);
   const expected = Buffer.from(expectedSignature);
   if (provided.length !== expected.length || !timingSafeEqual(provided, expected)) {
-    return false;
+    return null;
   }
 
   try {
     const payload = JSON.parse(Buffer.from(encodedPayload, 'base64url').toString('utf-8'));
-    return typeof payload.exp === 'number' && payload.exp > Date.now();
+    if (typeof payload.exp !== 'number' || payload.exp <= Date.now()) return null;
+    if (typeof payload.sessionId !== 'string') return null;
+    return { sessionId: payload.sessionId };
   } catch {
-    return false;
+    return null;
   }
 }

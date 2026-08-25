@@ -43,3 +43,21 @@ export async function issueTokenForSession(
 
   return { ok: true, token: issueAccessToken(session.id, tokenSecret) };
 }
+
+/**
+ * Live refund check against Stripe. Tokens are stateless (signature + expiry
+ * only, no database), so this is what actually revokes access if a purchase
+ * gets refunded: every content request re-checks the underlying charge.
+ */
+export async function isSessionRefunded(stripe: Stripe, sessionId: string): Promise<boolean> {
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  const paymentIntentId =
+    typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id;
+  if (!paymentIntentId) return false;
+
+  const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId, {
+    expand: ['latest_charge'],
+  });
+  const charge = paymentIntent.latest_charge;
+  return typeof charge === 'object' && charge !== null && charge.refunded === true;
+}

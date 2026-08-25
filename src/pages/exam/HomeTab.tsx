@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import styles from './Exam.module.css';
+import s from '../../styles/shared.module.css';
 import type { ExamContent } from './types';
+import { getExamAccessToken } from '../../lib/examAccess';
 
 const FAIL_REASONS = [
   {
@@ -50,6 +53,28 @@ interface HomeTabProps {
 }
 
 export default function HomeTab({ content, onNavigate }: HomeTabProps) {
+  const [downloadState, setDownloadState] = useState<'idle' | 'downloading' | 'error'>('idle');
+
+  async function downloadStudyGuide() {
+    const token = getExamAccessToken();
+    if (!token) return;
+    setDownloadState('downloading');
+    try {
+      const res = await fetch('/api/study-guide', { headers: { Authorization: `Bearer ${token}` } });
+      if (!res.ok) throw new Error('download failed');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'CCA-F-Study-Guide.pdf';
+      a.click();
+      URL.revokeObjectURL(url);
+      setDownloadState('idle');
+    } catch {
+      setDownloadState('error');
+    }
+  }
+
   const studySteps = [
     { title: 'Anti-Patterns tab first', detail: `Memorize all ${content.antiPatterns.length} patterns. You can eliminate 2-3 wrong answers instantly on most questions.` },
     { title: 'Concepts tab', detail: `Expand all ${content.domains.length} domains. Pay special attention to the newer topics: CWM, Prompt Caching, Hooks, 4D Framework, these appear on the real exam and most prep tools miss them.` },
@@ -99,6 +124,15 @@ export default function HomeTab({ content, onNavigate }: HomeTabProps) {
           <span className={styles.menuCardTitle}>Jump to Practice Quiz</span>
           <span className={styles.menuCardDesc}>Browse all questions, filter by domain and difficulty.</span>
         </button>
+      </div>
+
+      <div className={styles.downloadRow}>
+        <button className={s.btnOutline} onClick={downloadStudyGuide} disabled={downloadState === 'downloading'}>
+          {downloadState === 'downloading' ? 'Preparing download...' : 'Download Study Guide (PDF)'}
+        </button>
+        {downloadState === 'error' && (
+          <span className={styles.failHeading}>Download failed. Try again or email hello@icanteachyouai.com.</span>
+        )}
       </div>
 
       <div className={`${styles.csSection} ${styles.failSection}`}>

@@ -8,18 +8,25 @@ export default function CheckoutSuccessPage() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const [examUnlocked, setExamUnlocked] = useState(false);
+  const [unlockError, setUnlockError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!sessionId) return;
 
     let cancelled = false;
     verifyExamPurchase(sessionId)
-      .then((token) => {
-        if (cancelled || !token) return;
-        storeExamAccess(token, sessionId);
-        setExamUnlocked(true);
+      .then(({ token, error }) => {
+        if (cancelled) return;
+        if (token) {
+          storeExamAccess(token, sessionId);
+          setExamUnlocked(true);
+          return;
+        }
+        setUnlockError(error);
       })
-      .catch(() => {});
+      .catch(() => {
+        if (!cancelled) setUnlockError('Something went wrong verifying your purchase.');
+      });
 
     return () => {
       cancelled = true;
@@ -34,6 +41,13 @@ export default function CheckoutSuccessPage() {
         <p className={styles.successText}>
           Thank you for your purchase. A receipt has been sent to your email address. You can access your content below.
         </p>
+        {unlockError && (
+          <p className={styles.successUnlockError}>
+            Couldn't unlock your exam access automatically: {unlockError} Email{' '}
+            <a href="mailto:hello@icanteachyouai.com" className={styles.successNoteLink}>hello@icanteachyouai.com</a>{' '}
+            with your order confirmation and we'll get you sorted.
+          </p>
+        )}
         <div className={styles.successBtns}>
           <Link to={examUnlocked ? '/exam' : '/exam-prep'} className={`${s.btnGold}`}>
             Access Exam Prep

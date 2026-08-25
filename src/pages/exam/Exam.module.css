@@ -115,6 +115,14 @@
   line-height: 1.65;
 }
 
+.downloadRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: var(--space-10);
+}
+
 .statGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

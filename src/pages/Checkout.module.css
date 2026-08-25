@@ -255,6 +255,17 @@
   margin-bottom: var(--space-8);
 }
 
+.successUnlockError {
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  color: var(--red);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
 .successBtns {
   display: flex;
   gap: var(--space-3);

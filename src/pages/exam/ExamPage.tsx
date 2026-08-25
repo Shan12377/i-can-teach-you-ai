@@ -14,7 +14,7 @@ import FlashcardsTab from './FlashcardsTab';
 import NotesTab from './NotesTab';
 import FeedbackTab from './FeedbackTab';
 
-type LoadState = 'checking' | 'denied' | 'error' | 'ready';
+type LoadState = 'checking' | 'denied' | 'error' | 'refunded' | 'ready';
 
 type Tab = 'home' | 'antipatterns' | 'concepts' | 'quiz' | 'timed' | 'cheatsheet' | 'flashcards' | 'notes' | 'feedback';
 
@@ -58,7 +58,7 @@ export default function ExamPage() {
       // rather than immediately booting a legitimate returning customer.
       if (res.status === 401) {
         const sessionId = getExamSessionId();
-        const refreshedToken = sessionId ? await verifyExamPurchase(sessionId) : null;
+        const { token: refreshedToken } = sessionId ? await verifyExamPurchase(sessionId) : { token: null };
         if (refreshedToken) {
           storeExamAccess(refreshedToken, sessionId!);
           res = await fetchContent(refreshedToken);
@@ -66,6 +66,12 @@ export default function ExamPage() {
       }
 
       if (cancelled) return;
+
+      if (res.status === 403) {
+        clearExamAccess();
+        setLoadState('refunded');
+        return;
+      }
 
       if (res.status === 401) {
         clearExamAccess();
@@ -107,6 +113,19 @@ export default function ExamPage() {
           <p className={styles.statusText}>
             Your access link has expired or is invalid.{' '}
             <Link to="/exam-prep" className={styles.statusLink}>Return to Exam Prep</Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (loadState === 'refunded') {
+    return (
+      <div className={styles.page}>
+        <div className={s.wrapWide}>
+          <p className={styles.statusText}>
+            This purchase was refunded, so access is no longer active. If this looks wrong, email{' '}
+            <a href="mailto:hello@icanteachyouai.com" className={styles.statusLink}>hello@icanteachyouai.com</a>.
           </p>
         </div>
       </div>
