@@ -205,8 +205,8 @@ On "run the audit," execute `docs/AUDIT-PROMPT.md` exactly: every numbered rule 
 ## 14a. Portfolio Rules
 
 - Healthcare builds (Hunter's Holistic Health, Pharmacy Decoder, DeIDGuard, CCA-F Exam Prep) are the proof-of-work grid.
-- Non-healthcare builds (Yaadmoji, Beat Di Table) appear only in the "Also built, for fun" row. They are never mixed into the healthcare grid.
-- GLPRoot is not mentioned anywhere on this site.
+- Non-healthcare builds (Yaadmoji, Yaad Dominoes) appear only in the "Also built, for fun" row. They are never mixed into the healthcare grid.
+- GLPRoot (the first site Dr. Hunter built with AI) is never named on this site. It can be referenced narratively as "the first site I built with AI" or equivalent. Its account is being suspended; any link tied to that reference points to drshallandahunter.com, the redirect destination, never a GLPRoot domain.
 - No `vercel.app` or other preview URL is ever linked from a public page. Every linked project has its own domain.
 - drshallandahunter.com is linked from the footer, the About page, and `sameAs` in the Person schema. Do not promote it above that.
 
@@ -219,5 +219,5 @@ On "run the audit," execute `docs/AUDIT-PROMPT.md` exactly: every numbered rule 
 5. Add `scripts/check-blog.mjs` and `npm run check:blog`; wire it into `build`.
 6. Homepage redesign per `docs/DESIGN-SPEC.md`, with 4a.3 and 4a.4 landing in the same change.
 7. Add `public/claude-md-excerpt.md` and the footer link.
-8. Put Beat Di Table on its own domain before the "for fun" row ships.
+8. Put Yaad Dominoes on its own domain before the "for fun" row ships.
 9. Decide GLPRoot: maintain it, redirect the domain to drshallandahunter.com, or take it down. Do not leave it live and unmaintained.

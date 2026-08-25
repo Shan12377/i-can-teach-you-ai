@@ -9,7 +9,7 @@ import WaitlistQuestionsPage from './pages/intake/WaitlistQuestionsPage';
 import AboutPage from './pages/AboutPage';
 import ProductsPage from './pages/ProductsPage';
 import ExamPrepPage from './pages/ExamPrepPage';
-import ExamPage from './pages/ExamPage';
+import ExamPage from './pages/exam/ExamPage';
 import BlogIndexPage from './pages/blog/BlogIndexPage';
 import BlogPostPage from './pages/blog/BlogPostPage';
 import TermsPage from './pages/legal/TermsPage';

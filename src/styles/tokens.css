@@ -97,6 +97,11 @@
   --amber-bg:        rgba(251, 191, 36, 0.1);
   --amber-border:    rgba(251, 191, 36, 0.3);
 
+  /* --- Coral: 4th category tag color (exam domain tags only, not a status color) --- */
+  --coral:           #fb7185;
+  --coral-bg:        rgba(251, 113, 133, 0.1);
+  --coral-border:    rgba(251, 113, 133, 0.28);
+
   /* --- Typography --- */
   --font-sans:   'DM Sans', sans-serif;
   --font-mono:   'DM Mono', monospace;

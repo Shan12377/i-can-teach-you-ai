@@ -17,15 +17,20 @@ export default function AboutPage() {
         <div className={styles.bioGrid}>
           <div className={styles.bioContent}>
             <p className={styles.bioPara}>
-              Dr. Shallanda Hunter is a PharmD with a background in functional medicine education and a growing
-              practice in AI-powered health systems. She built Hunters Holistic Health, a fully deployed
-              functional medicine education platform, using Claude Code, n8n automation, and a HIPAA-conscious
-              architecture, without a traditional development team.
+              Dr. Shallanda Hunter started building with AI years before it was a headline, and hasn't stopped.
+              From{' '}
+              <a href="https://www.drshallandahunter.com" target="_blank" rel="noopener noreferrer">
+                the first site she ever built with AI
+              </a>
+              {' '}through Hunter's Holistic Health, DeIDGuard, Pharmacy Decoder, and now I Can Teach You AI,
+              each one shipped without a traditional development team.
             </p>
             <p className={styles.bioPara}>
-              The experience of building that platform from the ground up, navigating FTC compliance, HIPAA
-              architecture decisions, Apple App Store eligibility, and the practical realities of vibe coding,
-              is the foundation of everything taught at I Can Teach You AI.
+              Her approach to teaching comes from the same place as her approach to building: she designs the
+              way she'd want to learn. Pharmacy Decoder's 340 practice questions, mapped across all four NABP
+              domains, are built the way a real exam is built, not just recall, but the reasoning an exam
+              actually rewards. That same instinct for what makes people pass shapes every course and
+              workshop taught at I Can Teach You AI.
             </p>
             <p className={styles.bioPara}>
               Her clinical training shapes everything she builds. Understanding drug interactions, lab
@@ -35,14 +40,19 @@ export default function AboutPage() {
             </p>
             <p className={styles.bioPara}>
               The curriculum here is not theoretical. Every workflow, every compliance decision, and every
-              build pattern covered in this program has been tested in production at{' '}
+              build pattern covered in this program has been tested on real, live systems:{' '}
               <a href="https://www.huntersholistichealth.com" target="_blank" rel="noopener noreferrer">
                 huntersholistichealth.com
               </a>
-              {' '}and documented at{' '}
+              ,{' '}
+              <a href="https://pharmacydecoder.com" target="_blank" rel="noopener noreferrer">
+                pharmacydecoder.com
+              </a>
+              , and DeIDGuard, and documented at{' '}
               <a href="https://www.drshallandahunter.com" target="_blank" rel="noopener noreferrer">
                 drshallandahunter.com
-              </a>.
+              </a>. When the healthcare work needs a break, that same build instinct goes toward Yaadmoji,
+              a Jamaican Patois sticker app, and Yaad Dominoes, a real-rules Jamaican dominoes game.
             </p>
 
             <div className={styles.credentialGrid}>
@@ -51,9 +61,10 @@ export default function AboutPage() {
                 { label: 'Specialty', value: 'Functional Medicine Education' },
                 { label: 'AI Focus', value: 'HIPAA-Conscious Workflows, Vibe Coding, Claude Code' },
                 { label: 'Live Platform', value: 'huntersholistichealth.com' },
+                { label: 'Live Platform', value: 'pharmacydecoder.com' },
                 { label: 'Main Site', value: 'drshallandahunter.com' },
               ].map(c => (
-                <div key={c.label} className={styles.credentialItem}>
+                <div key={`${c.label}-${c.value}`} className={styles.credentialItem}>
                   <span className={styles.credentialLabel}>{c.label}</span>
                   <span className={styles.credentialValue}>{c.value}</span>
                 </div>

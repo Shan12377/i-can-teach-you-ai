@@ -78,10 +78,10 @@ export default function ExamPrepPage() {
             <div className={styles.headerCardFeatures}>
               {[
                 '207 practice questions',
-                'All 6 CCA-F domains',
+                'All 5 CCA-F domains',
                 'Official doc citations',
-                'Anti-patterns guide',
-                'Cheat sheet included',
+                '24 anti-patterns, 70 flashcards',
+                'Timed exam, cheat sheet, notes',
               ].map(f => (
                 <div key={f} className={styles.headerCardFeature}>
                   <span style={{ color: 'var(--green)' }}>&#10003;</span>
@@ -160,15 +160,14 @@ export default function ExamPrepPage() {
 
         {/* Domain breakdown */}
         <div className={styles.domains}>
-          <h2 className={styles.domainsH2}>All Six CCA-F Domains Covered</h2>
+          <h2 className={styles.domainsH2}>All Five CCA-F Domains Covered</h2>
           <div className={styles.domainsGrid}>
             {[
-              { name: 'Core Concepts', pct: 22, q: 45 },
-              { name: 'CLAUDE.md Mastery', pct: 18, q: 37 },
-              { name: 'Agentic Workflows', pct: 20, q: 41 },
-              { name: 'Safety and Compliance', pct: 15, q: 31 },
-              { name: 'Tool Use and Integration', pct: 15, q: 31 },
-              { name: 'Advanced Patterns', pct: 10, q: 22 },
+              { name: 'Agentic Architecture & Orchestration', pct: 24, q: 50 },
+              { name: 'Prompt Engineering & Structured Output', pct: 21, q: 44 },
+              { name: 'Context Management & Reliability', pct: 20, q: 42 },
+              { name: 'Claude Code Configuration & Workflows', pct: 18, q: 38 },
+              { name: 'Tool Design & MCP Integration', pct: 16, q: 33 },
             ].map(d => (
               <div key={d.name} className={styles.domainItem}>
                 <div className={styles.domainHeader}>

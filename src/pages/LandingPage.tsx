@@ -7,7 +7,7 @@ const stack = [
   {
     tool: 'Claude Code',
     role: 'Primary build tool',
-    detail: 'Built two full production apps without a dev team. CLAUDE.md is the secret weapon.',
+    detail: 'Built four production apps and platforms without a dev team. CLAUDE.md is the secret weapon.',
     color: 'var(--accent)',
   },
   {
