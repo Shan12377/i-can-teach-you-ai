@@ -96,7 +96,7 @@ export const ROUTE_META: Record<string, SeoInput> = {
           '@type': 'Product',
           name: 'CCA-F Exam Prep',
           description:
-            '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, covering all six domains with official documentation citations.',
+            '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, covering all five domains with official documentation citations.',
           brand: { '@id': `${SITE_URL}/#org` },
           offers: {
             '@type': 'Offer',

@@ -397,7 +397,7 @@ The CLAUDE.md file is the difference between a productive session and a frustrat
   {
     slug: 'claude-code-exam-prep-cca-f-guide',
     title: 'How to Pass the CCA-F Exam: A Complete Study Guide',
-    excerpt: 'The Claude Code Associate Foundations exam tests six domains. Here is what each one covers, where most candidates lose points, and how to prepare efficiently.',
+    excerpt: 'The Claude Code Associate Foundations exam tests five domains. What each one covers, where candidates lose points, and how to prepare efficiently.',
     category: 'Exam Prep',
     date: 'Jun 6, 2026',
     readTime: '11 min read',
@@ -408,53 +408,47 @@ The Claude Code Associate Foundations (CCA-F) certification is Anthropic's entry
 
 The exam is not a coding test. You will not be asked to write code. You will be asked to demonstrate that you understand the concepts, tools, workflows, and safety principles that govern how Claude Code operates.
 
-This matters for healthcare professionals specifically because several of the exam domains (safety, compliance, and agentic workflows) map directly onto the compliance requirements you already work within.
+This matters for healthcare professionals specifically because the agentic architecture domain, the heaviest on the exam, covers human-in-the-loop gating and programmatic enforcement patterns that map directly onto the compliance requirements you already work within.
 
-## The Six Domains
+## The Five Domains
 
-**Domain 1: Core Concepts (22% of the exam)**
+**Domain 1: Agentic Architecture & Orchestration (27% of the exam, the heaviest domain)**
 
-This domain covers the foundational principles of how Claude Code works. Key topics include the context window, how Claude processes instructions, the difference between the system prompt and the user prompt, and how Claude handles ambiguity.
+An agent is Claude running in a loop: call tools, get results, reason, call more tools, stop when done. The critical signal is stop_reason, not the content type of the response. This domain also covers multi-agent orchestration, subagent context isolation (subagents get zero automatic memory of the parent session), human-in-the-loop gating, fallback design, and RAG pipelines.
 
-The most common mistake in this domain is conflating how Claude Code works with how other AI tools work. Claude Code has specific behaviors around tool use, file operations, and task management that are distinct from a general-purpose chat interface.
+The most tested concept: for compliance-critical rules with financial or safety consequences, use programmatic hooks, not system prompt instructions. Prompts are probabilistic. Hooks are deterministic.
 
-**Domain 2: [CLAUDE.md](/blog/claude-code-absolute-beginners-guide) Mastery (18%)**
+**Domain 2: Tool Design & MCP Integration (18%)**
 
-This is the domain where most candidates underestimate the depth of knowledge required. The exam tests not just what a CLAUDE.md file is, but how to structure one for maximum effectiveness, which sections reduce hallucination in long agentic tasks, and how Claude Code reads and prioritizes instructions from different sources.
+MCP (the Model Context Protocol) is the standard for giving Claude access to external tools, and tool descriptions are the primary routing mechanism, not just documentation. This domain also tests stdio vs Streamable HTTP transport selection (SSE is deprecated), authentication patterns, and structured error handling in tool responses.
 
-The key insight: behavior rules in CLAUDE.md are the most direct mechanism for reducing model drift during multi-step tasks. The exam tests whether you know this and can apply it.
+The most common miss: candidates still learn SSE as a current transport option. It was deprecated in the MCP spec, replaced by Streamable HTTP for remote or multi-client use. stdio stays correct for local, single-session development.
 
-**Domain 3: Agentic Workflows (20%)**
+**Domain 3: Claude Code Configuration & Workflows (20%, more specific than most candidates expect)**
 
-This domain covers how Claude Code manages multi-step tasks, when to use the TodoWrite tool, how to structure complex requests for reliable execution, and how to handle errors and unexpected states in long-running workflows.
+Claude Code is controlled through a hierarchy of config files, and this domain tests exact file paths, not general familiarity. Project memory lives at ./CLAUDE.md in the project root, committed to git, not inside the .claude/ folder. That folder holds settings, rules, and commands. This domain also covers the hooks event model, slash command frontmatter, and monorepo patterns.
 
-The most tested concept: Claude Code should use TodoWrite for any task with more than two or three steps. This is not optional. It is the documented best practice for maintaining state and tracking progress.
+**Domain 4: Prompt Engineering & Structured Output (20%)**
 
-**Domain 4: Safety and Compliance (15%)**
+This domain tests when each prompting technique applies and its limits, along with the 4D Framework (Delegation, Description, Discernment, Diligence) for responsible AI collaboration. It also covers model selection tradeoffs (Haiku for volume, Sonnet for most production work, Opus for the highest-consequence tasks) and validation retry loop design.
 
-This domain covers Claude's safety behaviors, how to write instructions that keep Claude operating within appropriate boundaries, and how to handle situations where Claude refuses a request or asks for clarification.
+**Domain 5: Context Management & Reliability (15%)**
 
-For healthcare professionals, this domain is the most directly applicable to your work. The concepts of minimal footprint, explicit permission requirements, and the principle of preferring reversible actions map directly onto HIPAA-conscious workflow design.
-
-**Domain 5: Tool Use and Integration (15%)**
-
-This domain covers the specific tools available in Claude Code (Bash, Read, Write, Edit, Search, Browser), when to use each one, and how to combine them effectively. It also covers how to integrate Claude Code with external services via APIs.
-
-**Domain 6: Advanced Patterns (10%)**
-
-This domain covers parallel processing, multi-agent coordination, context management strategies, and performance optimization. It is the smallest domain by weight but tests the most sophisticated concepts.
+This is often the easiest set of points on the exam once you know the material. It tests the CWM (Context-Aware LLM Management) framework's zone structure, prompt caching with cache_control markers, token budget management, and provenance tracking across multiple sources.
 
 ## Where Most Candidates Lose Points
 
-Based on the structure of the exam and the documented best practices, the most common failure points are:
+Based on the actual structure and weighting of the exam, the most common failure points are:
 
-**Confusing /compact with /clear.** The /compact command summarizes conversation history to free up context window space while preserving the session. The /clear command resets the context entirely. These are tested separately and the distinction matters.
+**Choosing prompts over programmatic enforcement.** This is the single most tested concept. When a business rule has financial or safety consequences, prompt instructions have a non-zero failure rate. The exam always wants a hook or a programmatic gate instead.
 
-**Not knowing when to use TodoWrite.** The exam tests this repeatedly. The answer is: any multi-step task. Not just long tasks. Any task with more than one or two steps benefits from TodoWrite for state management.
+**Checking response content type instead of stop_reason.** A common code pattern checks response.content[0].type === 'text' to decide whether the agentic loop is done. This breaks in production because Claude can return text and a tool_use block in the same response. Always check stop_reason.
 
-**Misunderstanding the minimal footprint principle.** This is one of Claude Code's core safety behaviors. Claude should request only necessary permissions, avoid storing sensitive information beyond immediate needs, and prefer reversible actions over irreversible ones. The exam tests whether you can identify violations of this principle.
+**Confusing SSE and stdio transports.** A confirmed Domain 2 topic. stdio is for local, single-client development. Streamable HTTP is for remote or multi-client use. Many candidates don't know SSE was deprecated.
 
-**Confusing behavior rules with project overview.** The CLAUDE.md behavior rules section is what most directly constrains Claude's actions. The project overview provides context. They serve different functions and the exam tests whether you know the difference.
+**Assuming subagents inherit context.** Subagents start with zero automatic memory of the parent session or sibling agents. Every piece of information they need has to be explicitly passed in their prompt.
+
+**Not knowing the CWM framework or prompt caching thresholds.** These are confirmed Domain 5 topics that a lot of prep material skips entirely, including the caching minimum: 1,024 tokens for Opus and Sonnet, 2,048 tokens for Haiku.
 
 ## How to Prepare Efficiently
 
@@ -466,11 +460,11 @@ The most efficient preparation path is:
 
 3. For each question you get wrong, find the specific documentation page it came from. Do not just memorize the correct answer. Understand why it is correct.
 
-4. Pay special attention to the safety domain. It is disproportionately important for real-world use and the exam reflects this.
+4. Pay special attention to Domain 1 (Agentic Architecture & Orchestration). At 27% of the exam, it carries more weight than any other domain, and its programmatic-enforcement concepts show up as distractors throughout the other domains too.
 
 5. Do not rely on general AI knowledge. Claude Code has specific behaviors that differ from other AI tools. What is true for GPT-4 or Gemini may not be true for Claude Code.
 
-The 207 practice questions in the CCA-F Exam Prep product cover all six domains with full explanations and documentation citations. Every question was written against the official Anthropic documentation, not from memory or general AI knowledge.
+The 207 practice questions in the CCA-F Exam Prep product cover all five domains with full explanations and documentation citations. Every question was written against the official Anthropic documentation, not from memory or general AI knowledge.
 
 ## The Practical Value of the Certification
 

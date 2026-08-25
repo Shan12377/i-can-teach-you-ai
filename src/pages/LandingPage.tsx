@@ -83,7 +83,7 @@ const features = [
   {
     kicker: 'Claude Code Certification',
     title: 'Pass the CCA-F exam on your first attempt',
-    body: '207 practice questions, every answer linked to the official Anthropic doc it came from. Built by someone who uses Claude Code in production.',
+    body: '207 practice questions, every answer linked to the official Anthropic doc it came from. Built by a PharmD who has designed real certification exams before.',
     tag: 'Exam Prep',
   },
   {

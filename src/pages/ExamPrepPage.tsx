@@ -66,7 +66,8 @@ export default function ExamPrepPage() {
             </h1>
             <p className={styles.pageSubtitle}>
               207 practice questions. Every answer sourced from official Anthropic documentation.
-              Built by a PharmD who uses Claude Code in production healthcare applications.
+              Built by a PharmD who has designed real certification exam questions before, and ships
+              production software with Claude Code.
             </p>
           </div>
           <div className={styles.headerCard}>
