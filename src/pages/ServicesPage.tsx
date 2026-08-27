@@ -14,7 +14,7 @@ const services = [
     outcomes: [
       'The Two-Layer Architecture: separating administrative AI from clinical data',
       'Prompt engineering mapped to clinical reasoning frameworks (SBAR)',
-      'Hands-on sessions with NotebookLM, Perplexity, and Gemini Workspace',
+      'Hands-on sessions with ChatGPT, Codex, NotebookLM, Perplexity, and Gemini Workspace',
       'HIPAA and PHI boundary training for consumer-tier AI tools',
       'A take-home AI policy template for your organization',
     ],
@@ -32,9 +32,9 @@ const services = [
     audience: 'Pharmacists, functional medicine practitioners, health educators, solo practice owners, entrepreneurs',
     outcomes: [
       'Identify the highest-ROI AI tool for your specific workflow bottleneck',
-      'Set up and configure your personal AI stack (Perplexity, Gemini, Claude, n8n)',
+      'Set up and configure your personal AI stack, including ChatGPT, Codex, Claude, Perplexity, Gemini, and n8n',
       'Build a compliant intake or automation workflow live during the session',
-      'Learn the CLAUDE.md framework for vibe coding your own tools',
+      'Use ChatGPT to shape the work, then use Codex or Claude Code to build and inspect your own tool',
       'Leave with a written action plan and resource list',
     ],
     format: 'Virtual via Doxy.me. 60 minutes. Follow-up email summary included.',
@@ -75,7 +75,7 @@ const services = [
       'Custom n8n intake router (waitlist, support, clinical inquiry, feature requests)',
       'Google Sheets integration with automatic routing and email alerts',
       'Optional: React-based client portal with progress dashboards',
-      'Full documentation and CLAUDE.md file for future Claude Code maintenance',
+      'Full documentation and project instructions for future ChatGPT, Codex, or Claude Code maintenance',
       'Handoff call with walkthrough of every component',
     ],
     format: 'Project-based. Scoped per engagement. Quoted after a 30-minute discovery call.',
@@ -93,7 +93,7 @@ export default function ServicesPage() {
           <span className={styles.accent}>Built for Healthcare</span>
         </h1>
         <p className={styles.heroSub}>
-          Whether you need a workshop for your organization, a private session to build your own AI stack, or a custom workflow built for your practice, every engagement is grounded in clinical expertise and compliance-first thinking.
+          Whether you need a workshop for your organization, a private session to build your own AI stack, or a custom workflow built for your practice, every engagement is grounded in clinical expertise and compliance-first thinking. Dr. Hunter teaches ChatGPT and Codex from real product work, including I Can Teach You AI, Yaadmoji, and Yaad Dominoes.
         </p>
         <p className={styles.disclaimer}>
           All sessions and workshops are educational in nature. No clinical advice is provided.
@@ -155,7 +155,7 @@ export default function ServicesPage() {
           <div className={styles.faqItem}>
             <h3 className={styles.faqQ}>Do I need technical experience?</h3>
             <p className={styles.faqA}>
-              No. All workshops and sessions are designed for non-technical professionals. The goal is to teach you how to direct AI tools, not how to code them.
+              No. All workshops and sessions are designed for non-technical professionals. The goal is to teach you how to direct tools such as ChatGPT and Codex, not require you to arrive as a programmer.
             </p>
           </div>
           <div className={styles.faqItem}>
