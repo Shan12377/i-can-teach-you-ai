@@ -60,6 +60,15 @@ const proof: ProofProject[] = [
     status: 'Live',
   },
   {
+    name: 'Email-to-Brief Automation',
+    type: 'Automation workflow',
+    description: 'A scheduled workflow moves approved operational signals through summarization, task extraction, and calendar routing. Account sources are redacted in the public view.',
+    stack: 'n8n · AI summarization · Telegram · Calendar',
+    image: '/proof/oracle-n8n-email-brief-workflow-redacted.png',
+    imageAlt: 'Redacted n8n workflow for an automated email-to-brief system',
+    status: 'Live',
+  },
+  {
     name: 'Non-PHI Intake Router',
     type: 'Workflow architecture',
     description: 'A routing layer organizes early-access, support, and feature-request messages before a team acts. Clinical handling is excluded from this public preview.',
