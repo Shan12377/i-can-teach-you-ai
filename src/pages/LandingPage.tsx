@@ -14,6 +14,7 @@ type ProofProject = {
   image?: string;
   imageAlt?: string;
   portraitImage?: boolean;
+  painPoint?: string;
   status: 'Live' | 'Testing';
   featured?: boolean;
 };
@@ -27,6 +28,17 @@ const proof: ProofProject[] = [
     href: 'https://www.huntersholistichealth.com',
     image: '/proof/hhh-command-center.jpeg',
     imageAlt: "Hunter's Holistic Health Daily Command Center product screen",
+    status: 'Live',
+    featured: true,
+  },
+  {
+    name: 'Consistency Automation',
+    type: 'Member experience automation',
+    description: 'A scheduled system delivers fasting-window reminders, supplement prompts, and an energy check-in across the member app and Telegram. This personal demonstration keeps the bot name private.',
+    painPoint: 'When reminders and check-ins rely on manual outreach, consistency becomes difficult to sustain.',
+    stack: 'n8n · Telegram · Push notifications',
+    image: '/proof/hhh-reminders-energy-checkin-proof.png',
+    imageAlt: 'Side-by-side view of reminder settings and an automated Telegram energy check-in, with the bot name hidden',
     status: 'Live',
     featured: true,
   },
@@ -172,6 +184,7 @@ export default function LandingPage() {
                 )}
                 <div className={styles.projectContent}>
                   <div className={styles.projectMeta}><span>{project.type}</span><span className={project.status === 'Live' ? styles.statusLive : styles.statusTesting}><i aria-hidden="true" /> {project.status}</span></div>
+                  {project.painPoint && <p className={styles.projectPainPoint}><span>Pain point</span>{project.painPoint}</p>}
                   <h3>{project.name}</h3><p>{project.description}</p><span className={styles.projectStack}>{project.stack}</span>
                   {project.href && <ProjectLink href={project.href}>Inspect the build <ArrowUpRight size={15} aria-hidden="true" /></ProjectLink>}
                 </div>

@@ -75,6 +75,8 @@
 .statusTesting i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
 .projectContent h3 { font-family: var(--font-display); font-size: clamp(23px, 3vw, 34px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
 .projectContent p { margin-top: var(--space-4); color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
+.projectPainPoint { display: grid; gap: 6px; margin: 0 0 var(--space-5); padding: var(--space-4); border-left: 2px solid var(--gold); background: var(--gold-bg); color: var(--text) !important; font-size: 13px !important; line-height: 1.55 !important; }
+.projectPainPoint span { color: var(--gold); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
 .projectStack { margin-top: var(--space-5); color: var(--accent2); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.03em; }
 .projectLink { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--space-6); color: var(--gold); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; }
 .projectLink:hover { color: var(--text); }
