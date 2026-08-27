@@ -1,4 +1,4 @@
-# icanteachyouai.com: Homepage Design Spec v2
+# icanteachyouai.com: Founder-Led Homepage Design Spec v3
 
 Referenced from CLAUDE.md Section 4. Safe to commit (no pricing strategy, no targets, no positioning rationale).
 
@@ -8,7 +8,7 @@ The reference build is `icanteachyouai-homepage-prototype-v2.html`. Keep it outs
 
 ## 1. What "done" looks like
 
-`LandingPage.tsx` matches the prototype's layout, hierarchy, and motion, using only the tokens in `src/styles/tokens.css`, CSS Modules, and the fonts in BRAND-GUIDE (Syne 800 for headings, DM Sans for body, DM Mono for labels and code). Nothing is hardcoded. No new dependencies. Every rule in CLAUDE.md Section 4 and 4a passes.
+`LandingPage.tsx` presents Dr. Shallanda Hunter as a recognizable Healthcare AI Builder and Educator. The first viewport includes her real portrait, PharmD identity, one proof-led primary action, and an animated but accessible build system. Real products appear before teaching offers. Use only tokens in `src/styles/tokens.css`, CSS Modules, and the fonts in BRAND-GUIDE. Nothing is hardcoded. No new dependencies. Every rule in CLAUDE.md Section 4 and 4a passes.
 
 ## 2. Tokens
 
@@ -25,37 +25,39 @@ Use the names already in `tokens.css`. If any of these are missing, add them the
 
 | # | Section | Background | Notes |
 |---|---|---|---|
-| 1 | Hero | bg + faint grid mask | Two column asymmetric. Left: eyebrow, H1 with second sentence in gold and an underline that draws in at 0.9s, lead, one primary CTA (Exam Prep) and one ghost (Waitlist), and the "built with Claude Code" note. Right: the Rx terminal and the 4 up product strip. |
-| 2 | Proof of work | bg | One featured card (HHH) at 1.35fr spanning three rows with a real screenshot; three cards stacked right. Hover lifts 4px and turns border gold. Teal pulse on live dots, gold on "in testing". |
+| 1 | Hero | bg + faint grid mask | Two column asymmetric. Left: founder-led category, H1 with gold phrase and underline, direct promise, one proof-led primary action, one organization action, and credentials. Right: Dr. Hunter portrait plus the animated current build system. |
+| 1b | Authority strip | bg2 | Four concise, verifiable proof signals. Use real product and question counts only. |
+| 2 | Proof of work | bg | One featured HHH card with a reviewed public-safe product image, followed by Pharmacy Decoder, DeIDGuard, and CCA-F Exam Prep. Hover lifts 4px and turns border gold. Teal pulse on live dots, gold on testing. |
 | 2b | Also built, for fun | bg | A single compact row under the proof grid, visually lighter (smaller cards, no pulse, no featured slot). Two items: Yaadmoji (Jamaican Patois sticker, emoji, and soundbite app) and Beat Di Table (Jamaican dominoes, cut throat and partners). One honest line each, a link, the stack in mono. Eyebrow reads "Also built, for fun." These prove the skill is general; they never sit in the healthcare grid. Beat Di Table needs a real domain before it appears here; use the vercel.app link nowhere on the site. GLPRoot is not listed anywhere. |
-| 3 | Stack | card | Vertical gold rail with five pinned rows. Left column tool name plus a purple mono role label; right column one sentence. Order is real (the order she reaches for them). |
-| 4 | Curriculum | bg | 2x2 cells. Mono audience tag. Border turns teal on hover. |
-| 5 | This site is the lesson | card | Two columns: copy left, a `pre` block with the public CLAUDE.md excerpt right, purple left border. |
-| 6 | Final CTA | gold-soft | "Start with the exam. Stay for the build." Same two buttons as hero. |
+| 3 | Build process | card | Four steps from workflow definition to testing. This makes Dr. Hunter's judgment visible. |
+| 4 | Teaching | bg | Three audience cards for healthcare professionals, organizations, and builders. |
+| 5 | Build library | card | The newest three articles displayed as a compact editorial index. |
+| 6 | Final CTA | gold-soft | Organization-first action with the learning list as secondary. |
 | 7 | Footer | bg | Links to `/claude-md-excerpt`, Privacy, Terms. |
 
-## 4. The Rx terminal (signature)
+## 4. The Living Build Lab (signature)
 
-- Title bar is a prescription label: `Rx for / Your practice`, `Sig / claude-code + n8n. PHI stays in the covered lane.`, large gold Rx symbol.
-- Body types a scripted Claude Code session (copy the `lines` array from the prototype), loops after 6s. Prompt and cursor purple, success lines teal, warnings gold, comments muted.
-- Fixed height `var(--term-h)`, `overflow: hidden`. Zero CLS.
-- On `prefers-reduced-motion: reduce`, render the full transcript statically.
-- In React: the typing loop must live in a `useEffect` with cleanup (`clearTimeout` on unmount), or it leaks on route change.
-- Desktop only: `rotate(-0.6deg)`. Mobile: none.
+- The signature visual combines Dr. Hunter's real portrait with a three-stage workflow: healthcare problem, AI-assisted build, tested product.
+- Gold indicates the brand and primary direction. Purple labels technical build stages. Teal marks a live or tested state.
+- The workflow reserves its complete height and never shifts content.
+- Movement is limited to a small progress signal, status pulse, portrait halo, and headline underline.
+- On `prefers-reduced-motion: reduce`, every element remains visible and the workflow becomes static.
 
 ## 5. Motion rules
 
 - Reveal class is applied only when `<html>` has class `js`. Add that class in `main.tsx` before `createRoot`, not in an inline script.
 - `IntersectionObserver`, fire once, `rootMargin: 0 0 -8%`, disconnect on unmount.
 - 2.5 second fallback that marks everything revealed.
-- Allowed animations: terminal typing, cursor blink, live dot pulse, H1 underline draw, card hover lift, nav border on scroll. Nothing else.
+- Allowed animations: workflow progress, live dot pulse, portrait halo, H1 underline draw, card hover lift, nav border on scroll. Nothing else.
 - All of the above are disabled by `prefers-reduced-motion`.
 
 ## 6. Copy rules for this page
 
 - No em dashes anywhere, including the terminal script and alt text.
 - No "leverage", "seamless", "unlock", "elevate", "delve".
-- Product statuses are honest: DeIDGuard is "in testing" until it has a public URL.
+- Product statuses are honest: DeIDGuard is "Testing" until it has a public URL.
+- A source screenshot is never added directly. Create and inspect a public-safe derivative first.
+- Do not use testimonials containing a person's name plus health information.
 - The footer CLAUDE.md link goes to a curated public excerpt, never to the repo file.
 
 ## 7. The prompt to give Claude Code

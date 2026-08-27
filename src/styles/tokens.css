@@ -60,6 +60,8 @@
   --text:        #eeeef8;
   --text2:       #8888a8;
   --text3:       #82829f;
+  --text-secondary: #b4b4c2;
+  --text-muted:     #7c7c8e;
 
   /* --- Code Accent (Purple/Indigo) ---
      Reserved for code blocks, inline code, and technical/monospace labels only.
@@ -76,6 +78,8 @@
   --gold-border:     rgba(200, 167, 75, 0.28);
   --gold-glow:       0 0 12px rgba(200, 167, 75, 0.35);
   --gold-glow-strong: 0 0 24px rgba(200, 167, 75, 0.55);
+  --gold-wash:       rgba(200, 167, 75, 0.16);
+  --gold-soft-section: rgba(200, 167, 75, 0.055);
 
   /* --- Teal: secondary/links (connection to HHH) --- */
   --teal:            #0B9E8E;
@@ -83,6 +87,15 @@
   --teal-dark:       #144445;
   --teal-bg:         rgba(11, 158, 142, 0.1);
   --teal-border:     rgba(11, 158, 142, 0.28);
+  --teal-clear:      rgba(11, 158, 142, 0);
+
+  /* --- Founder-led homepage surfaces --- */
+  --grid-line:       rgba(255, 255, 255, 0.025);
+  --overlay-dark:    rgba(9, 9, 14, 0.82);
+  --overlay-card:    rgba(21, 21, 31, 0.9);
+  --portrait-shade:  rgba(9, 9, 14, 0.88);
+  --shadow-card:     0 22px 60px rgba(0, 0, 0, 0.28);
+  --shadow-deep:     0 32px 90px rgba(0, 0, 0, 0.42);
 
   /* --- Status Colors --- */
   --green:           #4ade80;

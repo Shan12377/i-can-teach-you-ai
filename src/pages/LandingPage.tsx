@@ -1,266 +1,207 @@
 import { Link } from 'react-router-dom';
+import type { ReactNode } from 'react';
+import { ArrowUpRight, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 import styles from './LandingPage.module.css';
 import s from '../styles/shared.module.css';
 import { BLOG_POSTS } from './blog/blogData';
 
-const stack = [
-  {
-    tool: 'Claude Code',
-    role: 'Primary build tool',
-    detail: 'Built four production apps and platforms without a dev team. CLAUDE.md is the secret weapon.',
-    color: 'var(--accent)',
-  },
-  {
-    tool: 'n8n (AWS)',
-    role: 'HIPAA-lane automation',
-    detail: 'Self-hosted on AWS with a signed BAA. Runs intake routing, email alerts, and webhook flows for HHH.',
-    color: 'var(--teal)',
-  },
-  {
-    tool: 'n8n (Oracle Cloud)',
-    role: 'Client and teaching automation',
-    detail: '12 months free on Oracle Cloud free tier. Used for non-clinical builds and teaching demos.',
-    color: 'var(--amber)',
-  },
-  {
-    tool: 'Google Apps Script',
-    role: 'Pharmacy Decoder backend',
-    detail: 'Powers OTP verification, student activation logging, and Google Sheets integration for the exam prep app.',
-    color: 'var(--green)',
-  },
-  {
-    tool: 'Make',
-    role: 'Personal automations',
-    detail: 'Telegram bots, Notion integrations, and morning briefings.',
-    color: 'var(--gold)',
-  },
-];
+type ProofProject = {
+  name: string;
+  type: string;
+  description: string;
+  stack: string;
+  href?: string;
+  image?: string;
+  imageAlt?: string;
+  status: 'Live' | 'Testing';
+  featured?: boolean;
+};
 
-const builds = [
+const proof: ProofProject[] = [
   {
-    name: 'Hunter\'s Holistic Health',
-    url: 'https://www.huntersholistichealth.com',
-    desc: 'Functional medicine education platform with BP tracker, AI Meal Guard, daily logging, educator dashboard, and Stripe billing.',
-    stack: 'React, Supabase, n8n, Vercel, Chart.js',
+    name: "Hunter's Holistic Health",
+    type: 'Healthcare education platform',
+    description: 'A live functional medicine education platform with privacy-first tools, daily tracking, and a structured member experience.',
+    stack: 'React · Supabase · n8n · Vercel',
+    href: 'https://www.huntersholistichealth.com',
+    image: '/proof/hhh-command-center.jpeg',
+    imageAlt: "Hunter's Holistic Health Daily Command Center product screen",
     status: 'Live',
+    featured: true,
   },
   {
     name: 'Pharmacy Decoder',
-    url: 'https://pharmacydecoder.com',
-    desc: '340 UMPJE practice questions across all 4 NABP domains. School access system with OTP verification.',
-    stack: 'Vanilla JS, Google Apps Script, Airtable, Vercel',
+    type: 'Pharmacy education product',
+    description: '340 scenario-based pharmacy law questions with school access, OTP verification, and progress tracking.',
+    stack: 'JavaScript · Apps Script · Airtable',
+    href: 'https://pharmacydecoder.com',
+    image: '/proof/pharmacy-decoder.jpg',
+    imageAlt: 'Pharmacy Decoder product logo',
     status: 'Live',
   },
   {
     name: 'DeIDGuard',
-    url: null,
-    desc: 'Chrome extension for HIPAA de-identification. Detects and masks PHI in browser-based workflows.',
-    stack: 'Chrome Extension API, JavaScript',
-    status: 'Built',
+    type: 'Privacy browser extension',
+    description: 'A browser extension built to detect and mask identifiers before text enters an AI workflow.',
+    stack: 'Chrome Extension API · JavaScript',
+    image: '/proof/deidguard.svg',
+    imageAlt: 'DeIDGuard privacy extension graphic',
+    status: 'Testing',
   },
   {
     name: 'CCA-F Exam Prep',
-    url: '/exam-prep',
-    desc: '207 practice questions for the Claude Code Associate Foundations certification. Every answer sourced from official Anthropic docs.',
-    stack: 'React, TypeScript',
+    type: 'Claude Code certification prep',
+    description: '207 practice questions sourced from official Anthropic documentation, built for deliberate exam practice.',
+    stack: 'React · TypeScript · Stripe',
+    href: '/exam-prep',
     status: 'Live',
   },
 ];
 
-const features = [
-  {
-    kicker: 'HIPAA-Conscious Workflows',
-    title: 'Build AI systems that survive a compliance review',
-    body: 'Most AI workflow tutorials skip the compliance layer. Every workflow here uses the two-layer architecture that keeps PHI out of the wrong places.',
-    tag: 'Healthcare Professionals',
-  },
-  {
-    kicker: 'Vibe Coding',
-    title: 'Ship real apps without a traditional dev background',
-    body: 'Claude Code and a solid CLAUDE.md file can take you from idea to deployed app faster than hiring a developer. The catch is knowing what to tell it.',
-    tag: 'Builders',
-  },
-  {
-    kicker: 'Claude Code Certification',
-    title: 'Pass the CCA-F exam on your first attempt',
-    body: '207 practice questions, every answer linked to the official Anthropic doc it came from. Built by a PharmD who has designed real certification exams before.',
-    tag: 'Exam Prep',
-  },
-  {
-    kicker: 'AI in Your Practice',
-    title: 'Automate the admin without touching patient data',
-    body: 'Intake routing, appointment follow-ups, supplement protocol builders. All running through n8n without a single piece of PHI leaving the covered lane.',
-    tag: 'Automation',
-  },
+const process = [
+  ['01', 'Start with the real workflow', 'Map the decisions, risks, and repetitive work before choosing a model or automation tool.'],
+  ['02', 'Separate sensitive data', 'Design the non-PHI and covered lanes first. The privacy boundary is architecture, not a disclaimer.'],
+  ['03', 'Build a working version', 'Use Claude Code, n8n, Supabase, Apps Script, and the smallest stack that can do the job reliably.'],
+  ['04', 'Test what can fail', 'Check permissions, edge cases, mobile behavior, accessibility, and the handoff before calling it shipped.'],
 ];
+
+const teaching = [
+  ['For healthcare professionals', 'Build useful AI tools without exposing sensitive data', 'Learn to identify safe use cases, draw the data boundary, and turn a repetitive workflow into a working system.'],
+  ['For organizations', 'Move your team from AI curiosity to responsible practice', 'Hands-on workshops connect AI literacy to the policies, workflows, and decisions your staff already manages.'],
+  ['For builders', 'Use AI coding tools with stronger judgment', 'Learn how to direct Claude Code, structure context, inspect output, and ship software you can explain.'],
+];
+
+function ProjectLink({ href, children }: { href: string; children: ReactNode }) {
+  return href.startsWith('/') ? (
+    <Link to={href} className={styles.projectLink}>{children}</Link>
+  ) : (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>{children}</a>
+  );
+}
 
 export default function LandingPage() {
   const featuredPosts = BLOG_POSTS.slice(0, 3);
 
   return (
     <div className={styles.page}>
-      {/* Hero */}
       <section className={styles.hero}>
-        <div className={s.wrapWide}>
-          <div className={styles.heroIntro}>
-            <span className={styles.heroCred}>Dr. Shallanda Hunter, PharmD</span>
-            <span className={styles.heroDot}>&middot;</span>
-            <span className={styles.heroRole}>Functional Medicine Educator</span>
-            <span className={styles.heroDot}>&middot;</span>
-            <span className={styles.heroRole}>Builder</span>
-          </div>
-          <h1 className={styles.heroH1}>
-            I build healthcare apps with AI.<br />
-            <span className={styles.heroAccent}>I can teach you how.</span>
-          </h1>
-          <p className={styles.heroSub}>
-            Not generic AI tutorials. I built two production platforms, a Chrome extension,
-            and an exam prep product using Claude Code, n8n, and vibe coding.
-            No dev team. No CS degree. PharmD who builds.
-          </p>
-          <div className={styles.heroCtas}>
-            <Link to="/exam-prep" className={`${s.btnGold} ${s.btnLg}`}>
-              Get Exam Prep - $37
-            </Link>
-            <Link to="/services" className={`${s.btnOutline} ${s.btnLg}`}>
-              Book a Session
-            </Link>
-            <Link to="/waitlist" className={`${s.btnOutline} ${s.btnLg}`}>
-              Join the Waitlist
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* What I've Built */}
-      <section className={styles.builds}>
-        <div className={s.wrapWide}>
-          <span className={s.kickerGold}>Proof of Work</span>
-          <h2 className={styles.sectionH}>
-            These are live. Not concepts. Not mockups.
-          </h2>
-          <div className={styles.buildsGrid}>
-            {builds.map(b => (
-              <div key={b.name} className={styles.buildCard}>
-                <div className={styles.buildCardTop}>
-                  <h3 className={styles.buildName}>{b.name}</h3>
-                  <span className={`${styles.buildStatus} ${b.status === 'Live' ? styles.buildStatusLive : ''}`}>
-                    {b.status === 'Live' && <span className={styles.buildDot} />}
-                    {b.status}
-                  </span>
-                </div>
-                <p className={styles.buildDesc}>{b.desc}</p>
-                <span className={styles.buildStack}>{b.stack}</span>
-                {b.url && (
-                  b.url.startsWith('/') ? (
-                    <Link to={b.url} className={styles.buildLink}>View &rarr;</Link>
-                  ) : (
-                    <a href={b.url} target="_blank" rel="noopener noreferrer" className={styles.buildLink}>
-                      Visit &rarr;
-                    </a>
-                  )
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* My Stack */}
-      <section className={styles.stackSection}>
-        <div className={s.wrapWide}>
-          <span className={s.kicker}>My Stack</span>
-          <h2 className={styles.sectionH}>
-            The tools behind every build
-          </h2>
-          <p className={styles.sectionP}>
-            Five tools. Two production apps. Zero traditional development experience required.
-            Each one chosen for a specific reason, and each one teachable.
-          </p>
-          <div className={styles.stackList}>
-            {stack.map((t, i) => (
-              <div key={t.tool} className={styles.stackRow}>
-                <span className={styles.stackIndex}>{String(i + 1).padStart(2, '0')}</span>
-                <div className={styles.stackToolCol}>
-                  <span className={styles.stackIndicator} style={{ background: t.color }} />
-                  <span className={styles.stackTool}>{t.tool}</span>
-                  <span className={styles.stackRole}>{t.role}</span>
-                </div>
-                <p className={styles.stackDetail}>{t.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What You'll Learn */}
-      <section className={styles.features}>
-        <div className={s.wrapWide}>
-          <span className={s.kicker}>What You Will Learn</span>
-          <h2 className={styles.sectionH}>
-            The AI curriculum that actually applies to your work
-          </h2>
-          <div className={styles.featuresGrid}>
-            {features.map((f, idx) => (
-              <div key={f.kicker} className={styles.featureCard}>
-                <span className={(idx === 0 ? s.pillGold : s.pillAccent) + ' ' + s.pill}>{f.kicker}</span>
-                <h3 className={styles.featureTitle}>{f.title}</h3>
-                <p className={styles.featureBody}>{f.body}</p>
-                <span className={styles.featureTag}>{f.tag}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured blog posts */}
-      <section className={styles.blogPreview}>
-        <div className={s.wrapWide}>
-          <div className={styles.blogPreviewHeader}>
-            <div>
-              <span className={s.kicker}>From the Blog</span>
-              <h2 className={styles.sectionH}>Latest writing</h2>
+        <div className={`${s.wrapWide} ${styles.heroGrid}`}>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>I Can Teach You AI, with Dr. Shallanda Hunter</p>
+            <h1 className={styles.heroTitle}>Healthcare AI taught by a <span>PharmD who ships.</span></h1>
+            <p className={styles.heroLead}>I teach healthcare professionals to build practical, compliance-conscious AI systems because I build and test them every day.</p>
+            <div className={styles.heroActions}>
+              <a href="#proof" className={`${s.btnGold} ${s.btnLg}`}>See what I built <ArrowUpRight size={17} aria-hidden="true" /></a>
+              <Link to="/services" className={`${s.btnOutline} ${s.btnLg}`}>Bring me to your team</Link>
             </div>
-            <Link to="/blog" className={s.btnGhost}>
-              View all posts &rarr;
-            </Link>
+            <div className={styles.heroTrust} aria-label="Professional credentials and focus">
+              <span>Dr. Shallanda Hunter</span><span>PharmD</span><span>Functional Medicine Educator</span><span>AI Builder</span>
+            </div>
           </div>
-          <div className={styles.blogGrid}>
-            {featuredPosts.map(post => (
-              <Link key={post.slug} to={`/blog/${post.slug}`} className={styles.blogCard}>
-                <div className={styles.blogCardMeta}>
-                  <span className={`${s.pill} ${s.pillAccent}`}>{post.category}</span>
-                  <span className={styles.blogCardDate}>{post.date}</span>
+
+          <div className={styles.heroVisual} aria-label="Dr. Shallanda Hunter and her live AI build system">
+            <div className={styles.portraitFrame}>
+              <div className={styles.portraitHalo} aria-hidden="true" />
+              <img src="/dr-hunter-expert.jpg" width="1080" height="1080" alt="Dr. Shallanda Hunter, PharmD" className={styles.portrait} />
+              <div className={styles.portraitCaption}><span className={styles.liveDot} aria-hidden="true" /><span>Building in public</span></div>
+            </div>
+            <div className={styles.systemCard}>
+              <div className={styles.systemHeader}><span>Current build system</span><span className={styles.systemStatus}>4 products</span></div>
+              <div className={styles.systemFlow} aria-label="Workflow from healthcare problem to tested product">
+                <span className={styles.flowNode}>Healthcare problem</span><span className={styles.flowLine} aria-hidden="true" />
+                <span className={styles.flowNode}>AI-assisted build</span><span className={styles.flowLine} aria-hidden="true" />
+                <span className={`${styles.flowNode} ${styles.flowNodeLive}`}>Tested product</span>
+              </div>
+              <p>Claude Code · n8n · React · Supabase · Apps Script</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.authorityStrip} aria-label="Proof at a glance">
+        <div className={`${s.wrapWide} ${styles.authorityGrid}`}>
+          <div><strong>4</strong><span>working AI products</span></div>
+          <div><strong>340</strong><span>pharmacy scenarios shipped</span></div>
+          <div><strong>207</strong><span>Claude Code practice questions</span></div>
+          <div><ShieldCheck aria-hidden="true" /><span>privacy-first architecture</span></div>
+        </div>
+      </section>
+
+      <section className={styles.proofSection} id="proof">
+        <div className={s.wrapWide}>
+          <div className={styles.sectionIntro}>
+            <div><span className={s.kickerGold}>Proof, not promises</span><h2 className={styles.sectionTitle}>The work is already live.</h2></div>
+            <p>I teach from systems I have designed, built, tested, and maintained. Open the products. Inspect the decisions.</p>
+          </div>
+          <div className={styles.proofGrid}>
+            {proof.map(project => (
+              <article key={project.name} className={`${styles.projectCard} ${project.featured ? styles.projectFeatured : ''}`}>
+                {project.image ? (
+                  <div className={styles.projectMedia}><img src={project.image} alt={project.imageAlt ?? ''} loading="lazy" width="1024" height="1024" /></div>
+                ) : (
+                  <div className={styles.examPreview} aria-hidden="true"><span>CCA-F · Practice mode</span><strong>What should the agent do next?</strong><i /><i /><i /></div>
+                )}
+                <div className={styles.projectContent}>
+                  <div className={styles.projectMeta}><span>{project.type}</span><span className={project.status === 'Live' ? styles.statusLive : styles.statusTesting}><i aria-hidden="true" /> {project.status}</span></div>
+                  <h3>{project.name}</h3><p>{project.description}</p><span className={styles.projectStack}>{project.stack}</span>
+                  {project.href && <ProjectLink href={project.href}>Inspect the build <ArrowUpRight size={15} aria-hidden="true" /></ProjectLink>}
                 </div>
-                <h3 className={styles.blogCardTitle}>{post.title}</h3>
-                <p className={styles.blogCardExcerpt}>{post.excerpt}</p>
-                <span className={styles.blogCardReadMore}>Read post &rarr;</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.processSection}>
+        <div className={s.wrapWide}>
+          <div className={styles.processHeading}><span className={s.kicker}>How I work</span><h2 className={styles.sectionTitle}>From healthcare problem to working system.</h2><p>AI is the build partner. Domain judgment, privacy boundaries, and testing decide whether the result is useful.</p></div>
+          <div className={styles.processGrid}>
+            {process.map((step, index) => (
+              <article key={step[0]} className={styles.processStep}>
+                <div className={styles.processTop}><span>{step[0]}</span>{index < process.length - 1 && <span className={styles.processConnector} aria-hidden="true" />}</div>
+                <h3>{step[1]}</h3><p>{step[2]}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.teachingSection}>
+        <div className={s.wrapWide}>
+          <div className={styles.sectionIntro}>
+            <div><span className={s.kickerGold}>Learn from the build</span><h2 className={styles.sectionTitle}>Technical enough to use. Clear enough to teach.</h2></div>
+            <p>Every session connects the tool to a real workflow, a risk boundary, and an outcome your audience understands.</p>
+          </div>
+          <div className={styles.teachingGrid}>
+            {teaching.map(item => (
+              <article key={item[0]} className={styles.teachingCard}><Sparkles size={18} aria-hidden="true" /><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p><CheckCircle2 size={18} aria-hidden="true" className={styles.teachingCheck} /></article>
+            ))}
+          </div>
+          <div className={styles.teachingAction}><Link to="/services" className={`${s.btnGold} ${s.btnLg}`}>View workshops and sessions</Link></div>
+        </div>
+      </section>
+
+      <section className={styles.writingSection}>
+        <div className={s.wrapWide}>
+          <div className={styles.writingHeader}>
+            <div><span className={s.kicker}>The Healthcare AI Build Library</span><h2 className={styles.sectionTitle}>What I am testing and teaching now.</h2></div>
+            <Link to="/blog" className={s.btnGhost}>Read every build note <ArrowUpRight size={15} aria-hidden="true" /></Link>
+          </div>
+          <div className={styles.writingGrid}>
+            {featuredPosts.map((post, index) => (
+              <Link key={post.slug} to={`/blog/${post.slug}`} className={styles.articleCard}>
+                <span className={styles.articleNumber}>{String(index + 1).padStart(2, '0')}</span><span className={styles.articleMeta}>{post.category} · {post.date}</span>
+                <h3>{post.title}</h3><p>{post.excerpt}</p><span className={styles.articleLink}>Read the build note <ArrowUpRight size={14} aria-hidden="true" /></span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Waitlist CTA */}
-      <section className={styles.waitlistCta}>
-        <div className={s.wrap}>
-          <span className={s.kickerGold}>Early Access</span>
-          <h2 className={styles.ctaH}>
-            Be first when the program launches.
-          </h2>
-          <p className={styles.ctaP}>
-            Join the waitlist for early access, launch pricing, and invitations to live sessions.
-            No spam. No pressure.
-          </p>
-          <Link to="/waitlist" className={`${s.btnGold} ${s.btnLg}`}>
-            Save My Spot
-          </Link>
-          <p className={styles.ctaSub}>
-            Already using AI in your practice?{' '}
-            <a href="https://www.drshallandahunter.com" target="_blank" rel="noopener noreferrer">
-              See the full work at drshallandahunter.com
-            </a>
-          </p>
+      <section className={styles.finalSection}>
+        <div className={`${s.wrapWide} ${styles.finalGrid}`}>
+          <div><span className={s.kickerGold}>Bring practical AI to your team</span><h2>Stop explaining what AI is. Start showing what it can do.</h2></div>
+          <div className={styles.finalCopy}><p>Book a hands-on workshop, a build session, or a focused conversation about a healthcare workflow.</p><div className={styles.finalActions}><Link to="/services" className={`${s.btnGold} ${s.btnLg}`}>Work with Dr. Hunter</Link><Link to="/waitlist" className={`${s.btnOutline} ${s.btnLg}`}>Join the learning list</Link></div></div>
         </div>
       </section>
     </div>
