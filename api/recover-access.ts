@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { CCA_F_PRICE_ID } from './_lib/exam-purchase.js';
+import { CCA_F_PRICE_ID, isCompletedCheckoutSession } from './_lib/exam-purchase.js';
 import { notifyN8n } from './_lib/n8n.js';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -45,7 +45,7 @@ export async function POST(req: Request): Promise<Response> {
 
     matchingSession = page.data.find(
       (s) =>
-        s.payment_status === 'paid' &&
+        isCompletedCheckoutSession(s) &&
         s.customer_details?.email?.toLowerCase() === normalizedEmail &&
         s.line_items?.data.some((item) => item.price?.id === CCA_F_PRICE_ID)
     );
@@ -60,11 +60,14 @@ export async function POST(req: Request): Promise<Response> {
   // that actually made the purchase. This closes both the "knowing someone's
   // email grants their access" gap and the email-enumeration side channel.
   if (matchingSession) {
-    await notifyN8n({
+    const notified = await notifyN8n({
       submissionType: 'ictai_resend_access',
       email: normalizedEmail,
       accessUrl: `https://icanteachyouai.com/checkout/success?session_id=${matchingSession.id}`,
     });
+    console.info('recover-access result', { matched: true, notified });
+  } else {
+    console.info('recover-access result', { matched: false, notified: false });
   }
 
   return Response.json(GENERIC_RESPONSE);

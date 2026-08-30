@@ -8,6 +8,10 @@ export type IssueResult =
   | { ok: true; token: string }
   | { ok: false; status: number; error: string };
 
+export function isCompletedCheckoutSession(session: Stripe.Checkout.Session): boolean {
+  return session.payment_status === 'paid' || session.payment_status === 'no_payment_required';
+}
+
 /**
  * Given an already-retrieved Checkout Session, confirms it paid for the CCA-F
  * product and issues a signed access token, capping re-issuance per purchase
@@ -18,7 +22,7 @@ export async function issueTokenForSession(
   session: Stripe.Checkout.Session,
   tokenSecret: string
 ): Promise<IssueResult> {
-  if (session.payment_status !== 'paid') {
+  if (!isCompletedCheckoutSession(session)) {
     return { ok: false, status: 402, error: 'Payment not completed' };
   }
 

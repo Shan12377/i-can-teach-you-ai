@@ -45,7 +45,7 @@ const proof: ProofProject[] = [
   {
     name: 'Pharmacy Decoder',
     type: 'Pharmacy education product',
-    description: '340 scenario-based pharmacy law questions with school access, OTP verification, and progress tracking.',
+    description: '340+ scenario-based pharmacy law questions with school access, OTP verification, and progress tracking.',
     stack: 'JavaScript · Apps Script · Airtable',
     href: 'https://pharmacydecoder.com',
     image: '/proof/pharmacy-decoder.jpg',
@@ -162,7 +162,7 @@ export default function LandingPage() {
       <section className={styles.authorityStrip} aria-label="Proof at a glance">
         <div className={`${s.wrapWide} ${styles.authorityGrid}`}>
           <div><strong>4</strong><span>working AI products</span></div>
-          <div><strong>340</strong><span>pharmacy scenarios shipped</span></div>
+          <div><strong>340+</strong><span>pharmacy scenarios shipped</span></div>
           <div><strong>207</strong><span>Claude Code practice questions</span></div>
           <div><ShieldCheck aria-hidden="true" /><span>privacy-first architecture</span></div>
         </div>

@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { CCA_F_PRICE_ID } from './_lib/exam-purchase.js';
+import { CCA_F_PRICE_ID, isCompletedCheckoutSession } from './_lib/exam-purchase.js';
 import { notifyN8n } from './_lib/n8n.js';
 
 export async function POST(req: Request): Promise<Response> {
@@ -29,7 +29,7 @@ export async function POST(req: Request): Promise<Response> {
   }
 
   const sessionSummary = event.data.object as Stripe.Checkout.Session;
-  if (sessionSummary.payment_status !== 'paid') {
+  if (!isCompletedCheckoutSession(sessionSummary)) {
     return Response.json({ received: true });
   }
 
