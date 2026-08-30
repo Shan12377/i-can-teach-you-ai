@@ -222,6 +222,17 @@
   box-shadow: 0 8px 24px rgba(11, 158, 142, 0.35);
 }
 
+.ctaButtonSecondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border2);
+}
+
+.ctaButtonSecondary:hover {
+  background: var(--bg3);
+  box-shadow: none;
+}
+
 /* FAQ */
 .faq {
   max-width: 900px;

@@ -32,7 +32,7 @@ export async function POST(req: Request): Promise<Response> {
   }
 
   const result = await issueTokenForSession(stripe, session, tokenSecret);
-  if (!result.ok) {
+  if (result.ok === false) {
     return Response.json({ error: result.error }, { status: result.status });
   }
   return Response.json({ token: result.token });

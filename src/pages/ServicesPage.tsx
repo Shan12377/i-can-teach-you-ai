@@ -38,7 +38,10 @@ const services = [
       'Leave with a written action plan and resource list',
     ],
     format: 'Virtual via Doxy.me. 60 minutes. Follow-up email summary included.',
-    ctas: [{ label: 'Book a Session ($197)', href: 'https://buy.stripe.com/8x200cdV3aLw5V08Pb6EU00' }],
+    ctas: [
+      { label: 'Book a Session ($197)', href: 'https://buy.stripe.com/8x200cdV3aLw5V08Pb6EU00' },
+      { label: 'Already Paid? Schedule Now', href: 'https://tidycal.com/shallandahunter/60-minute-meeting' },
+    ],
   },
   {
     id: 'exam-prep',
@@ -134,11 +137,11 @@ export default function ServicesPage() {
             </div>
 
             <div className={styles.ctaGroup}>
-              {service.ctas.map((cta) => (
+              {service.ctas.map((cta, i) => (
                 <a
                   key={cta.label}
                   href={cta.href}
-                  className={styles.ctaButton}
+                  className={i === 0 ? styles.ctaButton : `${styles.ctaButton} ${styles.ctaButtonSecondary}`}
                   {...(cta.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
                   {cta.label}

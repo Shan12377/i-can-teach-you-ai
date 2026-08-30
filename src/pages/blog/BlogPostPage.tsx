@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { BLOG_POSTS } from './blogData';
 import styles from './Blog.module.css';
@@ -9,6 +9,7 @@ import { getBlogPostSeo } from './blogSeo';
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = BLOG_POSTS.find(p => p.slug === slug);
+  const [comparisonView, setComparisonView] = useState<'before' | 'after'>('after');
 
   useSeo(post ? getBlogPostSeo(post) : null);
 
@@ -98,10 +99,58 @@ export default function BlogPostPage() {
               <p className={styles.postLead}>{post.excerpt}</p>
             </div>
 
+            {post.visual && (
+              <figure className={styles.postVisual}>
+                <img src={post.visual.image} alt={post.visual.alt} className={styles.postVisualImage} />
+                <div className={styles.postVisualShade} aria-hidden="true" />
+                <figcaption className={styles.postVisualCaption}>
+                  <span className={styles.visualStatus}><span className={styles.visualDot} />Build proof</span>
+                  <span>{post.visual.label}</span>
+                  <span className={styles.postVisualProof}>{post.visual.proof}</span>
+                </figcaption>
+              </figure>
+            )}
+
             {/* Disclaimer */}
             <div className={styles.postDisclaimer}>
               This article is for educational and informational purposes only. It does not constitute legal, medical, or professional advice. Consult qualified professionals for guidance specific to your situation.
             </div>
+
+            {post.comparison && (
+              <section className={styles.comparison} aria-labelledby="comparison-title">
+                <div className={styles.comparisonHeader}>
+                  <span className={styles.comparisonKicker}>{post.comparison.kicker}</span>
+                  <h2 id="comparison-title" className={styles.comparisonTitle}>{post.comparison.title}</h2>
+                </div>
+                <div className={styles.comparisonTabs} role="group" aria-label="Architecture comparison view">
+                  {(['before', 'after'] as const).map(view => (
+                    <button
+                      key={view}
+                      type="button"
+                      aria-pressed={comparisonView === view}
+                      className={`${styles.comparisonTab} ${comparisonView === view ? styles.comparisonTabActive : ''}`}
+                      onClick={() => setComparisonView(view)}
+                    >
+                      {view === 'before' ? 'Before' : 'After'}
+                    </button>
+                  ))}
+                </div>
+                <div key={comparisonView} className={styles.comparisonPanel} aria-live="polite">
+                  <span className={styles.comparisonPanelLabel}>
+                    {post.comparison[comparisonView].label}
+                  </span>
+                  <ul className={styles.comparisonList}>
+                    {post.comparison[comparisonView].points.map(point => (
+                      <li key={point}>
+                        <span className={styles.comparisonMarker} aria-hidden="true" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <p className={styles.comparisonTakeaway}>{post.comparison.takeaway}</p>
+              </section>
+            )}
 
             {/* Content */}
             <div className={styles.postContent}>

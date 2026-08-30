@@ -1,0 +1,23 @@
+.git
+.vercel
+.playwright-mcp
+.tmp.driveupload
+node_modules
+dist
+dist-server
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Private strategy and source material
+BRAND-GUIDE.md
+SEO-NEXT-STEPS.md
+CONTENT-TRIAGE.md
+NORTHSTAR.md
+RECEIPTS.md
+BUILD_LOG.md
+EVALS.md
+content

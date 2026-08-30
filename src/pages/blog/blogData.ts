@@ -5,6 +5,25 @@ export interface BlogPost {
   category: string;
   date: string;
   readTime: string;
+  visual?: {
+    image: string;
+    alt: string;
+    label: string;
+    proof: string;
+  };
+  comparison?: {
+    kicker: string;
+    title: string;
+    before: {
+      label: string;
+      points: string[];
+    };
+    after: {
+      label: string;
+      points: string[];
+    };
+    takeaway: string;
+  };
   content: string;
 }
 
@@ -16,6 +35,12 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'My Stack',
     date: 'Aug 18, 2026',
     readTime: '8 min read',
+    visual: {
+      image: '/proof/oracle-n8n-email-brief-workflow-redacted.png',
+      alt: 'Redacted n8n email briefing workflow used in Dr. Hunter\'s automation stack',
+      label: 'The working automation stack',
+      proof: 'Real workflow · Redacted',
+    },
     content: `
 ## Why This Post Exists
 
@@ -92,6 +117,12 @@ Five tools. Two production apps. One Chrome extension. One exam prep product. On
     category: 'My Stack',
     date: 'Aug 16, 2026',
     readTime: '7 min read',
+    visual: {
+      image: '/proof/n8n-intake-router-redacted.png',
+      alt: 'Redacted n8n intake routing workflow running in the healthcare automation environment',
+      label: 'Healthcare automation architecture',
+      proof: 'Reviewed workflow · Redacted',
+    },
     content: `
 ## The Hosting Decision Most People Skip
 
@@ -148,6 +179,35 @@ If you are building automation for a health practice, the hosting decision is no
     category: 'My Stack',
     date: 'Aug 14, 2026',
     readTime: '6 min read',
+    visual: {
+      image: '/proof/pharmacy-decoder.jpg',
+      alt: 'Pharmacy Decoder exam preparation product screen',
+      label: 'A focused backend for a real product',
+      proof: '340 questions · OTP verified',
+    },
+    comparison: {
+      kicker: 'Architecture comparison',
+      title: 'What changed when the backend matched the product',
+      before: {
+        label: 'Typical small-app backend',
+        points: [
+          'Dedicated server or serverless project',
+          'Separate database administration',
+          'Email provider configuration',
+          'Independent deployment pipeline',
+        ],
+      },
+      after: {
+        label: 'Pharmacy Decoder build',
+        points: [
+          'Apps Script web endpoint',
+          'Gmail sends OTP messages',
+          'Google Sheets logs activations',
+          'No dedicated backend server',
+        ],
+      },
+      takeaway: 'The result is fewer infrastructure layers while preserving the server-side functions the product actually needs.',
+    },
     content: `
 ## The Problem
 
