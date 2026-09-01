@@ -150,15 +150,7 @@ export const ROUTE_META: Record<string, SeoInput> = {
           name: 'Do I need technical experience?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'No. All workshops and sessions are designed for non-technical professionals. The goal is to teach you how to direct AI tools, not how to code them.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Are sessions HIPAA compliant?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'All 1-on-1 sessions are conducted via Doxy.me, a free HIPAA-compliant video platform. No PHI is collected or stored during sessions.',
+            text: 'No. All workshops and sessions are designed for non-technical professionals. The goal is to teach you how to direct AI tools, ChatGPT, Claude, Claude Code, Perplexity, Gemini, and more, not how to code them.',
           },
         },
         {

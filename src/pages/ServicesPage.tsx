@@ -96,7 +96,7 @@ export default function ServicesPage() {
           <span className={styles.accent}>Built for Healthcare</span>
         </h1>
         <p className={styles.heroSub}>
-          Whether you need a workshop for your organization, a private session to build your own AI stack, or a custom workflow built for your practice, every engagement is grounded in clinical expertise and compliance-first thinking. Dr. Hunter teaches ChatGPT and Codex from real product work, including I Can Teach You AI, Yaadmoji, and Yaad Dominoes.
+          Whether you need a workshop for your organization, a private session to build your own AI stack, or a custom workflow built for your practice, every engagement is grounded in clinical expertise and compliance-first thinking. Dr. Hunter teaches ChatGPT, Claude, Claude Code, Perplexity, and Gemini from real product work, including I Can Teach You AI, Yaadmoji, and Yaad Dominoes.
         </p>
         <p className={styles.disclaimer}>
           All sessions and workshops are educational in nature. No clinical advice is provided.
@@ -158,13 +158,7 @@ export default function ServicesPage() {
           <div className={styles.faqItem}>
             <h3 className={styles.faqQ}>Do I need technical experience?</h3>
             <p className={styles.faqA}>
-              No. All workshops and sessions are designed for non-technical professionals. The goal is to teach you how to direct tools such as ChatGPT and Codex, not require you to arrive as a programmer.
-            </p>
-          </div>
-          <div className={styles.faqItem}>
-            <h3 className={styles.faqQ}>Are sessions HIPAA compliant?</h3>
-            <p className={styles.faqA}>
-              All 1-on-1 sessions are conducted via Doxy.me, a free HIPAA-compliant video platform. No PHI is collected or stored during sessions.
+              No. All workshops and sessions are designed for non-technical professionals. The goal is to teach you how to direct AI tools, ChatGPT, Claude, Claude Code, Perplexity, Gemini, and more, not require you to arrive as a programmer.
             </p>
           </div>
           <div className={styles.faqItem}>
