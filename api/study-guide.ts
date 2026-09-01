@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import Stripe from 'stripe';
 import { verifyAccessToken } from './_lib/access-token.js';
 import { isSessionRefunded } from './_lib/exam-purchase.js';
+import { OWNER_BYPASS_SESSION_ID } from './owner-access.js';
 
 const encryptedDataPath = fileURLToPath(new URL('./_data/study-guide.enc.json', import.meta.url));
 
@@ -22,9 +23,11 @@ export async function GET(req: Request): Promise<Response> {
     return Response.json({ error: 'Invalid or expired access token' }, { status: 401 });
   }
 
-  const stripe = new Stripe(stripeSecretKey);
-  if (await isSessionRefunded(stripe, payload.sessionId)) {
-    return Response.json({ error: 'This purchase has been refunded' }, { status: 403 });
+  if (payload.sessionId !== OWNER_BYPASS_SESSION_ID) {
+    const stripe = new Stripe(stripeSecretKey);
+    if (await isSessionRefunded(stripe, payload.sessionId)) {
+      return Response.json({ error: 'This purchase has been refunded' }, { status: 403 });
+    }
   }
 
   try {

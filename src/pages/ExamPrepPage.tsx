@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './ExamPrep.module.css';
 import s from '../styles/shared.module.css';
-import { recoverExamAccess } from '../lib/examAccess';
+import { recoverExamAccess, claimOwnerAccess, storeExamAccess } from '../lib/examAccess';
 
 function RecoverAccess() {
   const [open, setOpen] = useState(false);
@@ -54,6 +54,57 @@ function RecoverAccess() {
   );
 }
 
+function OwnerAccess() {
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [code, setCode] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
+  const [error, setError] = useState('');
+
+  if (!open) {
+    return (
+      <button type="button" className={styles.recoverToggle} onClick={() => setOpen(true)}>
+        Owner code
+      </button>
+    );
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    const result = await claimOwnerAccess(code);
+    if (result.token) {
+      storeExamAccess(result.token, 'owner-bypass');
+      navigate('/exam');
+      return;
+    }
+    setStatus('error');
+    setError(result.error ?? 'Invalid code');
+  };
+
+  return (
+    <form className={styles.recoverForm} onSubmit={handleSubmit}>
+      <label className={styles.recoverLabel} htmlFor="owner-code">
+        Enter owner code
+      </label>
+      <div className={styles.recoverRow}>
+        <input
+          id="owner-code"
+          type="password"
+          required
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          className={s.input}
+        />
+        <button type="submit" className={s.btnOutline} disabled={status === 'loading'}>
+          {status === 'loading' ? 'Checking...' : 'Enter'}
+        </button>
+      </div>
+      {status === 'error' && <p className={styles.recoverError}>{error}</p>}
+    </form>
+  );
+}
+
 export default function ExamPrepPage() {
   return (
     <div className={styles.page}>
@@ -92,6 +143,7 @@ export default function ExamPrepPage() {
               ))}
             </div>
             <RecoverAccess />
+            <OwnerAccess />
           </div>
         </div>
 

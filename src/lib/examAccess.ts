@@ -58,3 +58,23 @@ export async function recoverExamAccess(email: string): Promise<RecoverAccessRes
   }
   return { ok: true, message: data.message };
 }
+
+export interface OwnerAccessResult {
+  token: string | null;
+  error: string | null;
+}
+
+// No Stripe or n8n involved: server checks the code directly and issues a
+// token, so this never depends on email delivery or promo-code edge cases.
+export async function claimOwnerAccess(code: string): Promise<OwnerAccessResult> {
+  const res = await fetch('/api/owner-access', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ code }),
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    return { token: null, error: data?.error ?? 'Something went wrong' };
+  }
+  return { token: typeof data?.token === 'string' ? data.token : null, error: null };
+}
