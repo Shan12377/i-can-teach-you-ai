@@ -40,6 +40,14 @@ export default function WaitlistPage() {
       }
     }
 
+    // Add to the SendFox waitlist list. Non-blocking: never delays the step-2
+    // redirect, n8n/Sheets stays the source of truth either way.
+    fetch('/api/sendfox-subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    }).catch(() => {});
+
     setLoading(false);
     navigate('/waitlist/questions');
   };
