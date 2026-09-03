@@ -143,7 +143,7 @@ export default function LandingPage() {
           <div className={styles.heroVisual} aria-label="Dr. Shallanda Hunter and her live AI build system">
             <div className={styles.portraitFrame}>
               <div className={styles.portraitHalo} aria-hidden="true" />
-              <img src="/dr-hunter-expert-studio.webp" width="900" height="560" alt="Dr. Shallanda Hunter, PharmD" className={styles.portrait} />
+              <img src="/dr-hunter-expert-studio.webp" width="720" height="986" alt="Dr. Shallanda Hunter, PharmD" className={styles.portrait} />
               <div className={styles.portraitCaption}><span className={styles.liveDot} aria-hidden="true" /><span>Building in public</span></div>
             </div>
             <div className={styles.systemCard}>
