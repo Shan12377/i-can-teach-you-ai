@@ -25,13 +25,62 @@ const { render, ROUTE_META, SITE_URL, SITE_NAME, BLOG_POSTS, getBlogPostSeo } = 
 // lazy()/Suspense boundary, which renderToString can't resolve synchronously - it's also
 // gated/personalized content with nothing meaningful to prerender anyway.
 const staticRoutes = [
-  '/', '/about', '/products', '/exam-prep', '/blog', '/services',
+  '/', '/about', '/products', '/exam-prep', '/blog', '/services', '/healthcare-ai-workshops',
   '/waitlist', '/waitlist/questions', '/checkout', '/checkout/success', '/terms', '/privacy',
 ];
 const blogRoutes = BLOG_POSTS.map(p => `/blog/${p.slug}`);
 const routes = [...staticRoutes, ...blogRoutes];
 
 const shellRoutes = ['/exam'];
+
+// Each lazy route's CSS lives in its own asset file that the prerendered HTML never
+// referenced, so those pages arrived unstyled until their JS chunk loaded. Read the
+// build manifest and inline the right CSS into each route's static HTML.
+const routeModules = {
+  '/about': 'src/pages/AboutPage.tsx',
+  '/products': 'src/pages/ProductsPage.tsx',
+  '/exam-prep': 'src/pages/ExamPrepPage.tsx',
+  '/blog': 'src/pages/blog/BlogIndexPage.tsx',
+  '/services': 'src/pages/ServicesPage.tsx',
+  '/healthcare-ai-workshops': 'src/pages/WorkshopsPage.tsx',
+  '/waitlist': 'src/pages/intake/WaitlistPage.tsx',
+  '/waitlist/questions': 'src/pages/intake/WaitlistQuestionsPage.tsx',
+  '/checkout': 'src/pages/CheckoutPage.tsx',
+  '/checkout/success': 'src/pages/CheckoutSuccessPage.tsx',
+  '/terms': 'src/pages/legal/TermsPage.tsx',
+  '/privacy': 'src/pages/legal/PrivacyPage.tsx',
+  '/exam': 'src/pages/exam/ExamPage.tsx',
+};
+const blogPostModule = 'src/pages/blog/BlogPostPage.tsx';
+
+let manifest = {};
+try {
+  manifest = JSON.parse(readFileSync(join(distDir, '.vite', 'manifest.json'), 'utf-8'));
+} catch {
+  console.warn('No build manifest found; route CSS will not be inlined.');
+}
+
+// Walks a manifest entry and its imports so a route picks up CSS from shared chunks too.
+function cssForModule(moduleId, seen = new Set()) {
+  const entry = manifest[moduleId];
+  if (!entry || seen.has(moduleId)) return [];
+  seen.add(moduleId);
+  const files = [...(entry.css ?? [])];
+  for (const imported of entry.imports ?? []) files.push(...cssForModule(imported, seen));
+  return files;
+}
+
+function routeCssTag(path) {
+  const moduleId = path.startsWith('/blog/') && path !== '/blog' ? blogPostModule : routeModules[path];
+  if (!moduleId) return '';
+  const files = [...new Set(cssForModule(moduleId))];
+  if (files.length === 0) return '';
+  const css = files
+    .map(file => readFileSync(join(distDir, file), 'utf-8'))
+    .join('\n')
+    .replace(/<\/style/gi, '<\\/style');
+  return `<style data-route-css>${css}</style>`;
+}
 
 const builtTemplate = readFileSync(join(distDir, 'index.html'), 'utf-8');
 const template = builtTemplate.replace(
@@ -59,6 +108,9 @@ function resolveSeo(path) {
 function buildHtml(path, appHtml) {
   const seo = resolveSeo(path);
   let html = template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+
+  const cssTag = routeCssTag(path);
+  if (cssTag) html = html.replace('</head>', `  ${cssTag}\n  </head>`);
 
   if (seo) {
     const url = SITE_URL + seo.path;
@@ -139,6 +191,8 @@ for (const route of shellRoutes) {
       html = html.replace('</head>', '  <meta name="robots" content="noindex, nofollow" />\n  </head>');
     }
   }
+  const shellCss = routeCssTag(route);
+  if (shellCss) html = html.replace('</head>', `  ${shellCss}\n  </head>`);
   const outPath = outputPathFor(route);
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, html);

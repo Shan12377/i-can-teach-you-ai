@@ -9,6 +9,7 @@ export default function SiteLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
+    { to: '/healthcare-ai-workshops', label: 'Workshops' },
     { to: '/exam-prep', label: 'Exam Prep' },
     { to: '/services', label: 'Services' },
     { to: '/blog', label: 'Blog' },
@@ -96,6 +97,7 @@ export default function SiteLayout() {
                 <p className={styles.footerColTitle}>Connect</p>
                 <Link to="/waitlist" className={styles.footerLink}>Join Waitlist</Link>
                 <Link to="/services" className={styles.footerLink}>Services</Link>
+                <Link to="/healthcare-ai-workshops" className={styles.footerLink}>Healthcare AI Workshops</Link>
                 <Link to="/about" className={styles.footerLink}>About Dr. Hunter</Link>
                 <a href="mailto:hello@icanteachyouai.com" className={styles.footerLink}>
                   hello@icanteachyouai.com

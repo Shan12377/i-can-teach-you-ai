@@ -17,6 +17,7 @@ import PrivacyPage from './pages/legal/PrivacyPage';
 import CheckoutPage from './pages/CheckoutPage';
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage';
 import ServicesPage from './pages/ServicesPage';
+import WorkshopsPage from './pages/WorkshopsPage';
 import { ROUTE_META, SITE_URL, SITE_NAME } from './lib/seo';
 import { BLOG_POSTS } from './pages/blog/blogData';
 import { getBlogPostSeo } from './pages/blog/blogSeo';
@@ -34,6 +35,7 @@ const serverPages: RoutePages = {
   CheckoutPage,
   CheckoutSuccessPage,
   ServicesPage,
+  WorkshopsPage,
   TermsPage,
   PrivacyPage,
 };

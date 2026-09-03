@@ -15,6 +15,7 @@ const WaitlistQuestionsPage = lazy(() => import('./pages/intake/WaitlistQuestion
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const CheckoutSuccessPage = lazy(() => import('./pages/CheckoutSuccessPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const WorkshopsPage = lazy(() => import('./pages/WorkshopsPage'));
 const TermsPage = lazy(() => import('./pages/legal/TermsPage'));
 const PrivacyPage = lazy(() => import('./pages/legal/PrivacyPage'));
 
@@ -31,6 +32,7 @@ const clientPages: RoutePages = {
   CheckoutPage,
   CheckoutSuccessPage,
   ServicesPage,
+  WorkshopsPage,
   TermsPage,
   PrivacyPage,
 };

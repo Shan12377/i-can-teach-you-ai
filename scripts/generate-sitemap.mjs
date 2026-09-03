@@ -16,6 +16,7 @@ const staticRoutes = {
   '/exam-prep': 'src/pages/ExamPrepPage.tsx',
   '/blog': 'src/pages/blog/BlogIndexPage.tsx',
   '/services': 'src/pages/ServicesPage.tsx',
+  '/healthcare-ai-workshops': 'src/pages/WorkshopsPage.tsx',
   '/waitlist': 'src/pages/intake/WaitlistPage.tsx',
   '/terms': 'src/pages/legal/TermsPage.tsx',
   '/privacy': 'src/pages/legal/PrivacyPage.tsx',

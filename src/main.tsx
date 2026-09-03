@@ -3,6 +3,10 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
+// Reveal animations are opt-in: CSS only hides-then-reveals when this class exists,
+// so crawlers and no-JS readers always get fully visible content (CLAUDE.md 4a.3).
+document.documentElement.classList.add('js')
+
 const container = document.getElementById('root')!
 const app = (
   <StrictMode>

@@ -61,7 +61,7 @@
   --text2:       #8888a8;
   --text3:       #82829f;
   --text-secondary: #b4b4c2;
-  --text-muted:     #7c7c8e;
+  --text-muted:     #9494a8;  /* AA on every surface: 5.39:1 on --card2, the darkest pairing */
 
   /* --- Code Accent (Purple/Indigo) ---
      Reserved for code blocks, inline code, and technical/monospace labels only.

@@ -15,6 +15,7 @@ export interface RoutePages {
   CheckoutPage: ComponentType;
   CheckoutSuccessPage: ComponentType;
   ServicesPage: ComponentType;
+  WorkshopsPage: ComponentType;
   TermsPage: ComponentType;
   PrivacyPage: ComponentType;
 }
@@ -47,6 +48,7 @@ export default function RouteTree({ pages }: RouteTreeProps) {
         <Route path="/checkout" element={renderPage(pages.CheckoutPage)} />
         <Route path="/checkout/success" element={renderPage(pages.CheckoutSuccessPage)} />
         <Route path="/services" element={renderPage(pages.ServicesPage)} />
+        <Route path="/healthcare-ai-workshops" element={renderPage(pages.WorkshopsPage)} />
         <Route path="/terms" element={renderPage(pages.TermsPage)} />
         <Route path="/privacy" element={renderPage(pages.PrivacyPage)} />
       </Route>

@@ -99,3 +99,23 @@ code {
 #root {
   min-height: 100vh;
 }
+
+/* --- Scroll reveal (see src/lib/motion.ts) ---
+   Visible by default. Only when <html class="js"> is present do elements wait for
+   their intersection callback. Reduced motion turns the whole thing off. --- */
+html.js [data-reveal]:not([data-reveal-in]) {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+html.js [data-reveal] {
+  transition: opacity 700ms var(--ease-primary), transform 700ms var(--ease-primary);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal]:not([data-reveal-in]) {
+    opacity: 1;
+    transform: none;
+  }
+}

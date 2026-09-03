@@ -7,7 +7,8 @@ Dr. Hunter is a licensed pharmacist who builds production software (Hunter's Hol
 ## Products
 
 - [CCA-F Exam Prep](https://www.icanteachyouai.com/exam-prep): 207 practice questions for the Claude Code Associate Foundations certification exam, $37 one-time.
-- [Services](https://www.icanteachyouai.com/services): 1:1 sessions, AI workshops, and custom automation builds for healthcare practices and educators.
+- [Healthcare AI Workshops](https://www.icanteachyouai.com/healthcare-ai-workshops): half-day and full-day AI workshops for hospitals, health systems, pharmacy programs, and nursing schools. Virtual or in person, HIPAA-conscious, no coding background required.
+- [Services](https://www.icanteachyouai.com/services): 1:1 sessions, AI workshops, NotebookLM exam prep sessions, and custom automation builds for healthcare practices and educators.
 
 ## About
 

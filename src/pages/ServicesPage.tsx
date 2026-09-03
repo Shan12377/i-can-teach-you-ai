@@ -19,7 +19,10 @@ const services = [
       'A take-home AI policy template for your organization',
     ],
     format: 'In-person or virtual. Half-day (3 hours) or full-day (6 hours). Custom curriculum available.',
-    ctas: [{ label: 'Book a Workshop', href: 'mailto:hello@icanteachyouai.com' }],
+    ctas: [
+      { label: 'See Workshop Details', href: '/healthcare-ai-workshops' },
+      { label: 'Email About a Workshop', href: 'mailto:hello@icanteachyouai.com' },
+    ],
   },
   {
     id: 'sessions',
@@ -137,16 +140,26 @@ export default function ServicesPage() {
             </div>
 
             <div className={styles.ctaGroup}>
-              {service.ctas.map((cta, i) => (
-                <a
-                  key={cta.label}
-                  href={cta.href}
-                  className={i === 0 ? styles.ctaButton : `${styles.ctaButton} ${styles.ctaButtonSecondary}`}
-                  {...(cta.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                >
-                  {cta.label}
-                </a>
-              ))}
+              {service.ctas.map((cta, i) =>
+                cta.href.startsWith('/') ? (
+                  <Link
+                    key={cta.label}
+                    to={cta.href}
+                    className={i === 0 ? styles.ctaButton : `${styles.ctaButton} ${styles.ctaButtonSecondary}`}
+                  >
+                    {cta.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={cta.label}
+                    href={cta.href}
+                    className={i === 0 ? styles.ctaButton : `${styles.ctaButton} ${styles.ctaButtonSecondary}`}
+                    {...(cta.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  >
+                    {cta.label}
+                  </a>
+                )
+              )}
             </div>
           </article>
         ))}
