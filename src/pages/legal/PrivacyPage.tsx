@@ -1,9 +1,11 @@
 import styles from './Legal.module.css';
 
 const EFFECTIVE_DATE = 'June 12, 2026';
-const COMPANY = "Hunter's Holistic Health LLC";
+const UPDATED_DATE = 'September 4, 2026';
+const COMPANY = 'I Can Teach You AI';
+const ENTITY = "Hunter's Holistic Health LLC";
 const EMAIL = 'hello@icanteachyouai.com';
-const ADDRESS = '[ADDRESS LINE 1], [CITY, STATE ZIP]';
+const ADDRESS = '30 N Gould St, Ste R, Sheridan, WY 82801';
 
 export default function PrivacyPage() {
   return (
@@ -14,11 +16,11 @@ export default function PrivacyPage() {
             <div className={styles.header}>
               <span className={styles.kicker}>Legal</span>
               <h1 className={styles.h1}>Privacy Policy</h1>
-              <p className={styles.meta}>Effective Date: {EFFECTIVE_DATE} | Last Updated: {EFFECTIVE_DATE}</p>
+              <p className={styles.meta}>Effective Date: {EFFECTIVE_DATE} | Last Updated: {UPDATED_DATE}</p>
             </div>
 
             <div className={styles.disclaimer}>
-              This Privacy Policy describes how {COMPANY} ("we," "us," or "our") collects, uses, and shares information about you when you use I Can Teach You AI and related services. Please read it carefully.
+              This Privacy Policy describes how {COMPANY}, a brand operated by {ENTITY} ("we," "us," or "our") collects, uses, and shares information about you when you use I Can Teach You AI and related services. Please read it carefully.
             </div>
 
             <section className={styles.section}>
@@ -204,6 +206,7 @@ export default function PrivacyPage() {
               <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
               <div className={styles.contactBlock}>
                 <p><strong>{COMPANY}</strong></p>
+                <p>A brand of {ENTITY}</p>
                 <p>Attn: Privacy</p>
                 <p>{ADDRESS}</p>
                 <p>Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>

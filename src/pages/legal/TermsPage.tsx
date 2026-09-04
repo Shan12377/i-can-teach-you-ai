@@ -1,11 +1,15 @@
 import styles from './Legal.module.css';
 
 const EFFECTIVE_DATE = 'June 12, 2026';
-const COMPANY = "Hunter's Holistic Health LLC";
+const UPDATED_DATE = 'September 4, 2026';
+// The brand is the name used throughout. The operating entity is named once,
+// in the intro and the contact block, which is all a binding agreement needs.
+const COMPANY = 'I Can Teach You AI';
+const ENTITY = "Hunter's Holistic Health LLC";
 const SITE = 'I Can Teach You AI';
 const DOMAIN = 'icanteachyouai.com';
 const EMAIL = 'hello@icanteachyouai.com';
-const ADDRESS = '[ADDRESS LINE 1], [CITY, STATE ZIP]';
+const ADDRESS = '30 N Gould St, Ste R, Sheridan, WY 82801';
 
 export default function TermsPage() {
   return (
@@ -16,7 +20,7 @@ export default function TermsPage() {
             <div className={styles.header}>
               <span className={styles.kicker}>Legal</span>
               <h1 className={styles.h1}>Terms of Service</h1>
-              <p className={styles.meta}>Effective Date: {EFFECTIVE_DATE} | Last Updated: {EFFECTIVE_DATE}</p>
+              <p className={styles.meta}>Effective Date: {EFFECTIVE_DATE} | Last Updated: {UPDATED_DATE}</p>
             </div>
 
             <div className={styles.disclaimer}>
@@ -25,14 +29,14 @@ export default function TermsPage() {
 
             <section className={styles.section}>
               <h2>1. Agreement to Terms</h2>
-              <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User," "you," or "your") and {COMPANY} ("Company," "we," "us," or "our"), the operator of {SITE} at {DOMAIN} ("Platform"). By accessing or using the Platform in any manner, including browsing, registering, purchasing, or downloading content, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy, which is incorporated herein by reference.</p>
+              <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User," "you," or "your") and {COMPANY}, a brand operated by {ENTITY} ("Company," "we," "us," or "our"), the operator of {SITE} at {DOMAIN} ("Platform"). By accessing or using the Platform in any manner, including browsing, registering, purchasing, or downloading content, you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy, which is incorporated herein by reference.</p>
               <p>We reserve the right to modify these Terms at any time. We will provide notice of material changes by updating the "Last Updated" date and, where appropriate, by sending an email to registered users. Your continued use of the Platform after any modification constitutes your acceptance of the revised Terms. If you do not agree to the modified Terms, you must discontinue use of the Platform.</p>
             </section>
 
             <section className={styles.section}>
               <h2>2. Nature of Services and Educational Disclaimer</h2>
               <p>{SITE} is an educational platform operated by Dr. Shallanda Hunter, PharmD. The Platform provides educational content, courses, tools, and resources related to artificial intelligence, workflow automation, healthcare technology, and related topics.</p>
-              <p><strong>Dr. Hunter holds a PharmD (Doctor of Pharmacy), an academic degree, not a license to practice pharmacy or medicine through this Platform.</strong> It reflects her clinical training and education. Using this Platform is not the same as receiving care from a licensed pharmacist, physician, or other healthcare provider.</p>
+              <p><strong>Dr. Hunter holds an active Florida pharmacist license and a PharmD. She does not practice pharmacy, provide pharmaceutical care, or establish a patient relationship through this Platform.</strong> It reflects her clinical training and education. Using this Platform is not the same as receiving care from a licensed pharmacist, physician, or other healthcare provider.</p>
               <p><strong>Nothing on this Platform constitutes medical advice, diagnosis, treatment, or a patient-provider relationship.</strong> All content is provided for educational and informational purposes only. You should not rely on any content on this Platform as a substitute for professional medical, legal, financial, or other professional advice.</p>
               <p>Always consult a qualified healthcare provider before making decisions about your health, medications, supplements, or treatment. Always consult a qualified attorney before making decisions about legal compliance, business structure, or regulatory requirements.</p>
             </section>
@@ -63,7 +67,7 @@ export default function TermsPage() {
             <section className={styles.section}>
               <h2>6. Intellectual Property</h2>
               <p>All content on the Platform, including but not limited to text, graphics, logos, images, audio clips, digital downloads, data compilations, and software, is the property of {COMPANY} or its content suppliers and is protected by United States and international copyright, trademark, and other intellectual property laws.</p>
-              <p>The ROOTS Framework, I Can Teach You AI, and Hunters Holistic Health are trademarks of {COMPANY}. You may not use these marks without prior written permission.</p>
+              <p>I Can Teach You AI is a trademark of {ENTITY}. You may not use these marks without prior written permission.</p>
               <p>You are granted a limited, non-exclusive, non-transferable license to access and use the Platform and its content for personal, non-commercial purposes. You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any content from the Platform without our prior written consent.</p>
               <p><strong>DMCA Notice:</strong> If you believe that content on the Platform infringes your copyright, please send a written notice to {EMAIL} with the subject line "DMCA Notice" including: a description of the copyrighted work, the URL of the allegedly infringing content, your contact information, and a statement of good faith belief that the use is not authorized.</p>
             </section>
@@ -125,9 +129,9 @@ export default function TermsPage() {
 
             <section className={styles.section}>
               <h2>14. Dispute Resolution and Governing Law</h2>
-              <p>These Terms shall be governed by and construed in accordance with the laws of the State of Texas, without regard to its conflict of law provisions.</p>
+              <p>These Terms shall be governed by and construed in accordance with the laws of the State of Wyoming, being the state in which the operating entity is organized, without regard to its conflict of law provisions. Nothing in this section deprives you of the protection of any mandatory consumer law of the state in which you reside.</p>
               <p><strong>Informal Resolution:</strong> Before initiating any formal dispute, you agree to contact us at {EMAIL} and attempt to resolve the dispute informally for at least 30 days.</p>
-              <p><strong>Binding Arbitration:</strong> If informal resolution fails, any dispute arising out of or relating to these Terms or the Platform shall be resolved by binding arbitration administered by the American Arbitration Association under its Consumer Arbitration Rules. The arbitration shall take place in Texas. The arbitrator's decision shall be final and binding.</p>
+              <p><strong>Binding Arbitration:</strong> If informal resolution fails, any dispute arising out of or relating to these Terms or the Platform shall be resolved by binding arbitration administered by the American Arbitration Association under its Consumer Arbitration Rules. Consistent with the AAA Consumer Arbitration Rules, the arbitration shall be conducted remotely by telephone or video, by written submission, or in person in the county where you reside, at your election. The arbitrator's decision shall be final and binding.</p>
               <p><strong>Class Action Waiver:</strong> You agree that any arbitration or legal proceeding shall be conducted on an individual basis and not as a class, collective, or representative action. You waive any right to participate in a class action lawsuit or class-wide arbitration.</p>
             </section>
 
@@ -151,6 +155,7 @@ export default function TermsPage() {
               <p>For questions about these Terms, please contact us:</p>
               <div className={styles.contactBlock}>
                 <p><strong>{COMPANY}</strong></p>
+                <p>A brand of {ENTITY}</p>
                 <p>{ADDRESS}</p>
                 <p>Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
                 <p>Website: {DOMAIN}</p>
