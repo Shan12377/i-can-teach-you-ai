@@ -9,6 +9,10 @@ export interface ExamQuestion {
   explanation: string;
   distractorNotes: string;
   source: string;
+  /** Date this question was first written. */
+  added?: string;
+  /** Set when a later accuracy pass changed the question. */
+  revised?: { date: string; note: string };
 }
 
 export interface AntiPattern {
@@ -52,7 +56,16 @@ export interface Flashcard {
   answer: string;
 }
 
+export interface ContentMeta {
+  version: string;
+  created: string;
+  lastVerified: string;
+  questionCount: number;
+  changelog: { version: string; date: string; summary: string }[];
+}
+
 export interface ExamContent {
+  meta?: ContentMeta;
   questions: ExamQuestion[];
   antiPatterns: AntiPattern[];
   domains: DomainConcept[];

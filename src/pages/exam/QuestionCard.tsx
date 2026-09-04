@@ -65,6 +65,11 @@ export default function QuestionCard({ question, index, selected, onSelect, reve
           {/* Developer-authored content from our own encrypted question bank, never user input. */}
           <p dangerouslySetInnerHTML={{ __html: question.explanation }} />
           <p className={styles.reviewQWhy} dangerouslySetInnerHTML={{ __html: question.distractorNotes }} />
+          {question.revised && (
+            <p className={styles.reviewQRevised}>
+              Updated {question.revised.date}: {question.revised.note}
+            </p>
+          )}
           <a href={question.source} target="_blank" rel="noopener noreferrer" className={styles.reviewQSource}>
             View source documentation &rarr;
           </a>

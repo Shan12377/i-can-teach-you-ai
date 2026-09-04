@@ -1302,3 +1302,14 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Provenance note shown when an accuracy pass changed a question. */
+.reviewQRevised {
+  margin-top: var(--space-3);
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--gold-border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.6;
+}
