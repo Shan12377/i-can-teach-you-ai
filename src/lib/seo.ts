@@ -168,22 +168,22 @@ export const ROUTE_META: Record<string, SeoInput> = {
   '/products': {
     title: 'AI Courses for Healthcare Professionals | I Can Teach You AI',
     description:
-      'Courses and products for healthcare professionals building with AI: CCA-F exam prep, HIPAA-conscious workflow training, and member resources.',
+      'Courses and products for healthcare professionals building with AI: CCAR-F exam prep, HIPAA-conscious workflow training, and member resources.',
     path: '/products',
   },
   '/exam-prep': {
-    title: 'CCA-F Exam Prep: 207 Claude Code Practice Questions',
+    title: 'CCAR-F Exam Prep: 207 Claude Code Practice Questions',
     description:
-      '207 practice questions for the Claude Code Associate Foundations exam, written by a PharmD who builds production systems with Claude Code.',
+      '207 practice questions for the Claude Certified Architect: Foundations exam, written by a PharmD who builds production systems with Claude Code.',
     path: '/exam-prep',
     jsonLd: {
       '@context': 'https://schema.org',
       '@graph': [
         {
           '@type': 'Product',
-          name: 'CCA-F Exam Prep',
+          name: 'CCAR-F Exam Prep',
           description:
-            '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, covering all five domains with official documentation citations.',
+            '207 practice questions for the Claude Certified Architect: Foundations (CCAR-F) exam, covering all five domains with official documentation citations.',
           brand: { '@id': `${SITE_URL}/#org` },
           offers: {
             '@type': 'Offer',
@@ -195,9 +195,9 @@ export const ROUTE_META: Record<string, SeoInput> = {
         },
         {
           '@type': 'Course',
-          name: 'CCA-F Exam Prep',
+          name: 'CCAR-F Exam Prep',
           description:
-            '207 practice questions for the Claude Code Associate Foundations (CCA-F) exam, organized by domain with official documentation citations and explanations.',
+            '207 practice questions for the Claude Certified Architect: Foundations (CCAR-F) exam, organized by domain with official documentation citations and explanations.',
           url: `${SITE_URL}/exam-prep`,
           provider: { '@id': `${SITE_URL}/#org` },
           teaches: [
@@ -257,7 +257,7 @@ export const ROUTE_META: Record<string, SeoInput> = {
   },
   '/exam': {
     title: 'Exam Practice | I Can Teach You AI',
-    description: 'CCA-F exam practice, for verified purchasers.',
+    description: 'CCAR-F exam practice, for verified purchasers.',
     path: '/exam',
     noindex: true,
   },

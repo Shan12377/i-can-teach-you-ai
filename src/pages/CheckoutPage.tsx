@@ -8,9 +8,9 @@ const STRIPE_PAYMENT_LINKS: Record<string, string> = {
 
 const PRODUCTS: Record<string, { name: string; price: string; description: string; features: string[] }> = {
   'cca-f-exam-prep': {
-    name: 'CCA-F Exam Prep',
+    name: 'CCAR-F Exam Prep',
     price: '$37',
-    description: '207 practice questions for the Claude Code Associate Foundations exam. All five domains covered with full explanations and documentation citations.',
+    description: '207 practice questions for the Claude Certified Architect: Foundations exam. All five domains covered with full explanations and documentation citations.',
     features: [
       '207 practice questions across all 5 domains',
       'Full explanations for every answer',

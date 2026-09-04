@@ -456,15 +456,15 @@ The CLAUDE.md file is the difference between a productive session and a frustrat
   },
   {
     slug: 'claude-code-exam-prep-cca-f-guide',
-    title: 'How to Pass the CCA-F Exam: A Complete Study Guide',
-    excerpt: 'The Claude Code Associate Foundations exam tests five domains. What each one covers, where candidates lose points, and how to prepare efficiently.',
+    title: 'How to Pass the CCAR-F Exam: A Complete Study Guide',
+    excerpt: 'The Claude Certified Architect: Foundations exam tests five domains. What each one covers, where candidates lose points, and how to prepare efficiently.',
     category: 'Exam Prep',
     date: 'Jun 6, 2026',
     readTime: '11 min read',
     content: `
-## What the CCA-F Exam Actually Tests
+## What the CCAR-F Exam Actually Tests
 
-The Claude Code Associate Foundations (CCA-F) certification is Anthropic's entry-level certification for Claude Code practitioners. It tests whether you understand how to use Claude Code effectively, safely, and in alignment with Anthropic's documented best practices.
+The Claude Certified Architect: Foundations (CCAR-F) certification is Anthropic's entry-level certification for Claude Code practitioners. It tests whether you understand how to use Claude Code effectively, safely, and in alignment with Anthropic's documented best practices.
 
 The exam is not a coding test. You will not be asked to write code. You will be asked to demonstrate that you understand the concepts, tools, workflows, and safety principles that govern how Claude Code operates.
 
@@ -494,7 +494,7 @@ This domain tests when each prompting technique applies and its limits, along wi
 
 **Domain 5: Context Management & Reliability (15%)**
 
-This is often the easiest set of points on the exam once you know the material. It tests the CWM (Context-Aware LLM Management) framework's zone structure, prompt caching with cache_control markers, token budget management, and provenance tracking across multiple sources.
+This is often the easiest set of points on the exam once you know the material. It tests context engineering: compaction, structured note taking, context rot, prompt caching with cache_control markers, token budget management, and provenance tracking across multiple sources.
 
 ## Where Most Candidates Lose Points
 
@@ -508,7 +508,7 @@ Based on the actual structure and weighting of the exam, the most common failure
 
 **Assuming subagents inherit context.** Subagents start with zero automatic memory of the parent session or sibling agents. Every piece of information they need has to be explicitly passed in their prompt.
 
-**Not knowing the CWM framework or prompt caching thresholds.** These are confirmed Domain 5 topics that a lot of prep material skips entirely, including the caching minimum: 1,024 tokens for Opus and Sonnet, 2,048 tokens for Haiku.
+**Skipping context engineering and prompt caching.** Domain 5 is the smallest slice of the exam at 15 percent, which makes it the easiest to under study. The caching minimum is model dependent rather than a flat number, and cached prefixes carry a 5 minute TTL by default with a 1 hour option.
 
 ## How to Prepare Efficiently
 
@@ -524,11 +524,11 @@ The most efficient preparation path is:
 
 5. Do not rely on general AI knowledge. Claude Code has specific behaviors that differ from other AI tools. What is true for GPT-4 or Gemini may not be true for Claude Code.
 
-The 207 practice questions in the CCA-F Exam Prep product cover all five domains with full explanations and documentation citations. Every question was written against the official Anthropic documentation, not from memory or general AI knowledge.
+The 207 practice questions in the CCAR-F Exam Prep product cover all five domains with full explanations and documentation citations. Every question was written against the official Anthropic documentation, not from memory or general AI knowledge.
 
 ## The Practical Value of the Certification
 
-The CCA-F certification signals to employers, clients, and collaborators that you understand Claude Code at a documented, tested level. For healthcare professionals building AI-powered tools, it is also a credibility signal that you have engaged seriously with the safety and compliance dimensions of AI development.
+The CCAR-F certification signals to employers, clients, and collaborators that you understand Claude Code at a documented, tested level. For healthcare professionals building AI-powered tools, it is also a credibility signal that you have engaged seriously with the safety and compliance dimensions of AI development.
 
 The exam is not difficult if you have read the documentation. The challenge is knowing which parts of the documentation are most heavily tested and how to apply the concepts to scenario-based questions.
 
@@ -811,7 +811,7 @@ For US-based sales, digital educational products are generally not subject to sa
 
 Every product description on your Stripe checkout page should include the educational disclaimer. Stripe displays your product description on the checkout page, so this is the last thing a customer sees before paying.
 
-A compliant product description for an exam prep product: "207 practice questions for the CCA-F certification exam. Educational content only. Not affiliated with Anthropic. Results depend on individual study effort."
+A compliant product description for an exam prep product: "207 practice questions for the CCAR-F certification exam. Educational content only. Not affiliated with Anthropic. Results depend on individual study effort."
 
 A compliant product description for a health education subscription: "Monthly access to educational content on functional medicine concepts, AI workflows for health professionals, and related topics. Educational content only. Not medical advice."
 
@@ -1366,7 +1366,7 @@ Vibe coding is not magic. It requires patience, clear communication, and the abi
 - Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
 - Read [the head-to-head on Cursor, Bolt, Replit, and Claude Code](/blog/best-vibe-coding-tools-2026-cursor-bolt-claude).
 - Read [how a full HIPAA-conscious health app got built with Claude Code](/blog/build-health-app-without-coding-claude).
-- Ready to work together? [the Claude Code Associate Foundations exam prep pack](/exam-prep).
+- Ready to work together? [the Claude Certified Architect: Foundations exam prep pack](/exam-prep).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1494,7 +1494,7 @@ If you are **already a developer** looking to code 10x faster, use **Cursor**.
 - Read [Claude Code vs Cursor in 2026](/blog/claude-code-vs-cursor-2026).
 - Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
 - Read [the beginner vibe-coding tutorial: shipping a real app without writing code](/blog/vibe-coding-tutorial-beginners-2026).
-- Ready to work together? [the 207-question CCA-F exam prep for Claude Code](/exam-prep).
+- Ready to work together? [the 207-question CCAR-F exam prep for Claude Code](/exam-prep).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1548,10 +1548,10 @@ Always create a \`CLAUDE.md\` file in your folder before you start. Write your i
 
 ## Related reading
 
-- Read [the complete CCA-F exam study guide](/blog/claude-code-exam-prep-cca-f-guide).
+- Read [the complete CCAR-F exam study guide](/blog/claude-code-exam-prep-cca-f-guide).
 - Read [Claude Code vs Cursor in 2026](/blog/claude-code-vs-cursor-2026).
 - Read [the beginner vibe-coding tutorial: shipping a real app without writing code](/blog/vibe-coding-tutorial-beginners-2026).
-- Ready to work together? [the CCA-F exam prep pack once you are past the basics](/exam-prep).
+- Ready to work together? [the CCAR-F exam prep pack once you are past the basics](/exam-prep).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,
@@ -1598,7 +1598,7 @@ If you are a non-technical builder, lean heavily on Claude Code. It requires you
 ## Related reading
 
 - Read [the head-to-head on Cursor, Bolt, Replit, and Claude Code](/blog/best-vibe-coding-tools-2026-cursor-bolt-claude).
-- Read [the complete CCA-F exam study guide](/blog/claude-code-exam-prep-cca-f-guide).
+- Read [the complete CCAR-F exam study guide](/blog/claude-code-exam-prep-cca-f-guide).
 - Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
 - Ready to work together? [the Claude Code certification prep pack](/exam-prep).
 
@@ -1729,7 +1729,7 @@ It was originally marketed to students, but in 2026, businesses are using it jus
 
 ## NotebookLM for Studying (The Academic Workflow)
 
-For students, researchers, and professionals taking certification exams (like the CCA-F), NotebookLM is a study engine.
+For students, researchers, and professionals taking certification exams (like the CCAR-F), NotebookLM is a study engine.
 
 **1. The Source Upload:** Upload all your syllabus PDFs, lecture transcripts, and slide decks into one Notebook.
 **2. The Audio Overview:** This is NotebookLM's killer feature. It generates a highly realistic, 10-minute podcast of two AI hosts discussing your uploaded material. Listening to this on a commute is the best way to passively absorb dense material.

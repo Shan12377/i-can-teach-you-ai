@@ -5,7 +5,7 @@ import type { ExamQuestion } from './types';
 import { DOMAIN_LABELS } from './types';
 import QuestionCard from './QuestionCard';
 
-const SIMULATION_SIZE = 50;
+const SIMULATION_SIZE = 60;
 
 interface TimedExamTabProps {
   questions: ExamQuestion[];
@@ -67,6 +67,10 @@ export default function TimedExamTab({ questions }: TimedExamTabProps) {
         <div className={styles.scoreCard}>
           <span className={styles.scoreBig}>{Math.round((score.correct / score.total) * 100)}%</span>
           <span className={styles.scoreSub}>{score.correct} of {score.total} correct &middot; {formatElapsed(elapsed)}</span>
+          <span className={styles.scoreSub}>
+            Percent correct on this practice set. The real exam reports a scaled score from 100 to 1,000 with a
+            pass mark of 720, which is not a straight percentage.
+          </span>
         </div>
         <div className={styles.domainBreakdown}>
           {Object.entries(score.byDomain).map(([domain, d]) => (

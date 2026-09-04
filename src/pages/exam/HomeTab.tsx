@@ -10,8 +10,8 @@ const FAIL_REASONS = [
     detail: 'The #1 trap. When a business rule has financial consequences, prompt instructions are probabilistic. The exam always wants hooks or programmatic gates.',
   },
   {
-    title: 'Not knowing the CWM framework or prompt caching',
-    detail: 'These are confirmed D5 topics that most prep courses miss entirely. CWM zone structure and cache_control syntax appear on the real exam.',
+    title: 'Skipping context engineering and prompt caching',
+    detail: 'Domain 5 is only 15 percent of the exam, so it is the easiest to under study. Compaction, structured note taking, context rot and cache_control syntax all sit here.',
   },
   {
     title: 'Checking text content as a completion indicator',
@@ -43,7 +43,7 @@ const FAIL_REASONS = [
   },
   {
     title: 'Thinking a larger context window means better attention',
-    detail: 'Model selection and context size don’t fix attention dilution. Multi-pass reviews and CWM-structured prompts do.',
+    detail: 'Model selection and context size don’t fix attention dilution. Multi-pass reviews and deliberate context structuring do.',
   },
 ];
 
@@ -66,7 +66,7 @@ export default function HomeTab({ content, onNavigate }: HomeTabProps) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'CCA-F-Study-Guide.pdf';
+      a.download = 'CCAR-F-Study-Guide.pdf';
       a.click();
       URL.revokeObjectURL(url);
       setDownloadState('idle');
@@ -77,22 +77,22 @@ export default function HomeTab({ content, onNavigate }: HomeTabProps) {
 
   const studySteps = [
     { title: 'Anti-Patterns tab first', detail: `Memorize all ${content.antiPatterns.length} patterns. You can eliminate 2-3 wrong answers instantly on most questions.` },
-    { title: 'Concepts tab', detail: `Expand all ${content.domains.length} domains. Pay special attention to the newer topics: CWM, Prompt Caching, Hooks, 4D Framework, these appear on the real exam and most prep tools miss them.` },
+    { title: 'Concepts tab', detail: `Expand all ${content.domains.length} domains. Weight your time by the published blueprint: D1 27 percent, D3 20 percent, D4 20 percent, D2 18 percent, D5 15 percent.` },
     { title: 'Cheat Sheet', detail: `Read all ${content.cheatSheet.length} sections. Print before exam day.` },
     { title: 'Practice Quiz', detail: `Do all ${content.questions.length} questions. Use domain filters. For every wrong answer, re-read the explanation and note why the distractor was tempting.` },
     { title: 'Filter to Hard questions', detail: 'Re-drill only the hardest until you’re consistently right. Hard questions are marked with a badge.' },
-    { title: 'Flashcards', detail: `${content.flashcards.length} cards across all categories, including decks for CWM, Prompt Caching, 4D Framework, Model Selection, HITL, and Hooks.` },
-    { title: 'Timed Exam', detail: 'Simulate the real 120-minute exam. Score consistently above 820 before sitting the real thing. The passing score is 720 (72%).' },
+    { title: 'Flashcards', detail: `${content.flashcards.length} cards across all categories, including decks for Context Engineering, Prompt Caching, the 4D Framework, Model Selection, HITL, and Hooks.` },
+    { title: 'Timed Exam', detail: 'Sixty questions in 120 minutes, matching the real format. Anthropic scores the exam from 100 to 1,000 and sets the pass mark at 720, so aim comfortably clear of it before you book.' },
   ];
 
   return (
     <div>
       <div className={styles.menu}>
-        <span className={`${styles.reviewQScenario} ${styles.homeKicker}`}>CCA-F Exam Prep</span>
-        <h1 className={styles.menuH1}>Pass the CCA-F Exam on Your First Attempt</h1>
+        <span className={`${styles.reviewQScenario} ${styles.homeKicker}`}>CCAR-F Exam Prep</span>
+        <h1 className={styles.menuH1}>Pass the CCAR-F Exam on Your First Attempt</h1>
         <p className={styles.menuSub}>
-          Every confirmed exam topic exhausted. Built from real test-taker reports, official Anthropic Academy
-          courses, and the complete exam blueprint.
+          All five published domains, weighted to the official blueprint, with every answer linked to the
+          Anthropic documentation it comes from. An independent study resource, not affiliated with Anthropic.
         </p>
       </div>
 
@@ -111,7 +111,7 @@ export default function HomeTab({ content, onNavigate }: HomeTabProps) {
         </div>
         <div className={styles.statBlock}>
           <div className={styles.statNumber}>720</div>
-          <div className={styles.statLabel}>Passing Score</div>
+          <div className={styles.statLabel}>Passing Score (of 1,000)</div>
         </div>
       </div>
 

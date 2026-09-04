@@ -31,7 +31,7 @@ const ANCHOR = {
   'vibe-coding-tutorial-beginners-2026':          'the beginner vibe-coding tutorial: shipping a real app without writing code',
   'best-vibe-coding-tools-2026-cursor-bolt-claude':'the head-to-head on Cursor, Bolt, Replit, and Claude Code',
   'build-health-app-without-coding-claude':       'how a full HIPAA-conscious health app got built with Claude Code',
-  'claude-code-exam-prep-cca-f-guide':            'the complete CCA-F exam study guide',
+  'claude-code-exam-prep-cca-f-guide':            'the complete CCAR-F exam study guide',
   'claude-code-absolute-beginners-guide':         'Claude Code for absolute beginners',
   'claude-code-vs-cursor-2026':                   'Claude Code vs Cursor in 2026',
   'my-automation-stack-pharmd-builds-with-ai':    'the full five-tool automation stack behind this business',
@@ -134,7 +134,7 @@ const LINKS = {
       'best-vibe-coding-tools-2026-cursor-bolt-claude',
       'build-health-app-without-coding-claude',
     ],
-    money: { href: '/exam-prep', text: 'the Claude Code Associate Foundations exam prep pack' },
+    money: { href: '/exam-prep', text: 'the Claude Certified Architect: Foundations exam prep pack' },
   },
   'best-vibe-coding-tools-2026-cursor-bolt-claude': {
     siblings: [
@@ -142,7 +142,7 @@ const LINKS = {
       'claude-code-absolute-beginners-guide',
       'vibe-coding-tutorial-beginners-2026',
     ],
-    money: { href: '/exam-prep', text: 'the 207-question CCA-F exam prep for Claude Code' },
+    money: { href: '/exam-prep', text: 'the 207-question CCAR-F exam prep for Claude Code' },
   },
   'build-health-app-without-coding-claude': {
     siblings: [
@@ -168,7 +168,7 @@ const LINKS = {
       'claude-code-vs-cursor-2026',
       'vibe-coding-tutorial-beginners-2026',
     ],
-    money: { href: '/exam-prep', text: 'the CCA-F exam prep pack once you are past the basics' },
+    money: { href: '/exam-prep', text: 'the CCAR-F exam prep pack once you are past the basics' },
   },
   'claude-code-vs-cursor-2026': {
     siblings: [

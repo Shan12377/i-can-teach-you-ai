@@ -113,7 +113,7 @@ export default function ExamPrepPage() {
           <div>
             <span className={s.kicker}>Exam Prep</span>
             <h1 className={styles.pageH1}>
-              Claude Code Associate Foundations (CCA-F)
+              Claude Certified Architect: Foundations (CCAR-F)
             </h1>
             <p className={styles.pageSubtitle}>
               207 practice questions. Every answer sourced from official Anthropic documentation.
@@ -130,7 +130,7 @@ export default function ExamPrepPage() {
             <div className={styles.headerCardFeatures}>
               {[
                 '207 practice questions',
-                'All 5 CCA-F domains',
+                'All 5 CCAR-F domains',
                 'Official doc citations',
                 '24 anti-patterns, 70 flashcards',
                 'Timed exam, cheat sheet, notes',
@@ -149,7 +149,7 @@ export default function ExamPrepPage() {
 
         {/* Pain: what most prep resources get wrong */}
         <div className={styles.painSection}>
-          <h2 className={styles.painH2}>6 things most CCA-F prep resources get wrong</h2>
+          <h2 className={styles.painH2}>6 things most CCAR-F prep resources get wrong</h2>
           <p className={styles.painIntro}>
             Every fact in this bank is checked against the official Anthropic documentation. These six show up
             wrong across most competing study material, and each one is a real point lost on exam day.
@@ -265,7 +265,7 @@ export default function ExamPrepPage() {
 
         {/* Domain breakdown */}
         <div className={styles.domains}>
-          <h2 className={styles.domainsH2}>All Five CCA-F Domains Covered</h2>
+          <h2 className={styles.domainsH2}>All Five CCAR-F Domains Covered</h2>
           <div className={styles.domainsGrid}>
             {[
               { name: 'Agentic Architecture & Orchestration', pct: 27, q: 50 },
@@ -285,6 +285,41 @@ export default function ExamPrepPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Verified exam facts */}
+        <div className={styles.domains}>
+          <h2 className={styles.domainsH2}>What is on the CCAR-F exam?</h2>
+          <p className={styles.painIntro}>
+            The Claude Certified Architect: Foundations exam is 60 multiple choice and scenario questions in 120
+            minutes. Anthropic reports a scaled score from 100 to 1,000 and sets the pass mark at 720. The exam
+            costs $125, is delivered online proctored or at a Pearson VUE test centre, and the credential is
+            valid for 12 months.
+          </p>
+          <table className={styles.specTable}>
+            <tbody>
+              {[
+                ['Exam name', 'Claude Certified Architect: Foundations'],
+                ['Exam code', 'CCAR-F'],
+                ['Questions', '60, including scenario based items'],
+                ['Time limit', '120 minutes'],
+                ['Passing score', '720 on a 100 to 1,000 scale'],
+                ['Cost', '$125'],
+                ['Delivery', 'Online proctored, or a Pearson VUE test centre'],
+                ['Credential validity', '12 months'],
+                ['Domain weights', 'D1 27%, D3 20%, D4 20%, D2 18%, D5 15%'],
+              ].map(([k, v]) => (
+                <tr key={k}>
+                  <th scope="row">{k}</th>
+                  <td>{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className={styles.painIntro}>
+            Exam details verified against the Anthropic Academy certification page on September 4, 2026. This is
+            an independent study resource and is not affiliated with, endorsed by, or sponsored by Anthropic.
+          </p>
         </div>
       </div>
     </div>

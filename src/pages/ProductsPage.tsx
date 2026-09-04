@@ -6,14 +6,14 @@ const products = [
   {
     badge: 'Available Now',
     badgeType: 'green',
-    title: 'Claude Code Associate Foundations (CCA-F) Exam Prep',
+    title: 'Claude Certified Architect: Foundations (CCAR-F) Exam Prep',
     description:
-      'The most thorough CCA-F exam prep available. 207 practice questions across all five domains, every answer linked to the official Anthropic documentation. Built by a PharmD who has designed real certification exam questions before, and ships production software with Claude Code.',
+      'The most thorough CCAR-F exam prep available. 207 practice questions across all five domains, every answer linked to the official Anthropic documentation. Built by a PharmD who has designed real certification exam questions before, and ships production software with Claude Code.',
     price: '$37',
     priceNote: 'One-time purchase',
     features: [
       '207 practice questions',
-      'All five CCA-F domains covered',
+      'All five CCAR-F domains covered',
       'Every answer sourced from official Anthropic docs',
       'Anti-patterns and common exam traps',
       'Quick-reference cheat sheet',

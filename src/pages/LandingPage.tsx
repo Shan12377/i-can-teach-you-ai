@@ -93,7 +93,7 @@ const proof: ProofProject[] = [
     status: 'Live',
   },
   {
-    name: 'CCA-F Exam Prep',
+    name: 'CCAR-F Exam Prep',
     type: 'Claude Code certification prep',
     description: '207 practice questions sourced from official Anthropic documentation, built for deliberate exam practice.',
     stack: 'React · TypeScript · Stripe',
@@ -196,7 +196,7 @@ export default function LandingPage() {
                 {project.image ? (
                   <div className={styles.projectMedia}><img src={project.image} alt={project.imageAlt ?? ''} loading={project.featured ? 'eager' : 'lazy'} fetchPriority={project.featured ? 'high' : 'auto'} decoding="async" width="1024" height="1024" className={project.portraitImage ? styles.projectMediaPortrait : undefined} /></div>
                 ) : (
-                  <div className={styles.examPreview} aria-hidden="true"><span>CCA-F · Practice mode</span><strong>What should the agent do next?</strong><i /><i /><i /></div>
+                  <div className={styles.examPreview} aria-hidden="true"><span>CCAR-F · Practice mode</span><strong>What should the agent do next?</strong><i /><i /><i /></div>
                 )}
                 <div className={styles.projectContent}>
                   <div className={styles.projectMeta}><span>{project.type}</span><span className={project.status === 'Live' ? styles.statusLive : styles.statusTesting}><i aria-hidden="true" /> {project.status}</span></div>
