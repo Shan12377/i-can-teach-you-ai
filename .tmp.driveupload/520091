@@ -1,0 +1,16 @@
+feat: IndexNow submission for Bing, Yandex, Seznam and Naver
+
+One POST notifies every participating engine that a URL changed. No account and
+no verification flow: ownership is proved by the key file served at the site
+root, so this works the moment it deploys.
+
+- public/<key>.txt holds the key
+- scripts/indexnow.mjs reads public/sitemap.xml and submits every URL, or just
+  the paths passed as arguments
+- npm run indexnow
+
+Run it after any deploy that changes content. It is the fastest route into Bing,
+which is also what feeds DuckDuckGo, Yahoo, Copilot and ChatGPT search.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01HfjyJtDnKUFyZpm8yRh1Fa
