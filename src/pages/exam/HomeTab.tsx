@@ -22,8 +22,8 @@ const FAIL_REASONS = [
     detail: 'A confirmed D2 topic. stdio for local single-client; Streamable HTTP for remote multi-client. Many candidates don’t know the distinction.',
   },
   {
-    title: 'Missing the 4D Framework',
-    detail: 'Delegation, Description, Discernment, Diligence. It’s in the official Anthropic Academy courses and appears in D4 questions. Most third-party prep tools ignore it.',
+    title: 'Treating prompt caching as a deep topic',
+    detail: 'The exam guide lists caching implementation details as out of scope beyond knowing the feature exists. Spend that time on Domain 1 instead, which is 27 percent of the exam.',
   },
   {
     title: 'Routing all workflows to Batch API for cost savings',
@@ -81,7 +81,7 @@ export default function HomeTab({ content, onNavigate }: HomeTabProps) {
     { title: 'Cheat Sheet', detail: `Read all ${content.cheatSheet.length} sections. Print before exam day.` },
     { title: 'Practice Quiz', detail: `Do all ${content.questions.length} questions. Use domain filters. For every wrong answer, re-read the explanation and note why the distractor was tempting.` },
     { title: 'Filter to Hard questions', detail: 'Re-drill only the hardest until you’re consistently right. Hard questions are marked with a badge.' },
-    { title: 'Flashcards', detail: `${content.flashcards.length} cards across all categories, including decks for Context Engineering, Prompt Caching, the 4D Framework, Model Selection, HITL, and Hooks.` },
+    { title: 'Flashcards', detail: `${content.flashcards.length} cards across all categories, including decks for Context Engineering, Prompt Caching, Model Selection, HITL, and Hooks. The 4D Framework deck is Anthropic Academy material and useful background, but it does not appear in the CCAR-F exam guide.` },
     { title: 'Timed Exam', detail: 'Sixty questions in 120 minutes, matching the real format. Anthropic scores the exam from 100 to 1,000 and sets the pass mark at 720, so aim comfortably clear of it before you book.' },
   ];
 

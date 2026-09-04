@@ -14,8 +14,8 @@ export default function ConceptsTab({ domains }: ConceptsTabProps) {
     <div>
       <h1 className={styles.reviewH1}>Domain Concepts</h1>
       <p className={`${styles.menuSub} ${styles.tabIntro}`}>
-        Click any domain to expand. Covers context engineering, prompt caching, the 4D Framework, transport selection, model
-        selection, the hooks event model, and HITL patterns.
+        Click any domain to expand. Covers context engineering, transport selection, model selection, the hooks event model, and HITL
+        patterns. Some sections go beyond the published blueprint and are marked where they do.
       </p>
       <div className={styles.domainGrid}>
         {domains.map((d) => {

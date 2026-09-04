@@ -490,7 +490,7 @@ Claude Code is controlled through a hierarchy of config files, and this domain t
 
 **Domain 4: Prompt Engineering & Structured Output (20%)**
 
-This domain tests when each prompting technique applies and its limits, along with the 4D Framework (Delegation, Description, Discernment, Diligence) for responsible AI collaboration. It also covers model selection tradeoffs (Haiku for volume, Sonnet for most production work, Opus for the highest-consequence tasks) and validation retry loop design.
+This domain tests when each prompting technique applies and its limits, It also covers model selection tradeoffs (Haiku for volume, Sonnet for most production work, Opus for the highest-consequence tasks) and validation retry loop design.
 
 **Domain 5: Context Management & Reliability (15%)**
 

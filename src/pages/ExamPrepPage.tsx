@@ -317,8 +317,40 @@ export default function ExamPrepPage() {
             </tbody>
           </table>
           <p className={styles.painIntro}>
-            Exam details verified against the Anthropic Academy certification page on September 4, 2026. This is
-            an independent study resource and is not affiliated with, endorsed by, or sponsored by Anthropic.
+            Exam structure is 4 scenarios drawn from a bank of 6, and items are a mix of multiple choice and
+            multiple response, with each item stating how many answers to select. If you do not pass, the waiting
+            period is 14 days after a first attempt, 30 days after a second, and 90 days after a third, with a
+            maximum of four attempts in a rolling twelve months. The fee applies to each attempt.
+          </p>
+
+          <h2 className={styles.domainsH2}>What is not on the CCAR-F exam?</h2>
+          <p className={styles.painIntro}>
+            The exam guide publishes an out of scope list, and it is worth reading before you over prepare. These
+            do not appear on the exam:
+          </p>
+          <ul className={styles.scopeList}>
+            {[
+              'Fine tuning Claude models or training custom models',
+              'Claude API authentication, billing, or account management',
+              'Deploying or hosting MCP servers: infrastructure, networking, container orchestration',
+              'Claude\u2019s internal architecture, training process, or model weights',
+              'Constitutional AI, RLHF, or safety training methodologies',
+              'Embedding models or vector database implementation details',
+              'Computer use, and vision or image analysis',
+              'Streaming API implementation or server sent events',
+              'Rate limiting, quotas, or API pricing calculations',
+              'Prompt caching implementation details, beyond knowing the feature exists',
+              'Token counting algorithms or tokenization specifics',
+              'Specific cloud provider configurations',
+            ].map(item => (
+              <li key={item} className={styles.scopeItem}>{item}</li>
+            ))}
+          </ul>
+
+          <p className={styles.painIntro}>
+            Exam details verified against the official exam guide, version 1.0, effective July 2026, and the
+            Anthropic Academy certification page, on September 4, 2026. This is an independent study resource and
+            is not affiliated with, endorsed by, or sponsored by Anthropic.
           </p>
         </div>
       </div>
