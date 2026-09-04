@@ -7,6 +7,22 @@ import QuestionCard from './QuestionCard';
 
 const SIMULATION_SIZE = 60;
 
+/** How many responses this item asks for. Multiple-response items ask for more than one. */
+function requiredPicks(q: ExamQuestion): number {
+  return (q.correctIndices ?? [q.correctIndex]).length;
+}
+
+function isAnswered(q: ExamQuestion, picks: number[] | undefined): boolean {
+  return (picks?.length ?? 0) === requiredPicks(q);
+}
+
+/** Multiple-response items score all or nothing: every correct option and no others. */
+function isCorrect(q: ExamQuestion, picks: number[] | undefined): boolean {
+  const key = q.correctIndices ?? [q.correctIndex];
+  if (!picks || picks.length !== key.length) return false;
+  return key.every((k) => picks.includes(k));
+}
+
 interface TimedExamTabProps {
   questions: ExamQuestion[];
 }
@@ -28,7 +44,7 @@ function formatElapsed(seconds: number): string {
 
 export default function TimedExamTab({ questions }: TimedExamTabProps) {
   const [pool, setPool] = useState<ExamQuestion[]>(() => shuffle(questions).slice(0, SIMULATION_SIZE));
-  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [answers, setAnswers] = useState<Record<string, number[]>>({});
   const [submitted, setSubmitted] = useState(false);
   const [elapsed, setElapsed] = useState(0);
 
@@ -45,7 +61,7 @@ export default function TimedExamTab({ questions }: TimedExamTabProps) {
     for (const q of pool) {
       byDomain[q.domain] ??= { correct: 0, total: 0 };
       byDomain[q.domain].total += 1;
-      if (answers[q.id] === q.correctIndex) {
+      if (isCorrect(q, answers[q.id])) {
         correct += 1;
         byDomain[q.domain].correct += 1;
       }
@@ -97,7 +113,7 @@ export default function TimedExamTab({ questions }: TimedExamTabProps) {
     );
   }
 
-  const answeredCount = Object.keys(answers).length;
+  const answeredCount = pool.filter((q) => isAnswered(q, answers[q.id])).length;
 
   return (
     <div className={styles.simulation}>
@@ -114,7 +130,7 @@ export default function TimedExamTab({ questions }: TimedExamTabProps) {
             question={q}
             index={idx}
             selected={answers[q.id]}
-            onSelect={(i) => setAnswers((prev) => ({ ...prev, [q.id]: i }))}
+            onSelect={(next) => setAnswers((prev) => ({ ...prev, [q.id]: next }))}
             revealOnAnswer={false}
           />
         ))}

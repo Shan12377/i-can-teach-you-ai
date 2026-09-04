@@ -6,6 +6,12 @@ export interface ExamQuestion {
   question: string;
   options: string[];
   correctIndex: number;
+  /**
+   * Set on multiple-response items. When present this is the full answer key and
+   * correctIndex is only its first entry. The exam states how many responses to
+   * select, so the length of this array is the required number of picks.
+   */
+  correctIndices?: number[];
   explanation: string;
   distractorNotes: string;
   source: string;

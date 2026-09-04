@@ -12,7 +12,7 @@ interface QuizTabProps {
 export default function QuizTab({ questions }: QuizTabProps) {
   const [domain, setDomain] = useState<string>('All');
   const [difficulty, setDifficulty] = useState<string>('All');
-  const [revealed, setRevealed] = useState<Record<string, number>>({});
+  const [revealed, setRevealed] = useState<Record<string, number[]>>({});
 
   const filtered = useMemo(() => {
     return questions.filter(
@@ -47,7 +47,7 @@ export default function QuizTab({ questions }: QuizTabProps) {
             key={q.id}
             question={q}
             selected={revealed[q.id]}
-            onSelect={(i) => setRevealed((prev) => ({ ...prev, [q.id]: i }))}
+            onSelect={(next) => setRevealed((prev) => ({ ...prev, [q.id]: next }))}
             revealOnAnswer
           />
         ))}

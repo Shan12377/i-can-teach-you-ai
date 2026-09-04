@@ -279,6 +279,16 @@
   padding: 3px 10px;
 }
 
+.pillMulti {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--teal2);
+  background: var(--teal-bg);
+  border: 1px solid var(--teal-border);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+}
+
 .reportInline {
   margin-top: var(--space-3);
   display: flex;
