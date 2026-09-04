@@ -5,7 +5,6 @@ const UPDATED_DATE = 'September 4, 2026';
 const COMPANY = 'I Can Teach You AI';
 const ENTITY = "Hunter's Holistic Health LLC";
 const EMAIL = 'hello@icanteachyouai.com';
-const ADDRESS = '30 N Gould St, Ste R, Sheridan, WY 82801';
 
 export default function PrivacyPage() {
   return (
@@ -208,7 +207,6 @@ export default function PrivacyPage() {
                 <p><strong>{COMPANY}</strong></p>
                 <p>A brand of {ENTITY}</p>
                 <p>Attn: Privacy</p>
-                <p>{ADDRESS}</p>
                 <p>Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
               </div>
             </section>

@@ -9,7 +9,6 @@ const ENTITY = "Hunter's Holistic Health LLC";
 const SITE = 'I Can Teach You AI';
 const DOMAIN = 'icanteachyouai.com';
 const EMAIL = 'hello@icanteachyouai.com';
-const ADDRESS = '30 N Gould St, Ste R, Sheridan, WY 82801';
 
 export default function TermsPage() {
   return (
@@ -156,7 +155,6 @@ export default function TermsPage() {
               <div className={styles.contactBlock}>
                 <p><strong>{COMPANY}</strong></p>
                 <p>A brand of {ENTITY}</p>
-                <p>{ADDRESS}</p>
                 <p>Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
                 <p>Website: {DOMAIN}</p>
               </div>
