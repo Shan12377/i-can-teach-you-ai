@@ -78,10 +78,9 @@ export default function TermsPage() {
             <section className={styles.section}>
               <h2>8. FTC Compliance and Endorsements</h2>
               <p>In accordance with the Federal Trade Commission's Endorsement Guides (16 C.F.R. Part 255, as updated in 2023), we disclose the following:</p>
-              <p><strong>Affiliate Relationships:</strong> This Platform may contain affiliate links to third-party products and services, including but not limited to Fullscript, Amazon, and supplement brands. When you purchase through these links, we may earn a commission at no additional cost to you. All affiliate relationships are disclosed at the point of recommendation.</p>
+              <p><strong>Affiliate Relationships:</strong> This Platform does not currently carry affiliate links. If that changes, any affiliate relationship will be disclosed clearly at the point of recommendation, and we will update these Terms.</p>
               <p><strong>Testimonials:</strong> Any testimonials or case studies on this Platform reflect the experiences of specific individuals. Individual results vary. We do not guarantee that you will achieve the same or similar results. Where testimonials describe results that may not be typical, we disclose what typical results are based on available data.</p>
               <p><strong>Sponsored Content:</strong> Any sponsored content or paid partnerships will be clearly identified as such.</p>
-              <p><strong>Supplement Statements:</strong> Any statements about supplements or nutritional products have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.</p>
             </section>
 
             <section className={styles.section}>
@@ -103,7 +102,7 @@ export default function TermsPage() {
 
             <section className={styles.section}>
               <h2>10. Third-Party Services and Links</h2>
-              <p>The Platform integrates with and links to third-party services including Stripe (payment processing), Supabase (database), OpenAI (AI features), Fullscript (supplement dispensary), and others. Your use of these third-party services is governed by their respective terms of service and privacy policies. We are not responsible for the practices of any third-party services.</p>
+              <p>The Platform integrates with third-party services including Stripe (payment processing), SendFox (email delivery), and Vercel (hosting). Your use of these third-party services is governed by their respective terms of service and privacy policies. We are not responsible for the practices of any third-party services.</p>
               <p>The Platform may contain links to third-party websites. These links are provided for convenience only. We do not endorse, control, or assume responsibility for the content or practices of any linked websites.</p>
             </section>
 

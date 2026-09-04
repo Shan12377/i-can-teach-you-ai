@@ -44,7 +44,7 @@ export default function PrivacyPage() {
               <p><strong>Information from Third Parties:</strong></p>
               <ul>
                 <li><strong>Stripe:</strong> Transaction confirmation, email address, and billing country associated with purchases.</li>
-                <li><strong>Supabase:</strong> Authentication tokens and session data for logged-in users.</li>
+                <li><strong>SendFox:</strong> Subscription status and engagement data for anyone who joins the email list.</li>
               </ul>
             </section>
 
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
               <h2>3. How We Share Your Information</h2>
               <p>We share your information only in the following circumstances:</p>
               <ul>
-                <li><strong>Service Providers:</strong> We share information with third-party vendors who perform services on our behalf, including payment processing (Stripe), database hosting (Supabase), email delivery, and analytics. These vendors are contractually obligated to use your information only to provide services to us and to protect it appropriately.</li>
+                <li><strong>Service Providers:</strong> We share information with third-party vendors who perform services on our behalf, including payment processing (Stripe), email delivery (SendFox), hosting and serverless functions (Vercel), and workflow automation for form submissions (a self-hosted n8n instance under our control). These vendors are contractually obligated to use your information only to provide services to us and to protect it appropriately.</li>
                 <li><strong>Legal Requirements:</strong> We may disclose your information if required by law, subpoena, or other legal process, or if we believe in good faith that disclosure is necessary to protect our rights, protect your safety or the safety of others, investigate fraud, or respond to a government request.</li>
                 <li><strong>Business Transfers:</strong> If we are involved in a merger, acquisition, or sale of all or a portion of our assets, your information may be transferred as part of that transaction. We will notify you via email and/or a prominent notice on the Platform of any change in ownership or uses of your information.</li>
                 <li><strong>With Your Consent:</strong> We may share your information for any other purpose with your explicit consent.</li>
@@ -111,12 +111,11 @@ export default function PrivacyPage() {
 
             <section className={styles.section}>
               <h2>6. AI Features and Data Processing</h2>
-              <p>The Platform includes AI-powered features (such as the AI Meal Guard) that use the OpenAI API. When you use these features:</p>
+              <p>This Platform does not send anything you type or upload to a third-party AI model. It teaches people how to build with AI; it does not run a user-facing AI feature of its own.</p>
               <ul>
-                <li>Your input (meal descriptions or images) is sent to OpenAI's API through our secure backend proxy. Your input is not sent directly from your browser to OpenAI.</li>
-                <li>We do not store your meal descriptions or images after the AI response is returned to you.</li>
-                <li>OpenAI may retain API inputs and outputs in accordance with their data retention policies. We recommend reviewing OpenAI's privacy policy for details.</li>
-                <li>AI-generated responses are for educational purposes only and do not constitute medical or dietary advice.</li>
+                <li>Course content, exam prep questions, and blog posts are written and reviewed by a person before publication.</li>
+                <li>Form submissions, including waitlist answers and exam question reports, are sent to a self-hosted n8n instance that we control. They are not passed to any AI vendor.</li>
+                <li>If we add an AI-powered feature in future, we will update this policy and say plainly what is sent, where, and whether it is retained, before the feature goes live.</li>
               </ul>
             </section>
 
@@ -187,8 +186,7 @@ export default function PrivacyPage() {
                   </thead>
                   <tbody>
                     <tr><td>Stripe</td><td>Payment processing</td><td>United States</td></tr>
-                    <tr><td>Supabase</td><td>Database and authentication</td><td>United States</td></tr>
-                    <tr><td>OpenAI</td><td>AI features (Meal Guard)</td><td>United States</td></tr>
+                    <tr><td>SendFox</td><td>Email list and delivery</td><td>United States</td></tr>
                     <tr><td>Vercel</td><td>Web hosting and serverless functions</td><td>United States</td></tr>
                     <tr><td>Google Workspace</td><td>Email and operational communications</td><td>United States</td></tr>
                   </tbody>

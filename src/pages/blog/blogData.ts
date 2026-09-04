@@ -1189,13 +1189,11 @@ Calling something educational does not make it safe. Some of these are genuine h
 
 One more limit worth stating plainly. The intake form captures medication categories, not medications and doses. Category-level input cannot detect a real interaction. "Anticoagulants" does not distinguish warfarin, which is vitamin K sensitive, from a DOAC, which is not. "Antihypertensives" does not distinguish an ACE inhibitor, where potassium is a hyperkalemia risk, from a thiazide, where magnesium loss is the issue. Keeping the form free of PHI is the right call, and the cost of that call is that this tool cannot perform an interaction check at all. That check happens with the client's pharmacist or prescriber, who has the actual list. The output always includes the recommendation to review with the client's healthcare provider.
 
-## The Fullscript Integration
+## Why There Is No Dispensary Link in This Workflow
 
-After the protocol summary is generated, the workflow includes an optional step that generates a Fullscript dispensary link for the educator's store. This is not automated product selection. It is a link to the educator's Fullscript dispensary where the client can browse products that the educator has curated.
+An obvious next step would be to append a link to an affiliate supplement dispensary, and plenty of build guides do exactly that. This one does not, on purpose.
 
-The Fullscript integration is an affiliate relationship. The educator earns a commission on purchases made through their dispensary. This must be disclosed to clients per FTC requirements.
-
-The disclosure language in the protocol summary: "The educator earns a commission on purchases made through this Fullscript dispensary link. That is a financial interest you should weigh. Nothing in this summary is a recommendation to buy any specific product. Decide what to take with your own licensed clinician and prescriber, not based on this link."
+The output of this workflow is generated from a client's health focus areas and medication categories. Attaching a commission-earning product link to a document built from someone's health inputs puts a financial interest inside what is supposed to be educational material, and an FTC disclosure does not remove that interest, it only discloses it. Keep the two apart. General product education can live somewhere a client's medication list never went.
 
 ## The Google Sheets Logging
 
@@ -1207,7 +1205,6 @@ Every protocol request is logged to the Protocol Requests tab in the master Goog
 - Dietary restrictions
 - Protocol goals
 - Timestamp
-- Whether the Fullscript link was included
 
 The log does not include the full protocol summary (that goes to Gmail). It is an operational record for tracking which clients have received protocol summaries and when.
 
