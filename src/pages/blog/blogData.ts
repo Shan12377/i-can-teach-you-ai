@@ -128,15 +128,17 @@ Five tools. Two production apps. One Chrome extension. One exam prep product. On
 
 When healthcare professionals discover n8n, they usually go straight to n8n Cloud or spin up a Docker container on the cheapest VPS they can find. The workflow runs. Data flows. Nobody thinks about where that data is sitting.
 
+That matters more with n8n than with most tools, because n8n does not offer a BAA. n8n staff confirmed as much on the company's own community forum in January 2026, and there is no HIPAA page in n8n's documentation. On n8n Cloud, n8n is the one holding your data, and without a BAA that closes the door on PHI. Self hosting flips it: you run the software on infrastructure you control, n8n the company never sees the data, and the only BAA you need is with the host underneath.
+
 For general business automation, this is fine. For healthcare-adjacent automation, it is a compliance gap.
 
 ## What a BAA Actually Does
 
-A Business Associate Agreement (BAA) is a legal contract between you and a service provider that handles data on your behalf. Under HIPAA, if a vendor processes, stores, or transmits protected health information (PHI), they must sign a BAA agreeing to specific security and privacy obligations.
+A Business Associate Agreement (BAA) is a legal contract between you and a service provider that handles data on your behalf. Under HIPAA the obligation runs the other way from how most people assume. A covered entity or business associate may only disclose PHI to a vendor after it obtains satisfactory assurances in writing, meaning a signed BAA, that the vendor will safeguard the information. The vendor is under no duty to offer you one, and plenty will simply say no. HHS also carves out a narrow conduit exception for services that only transmit PHI without accessing it, like an ISP. If a vendor stores your data or works with it, that exception does not apply and you need the BAA.
 
-AWS offers a BAA that covers EC2, S3, RDS, and dozens of other services. When you run n8n on an AWS EC2 instance covered by a BAA, you have a legal framework governing how that infrastructure handles your data.
+AWS offers a BAA that you accept yourself through AWS Artifact. Accepting it does not bless your whole account. AWS is specific about this: you can run any AWS service inside a HIPAA account, but you may only process, store, or transmit PHI in the services AWS names on its HIPAA Eligible Services list, and you have to encrypt all of that PHI at rest and in transit. EC2, EBS, S3, RDS, Elastic Load Balancing, and AWS Certificate Manager are all on that list today, which is why the stack below is built out of exactly those pieces. Anything not on the list can still run in the account, it just cannot touch PHI.
 
-Without a BAA, you are trusting the provider's general terms of service, which typically include broad rights to access, analyze, and sometimes use your data.
+Without a BAA you are operating on the provider's ordinary commercial terms, which are not written with PHI in mind. No contractual limits on how PHI may be used or disclosed, no obligation to report a breach up to you, no HIPAA-specific safeguard commitments. Terms vary by provider, so read yours rather than assuming. The point is that none of the protections HIPAA expects a business associate to give you are in that contract, because that is not what the contract is for.
 
 ## What My AWS n8n Instance Actually Runs
 
@@ -144,9 +146,9 @@ The n8n instance on AWS handles everything connected to Hunter's Holistic Health
 
 [The intake router](/blog/n8n-intake-routing-health-practice) receives four types of form submissions (waitlist, support, feature requests, clinical inquiries). Each type is routed to its own Google Sheets tab. Email alerts go out with name, email, category, and timestamp only. No health details in the alerts.
 
-The clinical inquiry flow is the most sensitive. The form itself collects only general interest information with a visible disclaimer telling users not to include lab results or diagnoses. But because this flow is the gateway to the clinical lane, it runs on the BAA-covered infrastructure.
+The clinical inquiry flow is the most sensitive. The form itself collects only general interest information with a visible disclaimer telling users not to include lab results or diagnoses. The safeguard here is the form design, not the hosting. The form does not collect clinical detail, so nothing that arrives is PHI to begin with. I still run this flow on the eligible AWS services under the BAA because it is the gateway to the clinical lane and I would rather the legal floor already be in place than have to move the workflow later. Hosting it there is not what makes it safe. Not collecting PHI is.
 
-The daily business briefing pulls data from five Gmail accounts, four Google Sheets tabs, and three Supabase tables. It summarizes everything via Claude Haiku, posts to Telegram, and creates calendar events for anything with a deadline.
+The daily business briefing pulls data from five Gmail accounts, four Google Sheets tabs, and three Supabase tables. It summarizes everything via Claude Haiku, posts to Telegram, and creates calendar events for anything with a deadline. Worth being blunt about this one: the AWS BAA stops at AWS. Claude, Telegram, and Supabase are separate vendors on separate terms, and the BAA does not travel with the data once it leaves the instance. So this briefing carries operational data only. Revenue, task counts, deadlines, message volume. No client health information goes anywhere near it, which is the only reason it can talk to those three services at all.
 
 ## The Two-Instance Pattern
 
@@ -162,7 +164,11 @@ Total monthly cost: roughly $15 to $20 depending on traffic, well within the fre
 
 ## The Takeaway
 
-If you are building automation for a health practice, the hosting decision is not just a technical choice. It is a compliance decision. Running n8n on AWS with a BAA does not make your workflows HIPAA-compliant by itself, but it puts the infrastructure layer on a proper legal foundation. That is the minimum starting point for healthcare-adjacent automation.
+If you are building automation for a health practice, the hosting decision is not just a technical choice. It is a compliance decision. Running n8n on AWS with a BAA does not make your workflows HIPAA-compliant by itself. Not close. It puts one layer, the infrastructure layer, on a defensible legal footing. Everything above it is still on you: what your forms collect, who can reach the data, how it is encrypted, what you log.
+
+Start one step earlier than the hosting question. Work out whether you are a covered entity or a business associate under HIPAA, because that determines whether a BAA is legally required of you or simply good hygiene. A cash-pay educator who never bills insurance electronically may land in a different place than a billing clinic.
+
+This is how I set up my own environment and it is general information, not legal advice. Before you rely on any of it, run your setup past your own healthcare attorney or compliance officer. Your situation, your state, and your payer relationships all change the answer.
 
 ## Related reading
 
@@ -277,13 +283,15 @@ This post covers the two-layer architecture that makes AI workflows safe for hea
 
 ## What HIPAA Actually Requires (The Practical Version)
 
+Before any of this: I am a PharmD, not an attorney, and this post is general information about how I built one system. It is not legal advice and it does not create any professional relationship. HIPAA obligations turn on facts specific to your practice, your state, and your vendors. Confirm anything here with your compliance officer or a healthcare attorney before you rely on it, and confirm every regulatory citation against the current text at ecfr.gov and hhs.gov rather than against my summary of it.
+
 HIPAA applies to covered entities and their business associates. A covered entity is a healthcare provider who transmits health information electronically in connection with certain transactions, a health plan, or a healthcare clearinghouse.
 
 The key phrase is "in connection with certain transactions." If you are a cash-pay functional medicine educator who does not bill insurance electronically, you may not be a covered entity under the strict legal definition. This is worth confirming with a healthcare attorney for your specific situation.
 
 That said, the practical approach is to build as if HIPAA applies, because the underlying principle (protect individually identifiable health information) is good practice regardless of your legal status.
 
-Protected Health Information (PHI) is any individually identifiable health information. That means a name combined with a health condition, a lab value, a diagnosis, or a treatment plan. A name and email alone is not PHI. A name, email, and a description of someone's health goals together can be.
+Protected Health Information (PHI) has a narrower legal definition than most people assume. Under 45 CFR 160.103, information is PHI when three things are true at once. It was created or received by a health care provider, health plan, employer, or health care clearinghouse. It relates to a person's past, present, or future physical or mental health, to the provision of health care, or to payment for that care. And it identifies the person, or there is a reasonable basis to believe it could be used to identify them. The regulation then carves out four categories that are not PHI even when all three are met: FERPA education records, certain treatment records under 20 U.S.C. 1232g(a)(4)(B)(iv), employment records held by a covered entity acting as an employer, and information about someone who has been deceased more than 50 years. That means a name combined with a health condition, a lab value, a diagnosis, or a treatment plan. A name and email are not automatically PHI. In the hands of a marketing list, they are just contact data. But the definition of individually identifiable health information expressly includes demographic information, so the same name and email become PHI the moment a covered provider receives them in connection with a request for care. A list of people who asked about clinical services is PHI even if not one health detail is attached to it. Assume any identifier that arrives through a clinical intake path is PHI, and design the workflow around that assumption rather than around the presence or absence of a diagnosis. A name, email, and a description of someone's health goals together can be.
 
 ## The Two-Layer Architecture
 
@@ -291,13 +299,13 @@ The architecture that keeps AI workflows safe is built around a hard separation 
 
 **Lane 1: The Non-PHI App and Automation Layer**
 
-This is where your intake forms, n8n workflows, Google Sheets, and email notifications live. Nothing in this lane ever touches PHI. Forms collect operational and interest data only. Email alerts contain name, email, category, and timestamp. No health narratives, no lab values, no diagnoses.
+This is where your intake forms, n8n workflows, Google Sheets, and email notifications live. Lane 1 is designed so that PHI has no reason to be there. What it cannot do is guarantee the outcome, because any free-text field can receive something a user was asked not to type, and a disclaimer above a text box is a request rather than a control. So plan for the failure case: review the free-text column on a set schedule, delete anything clinical out of the Sheet and out of the n8n execution log, move the substance into Lane 2, and write down that you did it. A lane that is designed for non-PHI and cleaned when it slips is defensible. A lane you claim in writing never touches PHI is a claim someone will one day check against the actual rows. Forms collect operational and interest data only. Email alerts contain name, email, category, and timestamp. No health narratives, no lab values, no diagnoses. Be precise about what that buys you. Stripping the narrative does not de-identify the alert. HIPAA recognizes only two ways to de-identify: Expert Determination under 45 CFR 164.514(b)(1), where a qualified statistician documents that the re-identification risk is very small, and Safe Harbor under 164.514(b)(2), where all 18 listed identifiers are removed and you have no actual knowledge that what is left could still identify someone. Names, email addresses, and event dates are three of those 18, so an alert that carries all three is not de-identified by any measure. What minimization actually gives you is a smaller blast radius: less sensitive content sitting in a mailbox, and a shorter breach notification if that mailbox is ever compromised. Route the alert to your covered Google Workspace mailbox anyway, and treat it as PHI.
 
 **Lane 2: The Clinical Lane**
 
 This is where PHI lives. For most solo practitioners and small practices, this is Google Workspace with a signed Business Associate Agreement (BAA) from Google. After someone submits a clinical interest form in Lane 1, you review it manually and move the conversation into Lane 2 via secure Gmail and Google Drive. The full configuration walkthrough is here: [how to set up Google Workspace as your HIPAA clinical lane](/blog/google-workspace-hipaa-clinical-lane-setup).
 
-The two lanes never merge in code. n8n never touches PHI. The app never stores PHI. The clinical lane is entirely manual and handled through your covered Google Workspace environment.
+The two lanes never merge in code. n8n never touches PHI. The app never stores PHI. Neither does any AI model in this stack, and that is the point of the split. A vendor that creates, receives, maintains, or transmits PHI on your behalf is a business associate, and an AI vendor is no exception. Sending PHI to a model with no signed BAA in place is a disclosure, not an experiment. Most consumer and free AI tiers are not offered under a BAA at all, and the enterprise tiers that are cover only the specific services and plan named in the agreement. Signing one does not finish the job either. A BAA binds the vendor. It does not transfer your own Privacy and Security Rule obligations, and it does not make a tool compliant on its own. The clinical lane is entirely manual and handled through your covered Google Workspace environment.
 
 ## What This Looks Like in Practice
 
@@ -334,9 +342,9 @@ Lane 1 forms should never collect:
 
 ## The Google Workspace BAA
 
-Before using Google Workspace for actual clinical files, you need a signed BAA with Google. This is done in the Google Workspace Admin Console under Account settings. Google's HIPAA materials confirm that Gmail, Drive, Docs, Sheets, and Meet are all covered services under the BAA when properly configured.
+Before using Google Workspace for actual clinical files, you need a signed BAA with Google. This is done in the Google Workspace Admin Console under Account settings. Google publishes a HIPAA Included Functionality list that defines which services the BAA actually covers. Gmail, Drive, Docs, Sheets, and Meet have been on it, but the list is Google's to revise, so check the current version rather than trusting a blog post from last year. Two limits matter more than the list itself. Third party applications and add-ons are not included in the covered functionality, and neither the BAA nor the Cloud Data Processing Addendum extends to Additional Google Services. That second one catches people, because the Additional Services and AI feature toggles live in the same Admin Console you use to sign the BAA. If you turn one on and PHI flows through it, that traffic is outside your BAA. Google is also explicit that deciding whether you are subject to HIPAA, and whether you intend to put PHI into Google services, is your call and not theirs.
 
-The configuration requirements are:
+The Workspace configuration steps are:
 - Signed BAA in the Admin Console
 - MFA enabled on all staff accounts
 - Drive sharing set to private by default
@@ -344,7 +352,7 @@ The configuration requirements are:
 - A standard client folder structure
 - Basic internal policies for access control
 
-None of this is technically complex. It is administrative work that takes a few hours to set up correctly.
+None of this is technically complex. It is administrative work that takes a few hours to set up correctly. It is also not the whole obligation. If HIPAA applies to you, the Security Rule requires more than settings. A risk analysis under 45 CFR 164.308(a)(1)(ii)(A) is a required implementation specification, not an optional one, and 164.316 requires that your policies and procedures be written down and kept for six years. Tightening the Admin Console is the easy half. The documented risk analysis is the half that gets asked for first when something goes wrong.
 
 ## Why This Matters More Than You Think
 
@@ -358,7 +366,7 @@ The two-layer architecture is not complicated. It is a discipline. Keep PHI in t
 
 Every workflow covered in this curriculum is built around this architecture. [The intake system](/blog/n8n-intake-routing-health-practice), the appointment follow-up automation, [the supplement protocol builder](/blog/supplement-protocol-builder-n8n), and the pre-session brief all run through Lane 1. The clinical lane is separate, manual, and Google Workspace-based.
 
-That is how you build AI workflows that survive a compliance review.
+That is the architecture I would want to be able to explain if someone ever asked me to. Have your compliance officer or counsel review it against your own facts before you trust it with a real client.
 
 ## Related reading
 
@@ -839,7 +847,7 @@ The Stripe Checkout hosted page handles PCI compliance automatically. The webhoo
     content: `
 ## Why Blood Pressure Tracking Is a Compliance Challenge
 
-A blood pressure tracker sounds simple: store readings, display a trend chart. The compliance challenge is that blood pressure is a clinical measurement with established diagnostic thresholds. A 140/90 reading means something specific in clinical medicine. How you display that information in an educational app determines whether you are providing education or practicing medicine.
+A blood pressure tracker sounds simple: store readings, display a trend chart. The compliance challenge is that blood pressure is a clinical measurement with established diagnostic thresholds. A 130/80 reading means something specific in clinical medicine, and so does 140/90. The 2025 AHA/ACC guideline calls the first stage 1 hypertension and the second stage 2. How you display that information in an educational app determines whether you are providing education or practicing medicine.
 
 This post covers the architecture decisions made in building the blood pressure tracker for Hunters Holistic Health, with specific attention to the educational framing that keeps the feature in educator territory.
 
@@ -850,9 +858,11 @@ The blood pressure log table in Supabase has the following structure:
 - id (UUID, primary key)
 - user_id (UUID, foreign key to auth.users)
 - systolic (integer, 60 to 250 range check)
-- diastolic (integer, 40 to 150 range check)
+- diastolic (integer, 40 to 200 range check, because readings above 120 diastolic are the severe range and a constraint at 150 would silently reject exactly the readings that matter most)
 - pulse (integer, optional, 30 to 200 range check)
-- context (text, optional: "morning", "evening", "after exercise", "stressed")
+- context (text, optional: "morning", "evening", "stressed", "did not rest five minutes first", "within 30 minutes of caffeine, smoking, or exercise")
+
+Those last two context values exist because the AHA measurement instructions matter more than the chart does. A reading taken within 30 minutes of caffeine, smoking, or exercise, or without five minutes of quiet rest, is not comparable to the rest of the log, so the app flags it rather than silently averaging it in. The logging screen carries the short version of the AHA protocol: validated automatic upper arm cuff, correct cuff size, feet flat, arm supported at heart level, two readings one minute apart.
 - notes (text, optional, 500 character limit)
 - logged_at (timestamp with time zone)
 - created_at (timestamp with time zone)
@@ -865,23 +875,23 @@ Row Level Security ensures that users can only read and write their own records.
 
 The trend chart uses Chart.js with a line chart type. The x-axis is time (logged_at), the y-axis is the reading value. Systolic and diastolic are displayed as separate lines.
 
-The chart includes reference lines at 120/80 (normal upper bound) and 140/90 (the threshold above which the AHA recommends consulting a healthcare provider). These reference lines are labeled as educational reference points, not diagnostic thresholds.
+The chart includes reference lines at 120/80 (the top of normal, which the 2025 AHA/ACC guideline defines as under 120 systolic and under 80 diastolic), at 130/80 (where stage 1 hypertension begins), at 140/90 (stage 2), and at 180/120 (the severe range that gets its own urgent action path). These reference lines are labeled as educational reference points, not diagnostic thresholds.
 
-The color coding is intentional: readings below 120/80 are displayed in teal (the brand's positive color), readings between 120/80 and 140/90 are displayed in amber, and readings above 140/90 are displayed in a muted red. The colors are informational, not alarming.
+The color coding is intentional: readings below 120/80 are displayed in teal (the brand's positive color), readings of 120 to 129 systolic with diastolic under 80 are displayed in a light amber, readings of 130 to 139 systolic or 80 to 89 diastolic in a deeper amber, readings of 140 or higher systolic or 90 or higher diastolic in a muted red, and anything above 180/120 in a distinct color tied to the urgent action message. The colors are informational, not alarming.
 
 ## The Educational Framing Pattern
 
 The most important architectural decision in the blood pressure tracker is the educational framing pattern. Every time a reading is displayed in a zone that might prompt concern, the UI shows educational context rather than a diagnostic label.
 
-Instead of: "WARNING: HYPERTENSIVE CRISIS"
+Instead of stamping "WARNING: HYPERTENSIVE CRISIS" on any reading over 140/90, which borrows an emergency label for a number the guideline calls stage 2 hypertension
 
-The UI shows: "Your reading is above the 140/90 reference point. The American Heart Association recommends consulting your healthcare provider when readings are consistently above this level. Here is what this means: [link to AHA educational resource]."
+The UI shows: "This reading falls above the 130/80 reference point in the 2025 AHA/ACC blood pressure categories. One reading is not a diagnosis, and the American Heart Association suggests retaking it after five minutes of quiet rest. If your readings keep landing here, that is worth a conversation with your own healthcare provider. Above 180/120 the app drops the color coding entirely and shows one message: this reading is in the severe range, contact your healthcare provider now, and call 911 if you also have chest pain, shortness of breath, weakness or numbness, vision changes, or trouble speaking. Here is what this means: [link to AHA educational resource]."
 
 This pattern is applied consistently throughout the app. The rule is: educational context, not diagnostic labels. Reference points, not thresholds. Recommendations to consult a provider, not diagnoses.
 
 ## The "No DOB" Decision
 
-The blood pressure tracker collects age, not date of birth. This is a deliberate data minimization decision. Age is sufficient for any educational context where blood pressure reference ranges vary by age group. Date of birth is more specific than necessary and creates a data point that, combined with other information, could be used to identify an individual.
+The blood pressure tracker collects age, not date of birth. This is a deliberate data minimization decision. Age is useful context for a cardiovascular risk conversation, though it does not change the reference ranges themselves. The 2025 AHA/ACC guideline applies the same blood pressure categories to every adult regardless of age. Date of birth is more specific than necessary and creates a data point that, combined with other information, could be used to identify an individual.
 
 The signup form collects first name, last name, age, and email. No date of birth, no address, no phone number (unless voluntarily provided in the clinical inquiry form). This is the minimum data needed to provide the educational service.
 
@@ -1116,9 +1126,9 @@ The feature is one of the most engaging in the app. Clients use it regularly. Th
     content: `
 ## The Time Cost of Protocol Building
 
-For functional medicine educators, building individualized supplement protocols is one of the most time-consuming parts of the workflow. A thorough protocol review, cross-referencing interactions, checking for contraindications with common medications, and formatting the output for client review can take 30 to 60 minutes per client.
+For functional medicine educators, researching general nutrition topics for client education is one of the most time-consuming parts of the workflow. Gathering background reading, checking what the published literature says, and formatting it for review can take 30 to 60 minutes. Individualized supplement recommendations are a separate activity. Those require a licensed clinician who knows the client, has their full medication list, and is responsible for their care. If you are not that clinician, this workflow produces reading material, not a protocol.
 
-An AI-assisted protocol builder does not replace this clinical judgment. It accelerates the research and formatting steps so that the educator can focus on the judgment calls.
+An AI-assisted research tool does not supply clinical judgment, and it does not confer it on the person running the workflow. It accelerates reading and formatting. If the output is going to inform what a specific client actually takes, a licensed clinician who knows that client has to make that call.
 
 This post covers the n8n workflow that automates the supplement protocol building process, with specific attention to the compliance framing that keeps it in educator territory.
 
@@ -1145,8 +1155,8 @@ You are a functional medicine nutrition researcher assisting a PharmD educator i
 
 Based on the health focus areas, medication categories, and dietary restrictions provided, generate an educational research summary covering:
 
-1. Key nutrients commonly studied in relation to the specified health focus areas
-2. General research findings on each nutrient (cite general research consensus, not specific studies)
+1. General nutrition topics associated with the named area of interest, described in terms of normal body structure and function rather than in terms of a disease or condition. Do not present any nutrient as addressing, improving, or managing a named disease state
+2. For each topic, state what the NIH Office of Dietary Supplements or NCCIH says, name that source, and link to it. Where those sources describe the evidence as limited, mixed, or insufficient, say so in those words. Do not state a consensus you cannot point to
 3. Common food sources for each nutrient
 4. General considerations when these nutrients are used alongside the specified medication categories (educational, not clinical)
 5. Suggested questions the educator might explore with the client's healthcare provider
@@ -1156,23 +1166,28 @@ Format the output as a structured educational summary, not a prescription or tre
 Important constraints:
 - Do not recommend specific doses
 - Do not diagnose conditions
-- Do not contraindicate specific medications by name
+- Where a nutrient and medication interaction is documented by an authoritative source, name it plainly and cite the source, so it can be verified
+- Do not present any interaction statement as a clinical decision. Route every one of them to the client's prescriber or pharmacist for review
 - Frame all content as educational research summary
-- Include this disclaimer at the end: "This summary is for educational reference only. It does not constitute medical advice or a treatment plan. All supplement decisions should be reviewed with the client's healthcare provider."
+- Include this disclaimer at the end: "This summary is for educational reference only. It does not constitute medical advice, diagnosis, or a treatment plan. These statements have not been evaluated by the Food and Drug Administration. No supplement mentioned here is intended to diagnose, treat, cure, or prevent any disease. Individualized recommendations require a licensed clinician who knows you, has your full medication list, and is responsible for your care. Review every item here with that clinician and with your prescriber or pharmacist before changing anything you take."
 \`\`\`
 
 ## The Medication Interaction Layer
 
-The most valuable part of the protocol builder is the medication interaction awareness. A PharmD's training in pharmacology is the competitive moat here. The system prompt is designed to surface educational information about nutrient-drug interactions that a non-pharmacist educator would not know to look for.
+The medication interaction section is the part that needs the most scrutiny, not the least. A language model will produce interaction statements that read as authoritative and are simply wrong. Every interaction the model surfaces has to be checked against a validated reference such as the NIH Office of Dietary Supplements fact sheets or a licensed interaction database before anyone acts on it. A PharmD's pharmacology training is what makes that verification possible. Without a pharmacist or prescriber verifying the output, this section is a liability rather than a feature. The system prompt is designed to surface educational information about nutrient-drug interactions that a non-pharmacist educator would not know to look for.
 
 The interaction categories covered:
-- Statins and CoQ10 depletion
-- Anticoagulants (warfarin) and vitamin K, fish oil, ginkgo
-- Antihypertensives and magnesium, potassium, CoQ10
-- Thyroid medications and calcium, iron, selenium timing
+- Statins and CoQ10, where NCCIH states the overall evidence does not support CoQ10 for statin-associated muscle pain. Include this as a commonly asked question with the evidence stated honestly, not as a recommendation
+- Warfarin and vitamin K intake consistency, and warfarin and ginkgo, which NCCIH states may increase bleeding risk. For omega-3s, ODS notes that most research shows 3 to 6 g/day does not significantly affect anticoagulant status, but that patients should have their INR monitored periodically. Any of these goes to the prescribing clinician, not into a summary
+- Potassium with ACE inhibitors, ARBs, or potassium-sparing diuretics. ODS documents that these reduce urinary potassium excretion and can cause hyperkalemia. This is a hard stop, not a consideration. Anyone on these drugs needs their prescriber to approve any potassium intake change
+- Loop and thiazide diuretics and magnesium status, where ODS documents urinary magnesium loss with chronic treatment. Note that ODS lists no magnesium interaction with antihypertensives as a class
+- CoQ10 and blood pressure, where NCCIH states CoQ10 probably does not have a meaningful effect
+- Levothyroxine and calcium carbonate, where the FDA-approved label advises avoiding levothyroxine within 4 hours of the supplement, and levothyroxine and iron, which is a documented absorption interaction. ODS documents no selenium interaction with thyroid medication, so do not include one
 - Metformin and B12 depletion
 
-These are framed as educational considerations, not clinical contraindications. The output always includes the recommendation to review with the client's healthcare provider.
+Calling something educational does not make it safe. Some of these are genuine hazards, and the potassium one in particular can be dangerous. The honest framing is this: the workflow surfaces topics that need a licensed clinician's attention, and it hands them to that clinician. It does not resolve them, and neither does an educator.
+
+One more limit worth stating plainly. The intake form captures medication categories, not medications and doses. Category-level input cannot detect a real interaction. "Anticoagulants" does not distinguish warfarin, which is vitamin K sensitive, from a DOAC, which is not. "Antihypertensives" does not distinguish an ACE inhibitor, where potassium is a hyperkalemia risk, from a thiazide, where magnesium loss is the issue. Keeping the form free of PHI is the right call, and the cost of that call is that this tool cannot perform an interaction check at all. That check happens with the client's pharmacist or prescriber, who has the actual list. The output always includes the recommendation to review with the client's healthcare provider.
 
 ## The Fullscript Integration
 
@@ -1180,7 +1195,7 @@ After the protocol summary is generated, the workflow includes an optional step 
 
 The Fullscript integration is an affiliate relationship. The educator earns a commission on purchases made through their dispensary. This must be disclosed to clients per FTC requirements.
 
-The disclosure language in the protocol summary: "The Fullscript link below connects to an affiliate dispensary. Purchases made through this link may generate a commission for the educator at no additional cost to you."
+The disclosure language in the protocol summary: "The educator earns a commission on purchases made through this Fullscript dispensary link. That is a financial interest you should weigh. Nothing in this summary is a recommendation to buy any specific product. Decide what to take with your own licensed clinician and prescriber, not based on this link."
 
 ## The Google Sheets Logging
 
@@ -1206,9 +1221,9 @@ This is the correct architecture. The AI does the research acceleration. The Pha
 
 ## The Takeaway
 
-The supplement protocol builder is one of the highest-value workflows in the n8n roadmap. It saves 20 to 40 minutes per protocol review and surfaces medication interaction considerations that might otherwise be missed.
+The supplement protocol builder is one of the highest-value workflows in the n8n roadmap. In my own use it has cut the time I spend gathering background reading, though I have not measured that formally and your results will differ. It also raises interaction topics worth checking, and it has raised ones that turned out to be wrong. Treat the output as a list of things to verify, never as a list of things that are true.
 
-The compliance architecture is straightforward: non-PHI inputs, educational output framing, educator review before client delivery, and clear affiliate disclosures. The PharmD credential is the differentiator that makes this workflow credible and safe.
+The compliance architecture is straightforward: non-PHI inputs, educational output framing, educator review before client delivery, and clear affiliate disclosures. A pharmacology background is what lets me catch the interaction claims this tool gets wrong. If you do not have that background, the missing piece is not the workflow, it is the verification. Build the tool if it helps your reading, and route everything that touches a real client's medications to a licensed clinician who can check it.
 
 ## Related reading
 
