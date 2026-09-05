@@ -172,7 +172,7 @@ export const ROUTE_META: Record<string, SeoInput> = {
     path: '/products',
   },
   '/exam-prep': {
-    title: 'CCAR-F Exam Prep: 207 Claude Code Practice Questions',
+    title: 'CCAR-F Exam Prep: 207 Practice Questions',
     description:
       '207 practice questions for the Claude Certified Architect: Foundations exam, written by a PharmD who builds production systems with Claude Code.',
     path: '/exam-prep',

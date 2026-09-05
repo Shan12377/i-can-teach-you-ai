@@ -291,7 +291,8 @@ export default function ExamPrepPage() {
         <div className={styles.domains}>
           <h2 className={styles.domainsH2}>What is on the CCAR-F exam?</h2>
           <p className={styles.painIntro}>
-            The Claude Certified Architect: Foundations exam is 60 multiple choice and scenario questions in 120
+            This section describes Anthropic's exam itself, not this study pack. The Claude Certified Architect:
+            Foundations exam is 60 multiple choice and scenario questions in 120
             minutes. Anthropic reports a scaled score from 100 to 1,000 and sets the pass mark at 720. The exam
             costs $125, is delivered online proctored or at a Pearson VUE test centre, and the credential is
             valid for 12 months.
@@ -301,10 +302,10 @@ export default function ExamPrepPage() {
               {[
                 ['Exam name', 'Claude Certified Architect: Foundations'],
                 ['Exam code', 'CCAR-F'],
-                ['Questions', '60, including scenario based items'],
+                ['Questions on the exam', '60, including scenario based items. This pack drills 207'],
                 ['Time limit', '120 minutes'],
                 ['Passing score', '720 on a 100 to 1,000 scale'],
-                ['Cost', '$125'],
+                ['Exam fee, paid to Anthropic', '$125. This study pack is $37 and is a separate purchase'],
                 ['Delivery', 'Online proctored, or a Pearson VUE test centre'],
                 ['Credential validity', '12 months'],
                 ['Domain weights', 'D1 27%, D3 20%, D4 20%, D2 18%, D5 15%'],
