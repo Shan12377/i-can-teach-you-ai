@@ -1323,3 +1323,47 @@
   font-size: 11px;
   line-height: 1.6;
 }
+
+.csSource {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  flex-wrap: wrap;
+}
+
+.csSource a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.csSource a:hover { color: var(--gold); }
+
+.csBadge {
+  border-radius: var(--radius-full);
+  padding: 2px 8px;
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.csBadgeVERIFIED {
+  color: var(--teal2);
+  background: var(--teal-bg);
+  border-color: var(--teal-border);
+}
+
+.csBadgeEXAMGUIDE {
+  color: var(--gold);
+  background: var(--gold-bg);
+  border-color: var(--gold-border);
+}
+
+.csBadgePRACTICE {
+  color: var(--coral);
+  background: var(--coral-bg);
+  border-color: var(--coral-border);
+}

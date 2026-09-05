@@ -49,6 +49,14 @@ export interface DomainConcept {
 export interface CheatSheetRow {
   term: string;
   detail: string;
+  /** URL of the first party doc that verifies this row, or a plain text citation. */
+  source?: string;
+  /**
+   * VERIFIED: confirmed in Anthropic or MCP documentation.
+   * EXAM-GUIDE: from the official CCAR-F exam guide only.
+   * PRACTICE: professional practice with no first party source.
+   */
+  status?: 'VERIFIED' | 'EXAM-GUIDE' | 'PRACTICE';
 }
 
 export interface CheatSheetSection {
