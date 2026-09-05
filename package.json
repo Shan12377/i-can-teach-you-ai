@@ -10,7 +10,8 @@
     "check:blog": "node scripts/check-blog.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "indexnow": "node scripts/indexnow.mjs"
+    "indexnow": "node scripts/indexnow.mjs",
+    "check:content": "node scripts/check-content.mjs"
   },
   "dependencies": {
     "date-fns": "^4.4.0",
