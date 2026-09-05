@@ -196,7 +196,7 @@ export default function BlogPostPage() {
             <div className={styles.sidebarCard}>
               <div className={styles.sidebarTitle}>CCAR-F Exam Prep</div>
               <p className={styles.sidebarText}>
-                207 practice questions for the Claude Certified Architect: Foundations exam. All five domains covered.
+                226 practice questions for the Claude Certified Architect: Foundations exam. All five domains covered.
               </p>
               <Link to="/exam-prep" className={styles.sidebarBtnGold}>View Exam Prep &rarr;</Link>
             </div>

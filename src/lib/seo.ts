@@ -172,9 +172,9 @@ export const ROUTE_META: Record<string, SeoInput> = {
     path: '/products',
   },
   '/exam-prep': {
-    title: 'CCAR-F Exam Prep: 207 Practice Questions',
+    title: 'CCAR-F Exam Prep: 226 Practice Questions',
     description:
-      '207 practice questions for the Claude Certified Architect: Foundations exam, written by a PharmD who builds production systems with Claude Code.',
+      '226 practice questions for the Claude Certified Architect: Foundations exam, written by a PharmD who builds production systems with Claude Code.',
     path: '/exam-prep',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -183,7 +183,7 @@ export const ROUTE_META: Record<string, SeoInput> = {
           '@type': 'Product',
           name: 'CCAR-F Exam Prep',
           description:
-            '207 practice questions for the Claude Certified Architect: Foundations (CCAR-F) exam, covering all five domains with official documentation citations.',
+            '226 practice questions for the Claude Certified Architect: Foundations (CCAR-F) exam, covering all five domains with official documentation citations.',
           brand: { '@id': `${SITE_URL}/#org` },
           offers: {
             '@type': 'Offer',
@@ -197,7 +197,7 @@ export const ROUTE_META: Record<string, SeoInput> = {
           '@type': 'Course',
           name: 'CCAR-F Exam Prep',
           description:
-            '207 practice questions for the Claude Certified Architect: Foundations (CCAR-F) exam, organized by domain with official documentation citations and explanations.',
+            '226 practice questions for the Claude Certified Architect: Foundations (CCAR-F) exam, organized by domain with official documentation citations and explanations.',
           url: `${SITE_URL}/exam-prep`,
           provider: { '@id': `${SITE_URL}/#org` },
           teaches: [

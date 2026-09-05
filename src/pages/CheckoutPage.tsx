@@ -10,9 +10,9 @@ const PRODUCTS: Record<string, { name: string; price: string; description: strin
   'cca-f-exam-prep': {
     name: 'CCAR-F Exam Prep',
     price: '$37',
-    description: '207 practice questions for the Claude Certified Architect: Foundations exam. All five domains covered with full explanations and documentation citations.',
+    description: '226 practice questions for the Claude Certified Architect: Foundations exam. All five domains covered with full explanations and documentation citations.',
     features: [
-      '207 practice questions across all 5 domains',
+      '226 practice questions across all 5 domains',
       'Full explanations for every answer',
       'Documentation citations for each question',
       'Domain-by-domain performance tracking',

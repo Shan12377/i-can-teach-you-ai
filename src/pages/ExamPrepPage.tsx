@@ -116,7 +116,8 @@ export default function ExamPrepPage() {
               Claude Certified Architect: Foundations (CCAR-F)
             </h1>
             <p className={styles.pageSubtitle}>
-              207 practice questions. Every answer sourced from official Anthropic documentation.
+              226 practice questions, including 19 multiple-response scenario items in the format the exam
+              actually uses. Every answer sourced from official Anthropic documentation.
               Built by a PharmD who has designed real certification exam questions before, and ships
               production software with Claude Code.
             </p>
@@ -129,7 +130,7 @@ export default function ExamPrepPage() {
             </Link>
             <div className={styles.headerCardFeatures}>
               {[
-                '207 practice questions',
+                '226 practice questions, 19 multiple-response',
                 'All 5 CCAR-F domains',
                 'Official doc citations',
                 '24 anti-patterns, 70 flashcards',
@@ -255,7 +256,7 @@ export default function ExamPrepPage() {
           </div>
           <div className={styles.previewCta}>
             <p className={styles.previewCtaText}>
-              204 more questions like these, organized by domain, with full explanations.
+              223 more questions like these, organized by domain, with full explanations.
             </p>
             <Link to="/checkout" className={`${s.btnGold} ${s.btnLg}`}>
               Get Full Access for $37
@@ -268,11 +269,11 @@ export default function ExamPrepPage() {
           <h2 className={styles.domainsH2}>All Five CCAR-F Domains Covered</h2>
           <div className={styles.domainsGrid}>
             {[
-              { name: 'Agentic Architecture & Orchestration', pct: 27, q: 50 },
-              { name: 'Tool Design & MCP Integration', pct: 18, q: 33 },
-              { name: 'Claude Code Configuration & Workflows', pct: 20, q: 38 },
-              { name: 'Prompt Engineering & Structured Output', pct: 20, q: 44 },
-              { name: 'Context Management & Reliability', pct: 15, q: 42 },
+              { name: 'Agentic Architecture & Orchestration', pct: 27, q: 55 },
+              { name: 'Tool Design & MCP Integration', pct: 18, q: 36 },
+              { name: 'Claude Code Configuration & Workflows', pct: 20, q: 42 },
+              { name: 'Prompt Engineering & Structured Output', pct: 20, q: 48 },
+              { name: 'Context Management & Reliability', pct: 15, q: 45 },
             ].map(d => (
               <div key={d.name} className={styles.domainItem}>
                 <div className={styles.domainHeader}>
@@ -302,7 +303,7 @@ export default function ExamPrepPage() {
               {[
                 ['Exam name', 'Claude Certified Architect: Foundations'],
                 ['Exam code', 'CCAR-F'],
-                ['Questions on the exam', '60, including scenario based items. This pack drills 207'],
+                ['Questions on the exam', '60, including scenario based items. This pack drills 226'],
                 ['Time limit', '120 minutes'],
                 ['Passing score', '720 on a 100 to 1,000 scale'],
                 ['Exam fee, paid to Anthropic', '$125. This study pack is $37 and is a separate purchase'],

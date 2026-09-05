@@ -95,7 +95,7 @@ const proof: ProofProject[] = [
   {
     name: 'CCAR-F Exam Prep',
     type: 'Claude Code certification prep',
-    description: '207 practice questions sourced from official Anthropic documentation, built for deliberate exam practice.',
+    description: '226 practice questions sourced from official Anthropic documentation, built for deliberate exam practice.',
     stack: 'React · TypeScript · Stripe',
     href: '/exam-prep',
     status: 'Live',
@@ -179,7 +179,7 @@ export default function LandingPage() {
         <div className={`${s.wrapWide} ${styles.authorityGrid}`}>
           <Stat value={4} label="working AI products" />
           <Stat value={340} suffix="+" label="pharmacy scenarios shipped" />
-          <Stat value={207} label="Claude Code practice questions" />
+          <Stat value={226} label="CCAR-F practice questions" />
           <div><ShieldCheck aria-hidden="true" /><span>privacy-first architecture</span></div>
         </div>
       </section>

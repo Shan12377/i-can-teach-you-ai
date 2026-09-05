@@ -532,7 +532,7 @@ The most efficient preparation path is:
 
 5. Do not rely on general AI knowledge. Claude Code has specific behaviors that differ from other AI tools. What is true for GPT-4 or Gemini may not be true for Claude Code.
 
-The 207 practice questions in the CCAR-F Exam Prep product cover all five domains with full explanations and documentation citations. Every question was written against the official Anthropic documentation, not from memory or general AI knowledge.
+The 226 practice questions in the CCAR-F Exam Prep product cover all five domains with full explanations and documentation citations. Every question was written against the official Anthropic documentation, not from memory or general AI knowledge.
 
 ## The Practical Value of the Certification
 
@@ -547,7 +547,7 @@ That is exactly what the practice questions are designed to address.
 - Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
 - Read [Claude Code vs Cursor in 2026](/blog/claude-code-vs-cursor-2026).
 - Read [the beginner vibe-coding tutorial: shipping a real app without writing code](/blog/vibe-coding-tutorial-beginners-2026).
-- Ready to work together? [the 207 practice questions with official-doc citations](/exam-prep).
+- Ready to work together? [the 226 practice questions with official-doc citations](/exam-prep).
 `,
   },
   {
@@ -819,7 +819,7 @@ For US-based sales, digital educational products are generally not subject to sa
 
 Every product description on your Stripe checkout page should include the educational disclaimer. Stripe displays your product description on the checkout page, so this is the last thing a customer sees before paying.
 
-A compliant product description for an exam prep product: "207 practice questions for the CCAR-F certification exam. Educational content only. Not affiliated with Anthropic. Results depend on individual study effort."
+A compliant product description for an exam prep product: "226 practice questions for the CCAR-F certification exam. Educational content only. Not affiliated with Anthropic. Results depend on individual study effort."
 
 A compliant product description for a health education subscription: "Monthly access to educational content on functional medicine concepts, AI workflows for health professionals, and related topics. Educational content only. Not medical advice."
 
@@ -1506,7 +1506,7 @@ If you are **already a developer** looking to code 10x faster, use **Cursor**.
 - Read [Claude Code vs Cursor in 2026](/blog/claude-code-vs-cursor-2026).
 - Read [Claude Code for absolute beginners](/blog/claude-code-absolute-beginners-guide).
 - Read [the beginner vibe-coding tutorial: shipping a real app without writing code](/blog/vibe-coding-tutorial-beginners-2026).
-- Ready to work together? [the 207-question CCAR-F exam prep for Claude Code](/exam-prep).
+- Ready to work together? [the 226-question CCAR-F exam prep for Claude Code](/exam-prep).
 
 > **Ready to learn more or bring this to your team?** Reach out at [hello@icanteachyouai.com](mailto:hello@icanteachyouai.com) or join the waitlist at [icanteachyouai.com/waitlist](https://icanteachyouai.com/waitlist).
     `,

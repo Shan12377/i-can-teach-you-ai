@@ -142,7 +142,7 @@ const LINKS = {
       'claude-code-absolute-beginners-guide',
       'vibe-coding-tutorial-beginners-2026',
     ],
-    money: { href: '/exam-prep', text: 'the 207-question CCAR-F exam prep for Claude Code' },
+    money: { href: '/exam-prep', text: 'the 226-question CCAR-F exam prep for Claude Code' },
   },
   'build-health-app-without-coding-claude': {
     siblings: [
@@ -160,7 +160,7 @@ const LINKS = {
       'claude-code-vs-cursor-2026',
       'vibe-coding-tutorial-beginners-2026',
     ],
-    money: { href: '/exam-prep', text: 'the 207 practice questions with official-doc citations' },
+    money: { href: '/exam-prep', text: 'the 226 practice questions with official-doc citations' },
   },
   'claude-code-absolute-beginners-guide': {
     siblings: [
